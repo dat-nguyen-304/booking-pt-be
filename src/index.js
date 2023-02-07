@@ -4,8 +4,6 @@ import cors from 'cors';
 import { connectDB } from "./config/connectDB";
 import initWebRoutes from "./route/route";
 import initSwagger from "./route/swagger";
-import swaggerJsdoc from "swagger-jsdoc";
-import swaggerUI from "swagger-ui-express";
 require('dotenv').config();
 connectDB();
 let app = express();

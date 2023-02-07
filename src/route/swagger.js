@@ -60,8 +60,8 @@ let initSwagger = (app) => {
 
     /**
      * @swagger
-     * /center/{centerId}:
-     *   post:
+     * /centers/{centerId}:
+     *   get:
      *    description: Use to get one center by centerId
      *    tags: [Centers] 
      *    produces:
@@ -81,19 +81,19 @@ let initSwagger = (app) => {
      *         required: true
      *         type: string
      */
-    app.post("/center/:centerId", CenterController.getCenterById);
+    app.get("/centers/:centerId", CenterController.getCenterById);
 
 
     const swaggerOptions = {
         swaggerDefinition: {
             openapi: '3.0.0',
             info: {
-                title: "customer api",
-                description: "Customer API information",
+                title: "Booking PT API",
+                description: "Booking PT API information",
                 contact: {
-                    name: "amazing developer"
+                    name: "Gacha team"
                 },
-                servers: "http://localhost:5000"
+                servers: "https://gachateambe.herokuapp.com/"
             }
         },
         apis: ["./src/route/swagger.js"]
