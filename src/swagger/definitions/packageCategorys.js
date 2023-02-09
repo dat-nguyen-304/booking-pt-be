@@ -1,18 +1,14 @@
-const centerDef = {
-    Center: {
+const packageCategoryDef = {
+    PackageCategory: {
         type: 'object',
         properties: {
-            centerId: {
+            packageCategoryId: {
                 type: 'integer',
                 example: 1
             },
-            centerName: {
+            packageCategoryName: {
                 type: 'string',
-                example: '"Gacha Quận 1'
-            },
-            address: {
-                type: 'string',
-                example: '100 Hai Bà Trưng'
+                example: 'Loại Basic'
             },
             createdAt: {
                 type: 'date',
@@ -23,14 +19,14 @@ const centerDef = {
                 example: true
             }
         },
-        required: ["centerId", "centerName", "address", "createdAt","activate"]
+        required: ["packageCategoryId", "packageCategoryName", "createdAt","activate"]
     },
-    // Centers: {
+    // PackageCategory: {
     //     type: 'array',
     //     items: {
-    //         $ref: '#/definitions/Center'
+    //         $ref: '#/definitions/PackageCategory'
     //     }
     // }
 };
 
-module.exports = centerDef;
+module.exports = packageCategoryDef;

@@ -3,25 +3,24 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Center extends Model {
+    class PackageCategory extends Model {
         static associate (models) {
         }
     };
-    Center.init({
-        centerId: {
+    PackageCategory.init({
+        packageCategoryId: {
             type: DataTypes.INTEGER,
             primaryKey: true // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
         },
-        centerName: DataTypes.STRING,
-        address: DataTypes.STRING,
+        packageCategoryName: DataTypes.STRING,
         createdAt: DataTypes.DATE,
         activate : DataTypes.BOOLEAN
     }, {
         sequelize,
-        modelName: 'Center',
+        modelName: 'PackageCategory',
         freezeTableName: true, // Nếu = false sequelize sẽ tự thêm 's' cho modelName nếu modelName chưa ở dạng số nhiều
         timestamps: false, // nếu = true sequelize sẽ thêm trường createdAt, updatedAt
-        idAttribute: 'centerId'
+        idAttribute: 'packageCategoryId'
     });
-    return Center;
+    return PackageCategory;
 };
