@@ -24,9 +24,10 @@ const packageCategoryDef = {
     // PackageCategory: {
     //     type: 'array',
     //     items: {
-    //         $ref: '#/definitions/PackageCategory'
+    //         $ref: '#/packageCategoryDef/PackageCategory'
     //     }
     // }
 };
 
 module.exports = packageCategoryDef;
+// export default packageCategoryDef;

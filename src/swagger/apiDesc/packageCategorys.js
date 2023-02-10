@@ -1,7 +1,7 @@
 module.exports = {
     '/api/packageCategorys': {
         get: {
-            tags: ["PackageCategory API"],
+            tags: ["Package Category API"],
             description: 'Get all users',
             responses: {
                 200: {
@@ -22,7 +22,7 @@ module.exports = {
 
     '/api/packageCategorys/{packageCategoryId}': {
         get: {
-            tags: ["PackageCategory API"],
+            tags: ["Package Category API"],
             description: 'Get a PackageCategory by packageCategoryId pass through parameter',
             parameters: [{
                 in: 'path',

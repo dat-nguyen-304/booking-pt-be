@@ -28,9 +28,10 @@ const centerDef = {
     // Centers: {
     //     type: 'array',
     //     items: {
-    //         $ref: '#/definitions/Center'
+    //         $ref: '#/centerDef/Center'
     //     }
     // }
 };
 
 module.exports = centerDef;
+// export default centerDef;
