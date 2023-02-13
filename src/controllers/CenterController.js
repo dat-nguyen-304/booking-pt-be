@@ -12,6 +12,19 @@ const getAllCenter = async (req, res) => {
     }
 }
 
+const postNewCenter = async (req, res) => {
+    try {
+        let response = await CenterService.postNewCenter(req.body);
+        return res.status(200).json(response);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            errCode: -1,
+            message: 'Error from server...'
+        })
+    }
+}
+
 const getCenterById = async (req, res) => {
     try {
         let response = await CenterService.getCenterById(req.params.centerId);
@@ -27,4 +40,4 @@ const getCenterById = async (req, res) => {
     }
 }
 
-module.exports = { getAllCenter, getCenterById }
+module.exports = { getAllCenter, getCenterById ,postNewCenter}

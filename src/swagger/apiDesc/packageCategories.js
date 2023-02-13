@@ -1,5 +1,5 @@
 module.exports = {
-    '/api/packageCategorys': {
+    '/api/package-categories': {
         get: {
             tags: ["Package Category API"],
             description: 'Get all users',
@@ -20,7 +20,7 @@ module.exports = {
         },
     },
 
-    '/api/packageCategorys/{packageCategoryId}': {
+    '/api/package-categories/{packageCategoryId}': {
         get: {
             tags: ["Package Category API"],
             description: 'Get a PackageCategory by packageCategoryId pass through parameter',

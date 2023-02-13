@@ -14,6 +14,19 @@ const getAllCenter = async () => {
     }
 }
 
+const postNewCenter = async (newCenter) => {
+    try {
+        const center = await db.Center.create(newCenter);
+        return {
+            errorCode: 0,
+            center
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 const getCenterById = async (id) => {
     try {
         const center = await db.Center.findOne({
@@ -35,5 +48,5 @@ const getCenterById = async (id) => {
 }
 
 module.exports = {
-    getAllCenter, getCenterById
+    getAllCenter, getCenterById,postNewCenter
 }

@@ -1,12 +1,12 @@
 import db from "../models/index";
 const getAllPackageCategory = async () => {
     try {
-        const packageCategorys = await db.PackageCategory.findAll({
+        const packageCategories = await db.PackageCategory.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            packageCategorys
+            packageCategories
         }
     } catch (error) {
         console.log(error);
@@ -16,17 +16,17 @@ const getAllPackageCategory = async () => {
 
 const getPackageCategoryById = async (id) => {
     try {
-        const packageCategorys = await db.PackageCategory.findOne({
+        const packageCategories = await db.PackageCategory.findOne({
             where: { packageCategoryId: id },
             raw: true
         });
-        if (!packageCategorys) return {
+        if (!packageCategories) return {
             errorCode: 1,
             description: 'packageCategoryId is not exist'
         }
         return {
             errorCode: 0,
-            packageCategorys
+            packageCategories
         }
     } catch (error) {
         console.log(error);

@@ -1,8 +1,8 @@
 import definitions from "./definitions/index";
 require('dotenv').config();
 const centers = require('./apiDesc/centers');
-const packageCategorys = require('./apiDesc/packageCategorys');
-console.log(definitions);
+const packageCategories = require('./apiDesc/packageCategories');
+
 module.exports = {
     swagger: '2.0',
     info: {
@@ -15,7 +15,7 @@ module.exports = {
     schemes: [
         'http',
     ],
-    paths: Object.assign({}, centers, packageCategorys),
+    paths: Object.assign({}, centers, packageCategories),
     tags: [
         {
             name: 'Center API',
