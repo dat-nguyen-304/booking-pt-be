@@ -14,6 +14,10 @@ const centerDef = {
                 type: 'string',
                 example: '100 Hai Bà Trưng'
             },
+            imgLink:{
+                type: 'string',
+                example: 'https://kickfit-sports.com/wp-content/uploads/2022/05/vo-si-Muay-Thai-so-1-Viet-Nam-nguyen-tran-duy-nhat.jpg'
+            },
             createdAt: {
                 type: 'date',
                 example: 1675729720
@@ -23,7 +27,7 @@ const centerDef = {
                 example: true
             }
         },
-        required: ["centerId", "centerName", "address", "createdAt","activate"]
+        required: ["centerId", "centerName", "address","imgLink", "createdAt","activate"]
     },
     // Centers: {
     //     type: 'array',

@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     PackageCategory.init({
         packageCategoryId: {
             type: DataTypes.INTEGER,
-            primaryKey: true // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
+            primaryKey: true,
+            autoIncrement: true // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
         },
         packageCategoryName: DataTypes.STRING,
         createdAt: DataTypes.DATE,
