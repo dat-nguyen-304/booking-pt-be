@@ -16,17 +16,17 @@ const getAllAccount = async () => {
 
 const getAccountById = async (id) => {
     try {
-        const accounts = await db.Center.findOne({
+        const account = await db.Center.findOne({
             where: { centerId: id },
             raw: true
         });
-        if (!accounts) return {
+        if (!account) return {
             errorCode: 1,
             description: 'accountId is not exist'
         }
         return {
             errorCode: 0,
-            accounts
+            account
         }
     } catch (error) {
         console.log(error);

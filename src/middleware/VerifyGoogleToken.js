@@ -9,9 +9,23 @@ const verifyGoogleToken = async (req, res, next) => {
             req.emailName = decodeValue.name;
             return next();
         }
-        return res.json({ message: 'Unauthorize' });
     } catch (e) {
-        return res.json({ message: 'Internal Error' });
+        if (error.code === 'auth/id-token-expired') {
+            return res.status(401).json({
+                errCode: -1,
+                message: 'Google Token expired'
+            });
+        } else if (error.code === 'auth/id-token-revoked' || error.code === 'auth/invalid-id-token') {
+            return res.status(401).json({
+                errCode: -1,
+                message: 'Invalid Google token'
+            });
+        } else {
+            return res.status(403).json({
+                errCode: -1,
+                message: 'Unauthenticated'
+            });
+        }
     }
 }
 

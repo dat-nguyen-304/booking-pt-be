@@ -9,8 +9,11 @@ const verifyRefreshToken = (req, res, next) => {
         req.role = decoded.role;
         next();
     } catch (e) {
-        console.log(e);
-        return res.sendStatus(403);
+        if (err.message === 'jwt expired') {
+            return res.status(401).json({ message: 'Token has expired' });
+        } else {
+            return res.status(401).json({ message: 'Token is invalid' });
+        }
     }
 }
 
