@@ -1,7 +1,6 @@
-import definitions from "./definitions/index";
+import definitions from "./definitions";
+import paths from "./apiDesc";
 require('dotenv').config();
-const centers = require('./apiDesc/centers');
-const packageCategories = require('./apiDesc/packageCategories');
 
 module.exports = {
     swagger: '2.0',
@@ -15,7 +14,19 @@ module.exports = {
     schemes: [
         'http',
     ],
-    paths: Object.assign({}, centers, packageCategories),
+    paths,
+    securityDefinitions: {
+        Bearer: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+        },
+    },
+    security: [
+        {
+            Bearer: [],
+        },
+    ],
     tags: [
         {
             name: 'Center API',

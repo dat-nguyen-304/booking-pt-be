@@ -11,9 +11,15 @@ const verifyAccessToken = (req, res, next) => {
         next();
     } catch (e) {
         if (err.message === 'jwt expired') {
-            return res.status(401).json({ message: 'Token has expired' });
+            return res.status(401).json({
+                errCode: -1,
+                message: 'Token has expired'
+            });
         } else {
-            return res.status(401).json({ message: 'Token is invalid' });
+            return res.status(401).json({
+                errCode: -1,
+                message: 'Token is invalid'
+            });
         }
     }
 }

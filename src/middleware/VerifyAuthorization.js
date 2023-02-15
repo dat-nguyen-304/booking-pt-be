@@ -6,7 +6,7 @@ const verifyAuthorization = (requiredRole) => {
                 next();
             else res.status(401).json({
                 errorCode: 1,
-                message: "Don't have permission"
+                message: "Unauthorized"
             })
         } catch (e) {
             console.log(e);

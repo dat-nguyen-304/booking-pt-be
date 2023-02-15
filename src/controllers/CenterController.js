@@ -30,7 +30,7 @@ const getCenterById = async (req, res) => {
         let response = await CenterService.getCenterById(req.params.centerId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
-        else return res.status(404).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -40,4 +40,4 @@ const getCenterById = async (req, res) => {
     }
 }
 
-module.exports = { getAllCenter, getCenterById ,postNewCenter}
+module.exports = { getAllCenter, getCenterById, postNewCenter }
