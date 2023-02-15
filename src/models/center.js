@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     Center.init({
         centerId: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
+            primaryKey: true, // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
+            autoIncrement: true
         },
         centerName: DataTypes.STRING,
         address: DataTypes.STRING,
         createdAt: DataTypes.DATE,
         imgLink: DataTypes.STRING,
-        activate : DataTypes.BOOLEAN
+        activate: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Center',

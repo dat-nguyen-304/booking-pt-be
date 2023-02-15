@@ -7,5 +7,4 @@ centerRouter.route('/')
     .post(CenterController.postNewCenter);
 centerRouter.route('/:centerId')
     .get(CenterController.getCenterById);
-
 export default centerRouter;

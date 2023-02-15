@@ -15,17 +15,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         username: DataTypes.STRING,
         password: DataTypes.STRING,
-        dob : DataTypes.DATE,
-        gender : DataTypes.BOOLEAN,
-        role : DataTypes.INTEGER,
-        email : DataTypes.STRING,
-        activate : DataTypes.BOOLEAN,
-        createdAt : DataTypes.DATE,
+        dob: DataTypes.DATE,
+        gender: DataTypes.BOOLEAN,
+        role: DataTypes.INTEGER,
+        email: DataTypes.STRING,
+        activate: DataTypes.BOOLEAN,
+        createdAt: DataTypes.DATE,
     }, {
         sequelize,
         modelName: 'Account',
         freezeTableName: true,
-        timestamps: false, 
+        timestamps: false,
         idAttribute: 'accountId'
     });
     return Account;
