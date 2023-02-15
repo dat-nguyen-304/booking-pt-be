@@ -2,6 +2,10 @@ const admin = require('../config/firebase-config');
 
 const verifyGoogleToken = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
+    if (!token) return res.status(401).json({
+        errCode: 1,
+        message: 'Token is required'
+    });
     try {
         const decodeValue = await admin.auth().verifyIdToken(token);
         if (decodeValue) {
@@ -10,12 +14,12 @@ const verifyGoogleToken = async (req, res, next) => {
             return next();
         }
     } catch (e) {
-        if (error.code === 'auth/id-token-expired') {
+        if (e.code === 'auth/id-token-expired') {
             return res.status(401).json({
                 errCode: -1,
                 message: 'Google Token expired'
             });
-        } else if (error.code === 'auth/id-token-revoked' || error.code === 'auth/invalid-id-token') {
+        } else if (e.code === 'auth/id-token-revoked' || e.code === 'auth/invalid-id-token') {
             return res.status(401).json({
                 errCode: -1,
                 message: 'Invalid Google token'

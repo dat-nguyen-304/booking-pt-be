@@ -19,15 +19,8 @@ const packageCategoryDef = {
                 example: true
             }
         },
-        required: ["packageCategoryId", "packageCategoryName", "createdAt","activate"]
-    },
-    // PackageCategory: {
-    //     type: 'array',
-    //     items: {
-    //         $ref: '#/packageCategoryDef/PackageCategory'
-    //     }
-    // }
+        required: ["packageCategoryId", "packageCategoryName", "createdAt", "activate"]
+    }
 };
 
-module.exports = packageCategoryDef;
-// export default packageCategoryDef;
+export default packageCategoryDef;

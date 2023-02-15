@@ -4,15 +4,15 @@ const verifyAuthorization = (requiredRole) => {
             const verified = requiredRole.includes(req.role);
             if (verified)
                 next();
-            else res.status(401).json({
+            else res.status(403).json({
                 errorCode: 1,
-                message: "Unauthorized"
+                message: "Forbidden"
             })
         } catch (e) {
             console.log(e);
-            return res.status(403).json({
+            return res.status(500).json({
                 errCode: -1,
-                message: e.message
+                message: 'Error from server'
             });
         }
     }

@@ -29,13 +29,21 @@ module.exports = {
     ],
     tags: [
         {
+            name: 'Authentication API',
+            description: 'APIs related to Authentication',
+        },
+        {
+            name: 'Account API',
+            description: 'APIs related to Account',
+        },
+        {
             name: 'Center API',
             description: 'APIs related to Center',
         },
         {
             name: 'Package Category API',
             description: 'APIs related to Package Category',
-        },
+        }
     ],
     definitions
 };
