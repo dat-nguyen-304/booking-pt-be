@@ -16,6 +16,7 @@ const getAllCenter = async () => {
 
 const postNewCenter = async (newCenter) => {
     try {
+        console.log(newCenter);
         const center = await db.Center.create(newCenter);
         return {
             errorCode: 0,
