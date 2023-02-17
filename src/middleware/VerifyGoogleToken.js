@@ -1,7 +1,12 @@
 const admin = require('../config/firebase-config');
 
 const verifyGoogleToken = async (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    if (!req.headers.authorization)
+    return res.status(401).json({
+        errCode: 1,
+        message: 'Token is required'
+    });
+    const token = req.headers.authorization.split(' ').length === 2 && req.headers.authorization.split(' ')[1];
     if (!token) return res.status(401).json({
         errCode: 1,
         message: 'Token is required'
