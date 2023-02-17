@@ -12,7 +12,7 @@ module.exports = {
     host: process.env.BE_HOST,
     basePath: '/',
     schemes: [
-        'http',
+        process.env.PROTOCOL_METHOD
     ],
     paths,
     securityDefinitions: {

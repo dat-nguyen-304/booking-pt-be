@@ -1,7 +1,7 @@
 import express from "express";
 import AccountController from "../controllers/AccountController";
 import verifyAccessToken from "../middleware/VerifyAccessToken";
-import verifyAuthorization from "../middleware/verifyAuthorization";
+import verifyAuthorization from "../middleware/VerifyAuthorization";
 
 const accountRouter = express.Router();
 
