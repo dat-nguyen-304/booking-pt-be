@@ -30,8 +30,8 @@ module.exports = {
                 },
                 {
                     in: 'formData',
-                    name: 'imgLink',
-                    type: "string",
+                    name: 'centerImg',
+                    type: "file",
                     required: true,
                     description: "ImgLink ID pass by parameter in url",
                 }],

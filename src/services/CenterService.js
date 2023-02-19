@@ -1,4 +1,12 @@
 import db from "../models/index";
+const { Storage } = require("@google-cloud/storage");
+import imgUrl from "../utils/GetImgLink";
+const UUID = require("uuid-v4");
+const os = require("os");
+const tempDir = os.tmpdir()
+const storage = new Storage({
+    keyFilename: "../booking-pt-be/src/config/serviceAccount.json",
+});
 const getAllCenter = async () => {
     try {
         const centers = await db.Center.findAll({
@@ -14,14 +22,23 @@ const getAllCenter = async () => {
     }
 }
 
-const postNewCenter = async (newCenter) => {
+const postNewCenter = async ({ center: { centerName, address }, file }) => {
     try {
-        console.log(newCenter);
+        const imgLink = await imgUrl(file, "users");
+        if (!imgLink) return {
+            errorCode: 1,
+            message: "File is required"
+        }
+        const newCenter = {
+            centerName,
+            address,
+            imgLink
+        };
         const center = await db.Center.create(newCenter);
         return {
             errorCode: 0,
-            center
-        }
+            center,
+        };
     } catch (error) {
         console.log(error);
         throw new Error(error);
@@ -49,5 +66,5 @@ const getCenterById = async (id) => {
 }
 
 module.exports = {
-    getAllCenter, getCenterById,postNewCenter
+    getAllCenter, getCenterById, postNewCenter
 }
