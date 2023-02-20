@@ -1,5 +1,8 @@
 const { Storage } = require("@google-cloud/storage");
 const UUID = require("uuid-v4");
+const fs = require('fs');
+const { promisify } = require('util');
+const unlinkAsync = promisify(fs.unlink);
 const storage = new Storage({
     keyFilename: "../booking-pt-be/src/config/serviceAccount.json",
 });
@@ -21,12 +24,15 @@ const imgUrl = async (file, dist) => {
                 },
             },
         });
+        await unlinkAsync(file.path);
         // profile image url
         const imgUrlDow =
             downLoadPath +
             encodeURIComponent(imageResponse[0].name) +
             "?alt=media&token=" +
             uuid;
+
+
         return imgUrlDow;
     }
 }

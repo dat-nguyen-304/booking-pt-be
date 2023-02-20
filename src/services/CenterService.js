@@ -1,12 +1,7 @@
 import db from "../models/index";
-const { Storage } = require("@google-cloud/storage");
 import imgUrl from "../utils/GetImgLink";
-const UUID = require("uuid-v4");
-const os = require("os");
-const tempDir = os.tmpdir()
-const storage = new Storage({
-    keyFilename: "../booking-pt-be/src/config/serviceAccount.json",
-});
+import deleteUrl from "../utils/DeleteImgLink"
+
 const getAllCenter = async () => {
     try {
         const centers = await db.Center.findAll({
@@ -63,6 +58,33 @@ const getCenterById = async (id) => {
     }
 }
 
+const deleteCenterById = async (id) => {
+    try {
+        const centerRes = await getCenterById(id);
+        const deleted = deleteUrl(centerRes.center.imgLink,"users");
+        if (deleted){
+            console.log("đã xóa");
+        }else{
+            console.log("chưa xóa")
+        }
+        const center = await db.Center.destroy({
+            where: { centerId: id },
+            raw: true
+        });
+        if (!center) return {
+            errorCode: 1,
+            description: 'centerId is not exist'
+        }
+        return {
+            errorCode: 0,
+            description: 'Center has been successfully deleted'
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 module.exports = {
-    getAllCenter, getCenterById, postNewCenter
+    getAllCenter, getCenterById, postNewCenter, deleteCenterById
 }
