@@ -22,19 +22,17 @@ const getAllCenter = async () => {
     }
 }
 
-const postNewCenter = async ({ center: { centerName, address }, file }) => {
+const postNewCenter = async ({ centerData, file }) => {
     try {
         const imgLink = await imgUrl(file, "users");
         if (!imgLink) return {
             errorCode: 1,
             message: "File is required"
         }
-        const newCenter = {
-            centerName,
-            address,
+        const center = await db.Center.create({
+            ...centerData,
             imgLink
-        };
-        const center = await db.Center.create(newCenter);
+        });
         return {
             errorCode: 0,
             center,

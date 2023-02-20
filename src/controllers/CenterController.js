@@ -15,7 +15,7 @@ const getAllCenter = async (req, res) => {
 
 const postNewCenter = async (req, res) => {
     try {
-        let response = await CenterService.postNewCenter({ center: req.body, file: req.file });
+        let response = await CenterService.postNewCenter({ centerData: req.body, file: req.file });
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
