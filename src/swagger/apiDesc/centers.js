@@ -57,6 +57,22 @@ module.exports = {
                 400: idIsNotExist,
                 500: errorFromServer
             }
+        },
+        delete: {
+            tags: ["Center API"],
+            description: 'Delete a center by centerId pass through parameter',
+            parameters: [{
+                in: 'path',
+                name: 'centerId',
+                type: "integer",
+                required: true,
+                description: "Center ID pass by parameter in url",
+            }],
+            responses: {
+                200: successAndReturnARecord('center', 'Center'),
+                400: idIsNotExist,
+                500: errorFromServer
+            }
         }
     },
 };
