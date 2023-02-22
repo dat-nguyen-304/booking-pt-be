@@ -61,10 +61,10 @@ const getCenterById = async (id) => {
 const deleteCenterById = async (id) => {
     try {
         const centerRes = await getCenterById(id);
-        const deleted = deleteUrl(centerRes.center.imgLink,"users");
-        if (deleted){
+        const deleted = deleteUrl(centerRes.center.imgLink, "users");
+        if (deleted) {
             console.log("đã xóa");
-        }else{
+        } else {
             console.log("chưa xóa")
         }
         const center = await db.Center.destroy({

@@ -1,8 +1,8 @@
 import centers from "./centers";
-import packageCategories from "./packageCategories";
+import packages from "./packages";
 import accounts from "./accounts";
 import auth from "./auth";
 
-const paths = Object.assign({}, centers, packageCategories, accounts, auth);
+const paths = Object.assign({}, centers, packages, accounts, auth);
 
 export default paths;

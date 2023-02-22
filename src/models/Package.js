@@ -13,10 +13,12 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true, // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
             autoIncrement: true
         },
-        packageCategoryId: DataTypes.INTEGER,
+        packageName: DataTypes.STRING,
         price: DataTypes.INTEGER,
         durationByMonth: DataTypes.INTEGER,
         durationByDay: DataTypes.INTEGER,
+        object: DataTypes.ENUM('newbie', 'intermediate', 'professional'),
+        category: DataTypes.ENUM('class', 'pt'),
         createdAt: DataTypes.DATE,
         activate: DataTypes.BOOLEAN
     }, {

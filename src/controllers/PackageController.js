@@ -1,7 +1,7 @@
-import PackageCategoryService from "../services/PackageCategoryService";
-const getAllPackageCategory = async (req, res) => {
+import PackageService from "../services/PackageService";
+const getAllPackage = async (req, res) => {
     try {
-        let response = await PackageCategoryService.getAllPackageCategory();
+        let response = await PackageService.getAllPackage();
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
@@ -12,9 +12,9 @@ const getAllPackageCategory = async (req, res) => {
     }
 }
 
-const getPackageCategoryById = async (req, res) => {
+const getPackageById = async (req, res) => {
     try {
-        let response = await PackageCategoryService.getPackageCategoryById(req.params.packageCategoryId);
+        let response = await PackageService.getPackageById(req.params.packageId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -27,4 +27,4 @@ const getPackageCategoryById = async (req, res) => {
     }
 }
 
-module.exports = { getAllPackageCategory, getPackageCategoryById }
+module.exports = { getAllPackage, getPackageById }

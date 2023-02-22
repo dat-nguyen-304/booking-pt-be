@@ -41,8 +41,8 @@ module.exports = {
             description: 'APIs related to Center',
         },
         {
-            name: 'Package Category API',
-            description: 'APIs related to Package Category',
+            name: 'Package API',
+            description: 'APIs related to Package',
         }
     ],
     definitions

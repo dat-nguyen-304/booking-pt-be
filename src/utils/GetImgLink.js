@@ -3,8 +3,9 @@ const UUID = require("uuid-v4");
 const fs = require('fs');
 const { promisify } = require('util');
 const unlinkAsync = promisify(fs.unlink);
+import path from 'path';
 const storage = new Storage({
-    keyFilename: "../booking-pt-be/src/config/serviceAccount.json",
+    keyFilename: path.join(__dirname, "../config/serviceAccount.json"),
 });
 
 const imgUrl = async (file, dist) => {
@@ -13,6 +14,7 @@ const imgUrl = async (file, dist) => {
     var downLoadPath =
         "https://firebasestorage.googleapis.com/v0/b/authen-39b0f.appspot.com/o/";
     if (file.size == 0) {
+        await unlinkAsync(file.path);
         return null;
     } else {
         const imageResponse = await bucket.upload(file.path, {
@@ -31,8 +33,6 @@ const imgUrl = async (file, dist) => {
             encodeURIComponent(imageResponse[0].name) +
             "?alt=media&token=" +
             uuid;
-
-
         return imgUrlDow;
     }
 }
