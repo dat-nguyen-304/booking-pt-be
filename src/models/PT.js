@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true, // nếu không thêm cái này, sequelize sẽ mặc định thêm trường "id"
             autoIncrement: true
         },
-        centerId: DataTypes.STRING,
+        centerId: DataTypes.INTEGER,
+        fullName: DataTypes.STRING,
         rating: DataTypes.FLOAT,
         description: DataTypes.STRING
     }, {

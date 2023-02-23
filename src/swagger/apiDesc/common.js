@@ -106,3 +106,20 @@ export const successAndReturnARecord = (keyRecord, modelRef) => {
         }
     }
 }
+
+export const deleteSuccess = {
+    description: 'Delete success',
+    schema: {
+        type: 'object',
+        properties: {
+            errorCode: {
+                type: 'integer',
+                example: 0,
+            },
+            message: {
+                type: 'string',
+                example: "success"
+            }
+        }
+    }
+}

@@ -34,6 +34,67 @@ const getPackageById = async (id) => {
     }
 }
 
+const update = async (id, packageData) => {
+    try {
+        const packageFound = await db.Package.findOne({
+            where: { packageId: id }
+        });
+        if (!packageFound) return {
+            errorCode: 1,
+            description: 'packageId is not exist'
+        }
+        await packageFound.update(packageData);
+        await packageFound.save();
+        return {
+            errorCode: 0,
+            package: packageFound
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+const toggleActivate = async (id) => {
+    try {
+        const packageFound = await db.Package.findOne({
+            where: { packageId: id }
+        });
+        if (!packageFound) return {
+            errorCode: 1,
+            description: 'packageId is not exist'
+        }
+        await packageFound.update({ activate: !packageFound.activate });
+        await packageFound.save();
+        return {
+            errorCode: 0,
+            package: packageFound
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+const remove = async (id) => {
+    try {
+        const packageFound = await db.Package.destroy({
+            where: { packageId: id }
+        });
+        if (!packageFound) return {
+            errorCode: 1,
+            description: 'packageId is not exist'
+        }
+        return {
+            errorCode: 0,
+            message: 'success'
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 module.exports = {
-    getAllPackage, getPackageById
+    getAllPackage, getPackageById, update, toggleActivate, remove
 }

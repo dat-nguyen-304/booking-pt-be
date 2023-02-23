@@ -7,6 +7,8 @@ packageRouter
     .get(PackageController.getAllPackage);
 packageRouter
     .route("/:packageId")
-    .get(PackageController.getPackageById);
+    .get(PackageController.getPackageById)
+    .patch(PackageController.updateOrDeactivate)
+    .delete(PackageController.remove)
 
 export default packageRouter;
