@@ -8,7 +8,7 @@ const PTDef = {
             },
             fullName: {
                 type: 'string',
-                example: 'Loại Basic'
+                example: 'Nguyễn Trần Duy Nhất'
             },
             centerId: {
                 type: 'integer',

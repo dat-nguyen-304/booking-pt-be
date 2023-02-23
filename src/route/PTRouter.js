@@ -9,6 +9,5 @@ PTRouter
     .route("/:PTId")
     .get(PTController.getById)
     .patch(PTController.update)
-    .delete(PTController.deleteById)
 
 export default PTRouter;

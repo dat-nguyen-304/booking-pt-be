@@ -3,7 +3,8 @@ import paths from "./apiDesc";
 require('dotenv').config();
 
 module.exports = {
-    swagger: '2.0',
+    swagger: '3.0',
+    openapi: '3.0.0',
     info: {
         version: '1.0.0',
         title: 'Gacha API',
@@ -47,7 +48,14 @@ module.exports = {
         {
             name: 'PT API',
             description: 'APIs related to PT',
+        },
+        {
+            name: 'Trainee API',
+            description: 'APIs related to Trainee',
         }
     ],
-    definitions
+    components: {
+        schemas: { ...definitions }
+
+    }
 };

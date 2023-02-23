@@ -1,12 +1,12 @@
 import db from "../models/index";
 const getAll = async () => {
     try {
-        const PTs = await db.PT.findAll({
+        const trainees = await db.Trainee.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            PTs
+            trainees
         }
     } catch (error) {
         console.log(error);
@@ -16,17 +16,17 @@ const getAll = async () => {
 
 const getById = async (id) => {
     try {
-        const PT = await db.PT.findOne({
-            where: { PTId: id },
+        const trainee = await db.Trainee.findOne({
+            where: { traineeId: id },
             raw: true
         });
-        if (!PT) return {
+        if (!trainee) return {
             errorCode: 1,
-            description: 'PT Id is not exist'
+            description: 'Trainee Id is not exist'
         }
         return {
             errorCode: 0,
-            PT
+            trainee: trainee
         }
     } catch (error) {
         console.log(error);
@@ -34,25 +34,27 @@ const getById = async (id) => {
     }
 }
 
-const update = async (id, PTData) => {
+const update = async (id, traineeData) => {
     try {
-        const PT = await db.PT.findOne({
-            where: { PTId: id }
+        const trainee = await db.Trainee.findOne({
+            where: { traineeId: id }
         });
-        if (!PT) return {
+        if (!trainee) return {
             errorCode: 1,
-            description: 'PTId is not exist'
+            description: 'TraineeId is not exist'
         }
-        await PT.update(PTData);
+        console.log(traineeData);
+        await trainee.update(traineeData);
         return {
             errorCode: 0,
-            PT
+            trainee
         }
     } catch (error) {
         console.log(error);
         throw new Error(error);
     }
 }
+
 
 module.exports = {
     getAll, getById, update

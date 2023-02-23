@@ -1,8 +1,8 @@
-import PTService from "../services/PTService";
+import TraineeService from "../services/TraineeService";
 
 const getAll = async (req, res) => {
     try {
-        let response = await PTService.getAll();
+        let response = await TraineeService.getAll();
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
     try {
-        let response = await PTService.getById(req.params.PTId);
+        let response = await TraineeService.getById(req.params.traineeId);
         if (response.errorCode === 0) return res.status(200).json(response);
         else return res.status(400).json(response);
     } catch (e) {
@@ -29,7 +29,8 @@ const getById = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        let response = await PTService.update(req.params.PTId, req.body);
+        console.log("req.body: ", req.body);
+        let response = await TraineeService.update(req.params.traineeId, req.body);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -41,5 +42,6 @@ const update = async (req, res) => {
         })
     }
 }
+
 
 module.exports = { getAll, getById, update };

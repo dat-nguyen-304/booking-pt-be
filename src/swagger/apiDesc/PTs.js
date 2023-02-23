@@ -4,7 +4,7 @@ module.exports = {
     '/api/PTs': {
         get: {
             tags: ["PT API"],
-            description: 'Get all Account',
+            description: 'Get all PT',
             responses: {
                 200: successAndReturnArray('PTs', 'PT'),
                 500: errorFromServer
@@ -37,50 +37,62 @@ module.exports = {
                 type: "integer",
                 required: true,
                 description: "PT ID pass by parameter in url",
-            },
-            {
-                in: 'formData',
-                name: 'centerId',
-                type: "integer",
-                description: "Center ID pass by payload",
-            },
-            {
-                in: 'formData',
-                name: 'fullName',
-                type: "string",
-                description: "PT's full name pass by payload",
-            },
-            {
-                in: 'formData',
-                name: 'rating',
-                type: "float",
-                description: "PT's rating pass by payload",
-            },
-            {
-                in: 'formData',
-                name: 'description',
-                type: "string",
-                description: "Description pass by payload",
             }
             ],
+            requestBody: {
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                centerId: {
+                                    type: 'integer',
+                                    description: `Center ID pass by payload`,
+                                },
+                                fullName: {
+                                    type: 'string',
+                                    description: `PT's full name pass by payload`,
+                                },
+                                rating: {
+                                    type: 'number',
+                                    format: 'float',
+                                    description: `PT's rating pass by payload`,
+                                },
+                                description: {
+                                    type: 'string',
+                                    description: `Description pass by payload`,
+                                }
+                            }
+                        },
+                    },
+                    'application/x-www-form-urlencoded': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                centerId: {
+                                    type: 'integer',
+                                    description: `Center ID pass by payload`,
+                                },
+                                fullName: {
+                                    type: 'string',
+                                    description: `PT's full name pass by payload`,
+                                },
+                                rating: {
+                                    type: 'number',
+                                    format: 'float',
+                                    description: `PT's rating pass by payload`,
+                                },
+                                description: {
+                                    type: 'string',
+                                    description: `Description pass by payload`,
+                                }
+                            }
+                        },
+                    }
+                },
+            },
             responses: {
                 200: successAndReturnARecord('PT', 'PT'),
-                400: idIsNotExist,
-                500: errorFromServer
-            }
-        },
-        delete: {
-            tags: ["PT API"],
-            description: 'Get a PT by PTId pass through parameter',
-            parameters: [{
-                in: 'path',
-                name: 'PTId',
-                type: "integer",
-                required: true,
-                description: "PT ID pass by parameter in url",
-            }],
-            responses: {
-                200: deleteSuccess,
                 400: idIsNotExist,
                 500: errorFromServer
             }
