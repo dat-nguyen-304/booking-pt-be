@@ -27,13 +27,18 @@ const getPackageById = async (req, res) => {
     }
 }
 
-const updateOrDeactivate = async (req, res) => {
+const updateOrToggleActivate = async (req, res) => {
     try {
         const { operation, ...packageData } = req.body;
         let response;
         if (operation === 'update')
             response = await PackageService.update(req.params.packageId, packageData);
-        else response = await PackageService.toggleActivate(req.params.packageId);
+        else if (operation === 'toggleActivate')
+            response = await PackageService.toggleActivate(req.params.packageId);
+        else return res.status(400).json({
+            errorCode: 1,
+            message: 'operation must be \'update\' or \'toggleActivate\''
+        });
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -46,9 +51,9 @@ const updateOrDeactivate = async (req, res) => {
     }
 }
 
-const remove = async (req, res) => {
+const deleteById = async (req, res) => {
     try {
-        let response = await PackageService.remove(req.params.packageId);
+        let response = await PackageService.deleteById(req.params.packageId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -62,4 +67,4 @@ const remove = async (req, res) => {
 }
 
 
-module.exports = { getAllPackage, getPackageById, updateOrDeactivate, remove }
+module.exports = { getAllPackage, getPackageById, updateOrToggleActivate, deleteById }

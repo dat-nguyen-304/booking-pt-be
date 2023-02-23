@@ -30,7 +30,7 @@ module.exports = {
         },
         patch: {
             tags: ["Package API"],
-            description: 'Get a package by packageId pass through parameter',
+            description: 'Update one PT if operation you pass by payload is "update". Or you activate/deactivate one package if operation is "toggleActivate"',
             parameters: [{
                 in: 'path',
                 name: 'packageId',
@@ -43,7 +43,7 @@ module.exports = {
                 name: 'operation',
                 type: "string",
                 required: true,
-                description: "Operation is deactivate or update",
+                description: "Operation is toggleActivate or update",
             },
             {
                 in: 'formData',

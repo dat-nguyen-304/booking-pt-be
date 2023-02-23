@@ -44,7 +44,6 @@ const update = async (id, packageData) => {
             description: 'packageId is not exist'
         }
         await packageFound.update(packageData);
-        await packageFound.save();
         return {
             errorCode: 0,
             package: packageFound
@@ -65,7 +64,6 @@ const toggleActivate = async (id) => {
             description: 'packageId is not exist'
         }
         await packageFound.update({ activate: !packageFound.activate });
-        await packageFound.save();
         return {
             errorCode: 0,
             package: packageFound
@@ -76,15 +74,17 @@ const toggleActivate = async (id) => {
     }
 }
 
-const remove = async (id) => {
+const deleteById = async (id) => {
     try {
-        const packageFound = await db.Package.destroy({
+        const packageFound = await db.Package.findOne({
             where: { packageId: id }
         });
         if (!packageFound) return {
             errorCode: 1,
             description: 'packageId is not exist'
         }
+
+        await packageFound.destroy();
         return {
             errorCode: 0,
             message: 'success'
@@ -96,5 +96,5 @@ const remove = async (id) => {
 }
 
 module.exports = {
-    getAllPackage, getPackageById, update, toggleActivate, remove
+    getAllPackage, getPackageById, update, toggleActivate, deleteById
 }

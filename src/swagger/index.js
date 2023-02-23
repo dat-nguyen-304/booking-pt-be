@@ -43,6 +43,10 @@ module.exports = {
         {
             name: 'Package API',
             description: 'APIs related to Package',
+        },
+        {
+            name: 'PT API',
+            description: 'APIs related to PT',
         }
     ],
     definitions

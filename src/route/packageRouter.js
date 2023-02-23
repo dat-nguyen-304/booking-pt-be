@@ -8,7 +8,7 @@ packageRouter
 packageRouter
     .route("/:packageId")
     .get(PackageController.getPackageById)
-    .patch(PackageController.updateOrDeactivate)
-    .delete(PackageController.remove)
+    .patch(PackageController.updateOrToggleActivate)
+    .delete(PackageController.deleteById)
 
 export default packageRouter;
