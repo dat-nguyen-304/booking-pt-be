@@ -1,12 +1,27 @@
 import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink"
+import {redisClient} from "../config/connectDB";
 
 const getAllCenter = async () => {
+    let isCached = false;
+    let centers
     try {
-        const centers = await db.Center.findAll({
-            raw: true
-        });
+        const cacheResults = await redisClient.get("centers");
+        if (cacheResults) {
+            console.log("chạy vo vi da co data");
+            isCached = true;
+            centers = JSON.parse(cacheResults);
+        } else {
+            centers = await db.Center.findAll({
+                where: { activate: true },
+                raw: true
+            });
+            if (centers.length === 0) {
+                throw "API returned an empty array";
+            }
+            await redisClient.set("centers", JSON.stringify(centers));
+        }
         return {
             errorCode: 0,
             centers

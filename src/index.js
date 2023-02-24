@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connectDB } from "./config/connectDB";
+import { connectDB, connectRedis } from "./config/connectDB";
 import initWebRoutes from "./route/";
 import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "./swagger/index";
 require('dotenv').config();
 connectDB();
+connectRedis();
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
