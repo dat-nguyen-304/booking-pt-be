@@ -52,6 +52,14 @@ module.exports = {
         {
             name: 'Trainee API',
             description: 'APIs related to Trainee',
+        },
+        {
+            name: 'Trainee Package API',
+            description: 'APIs related to Trainee Package',
+        },
+        {
+            name: 'Session API',
+            description: 'APIs related to Session',
         }
     ],
     components: {

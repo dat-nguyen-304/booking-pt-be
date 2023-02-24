@@ -42,7 +42,7 @@ module.exports = {
                                 },
                                 category: {
                                     type: 'string',
-                                    enum: ['free', 'class', 'pt'],
+                                    enum: ['havept', 'nopt'],
                                     description: 'Category pass by payload',
                                 },
                             },
@@ -76,7 +76,7 @@ module.exports = {
                                 },
                                 category: {
                                     type: 'string',
-                                    enum: ['free', 'class', 'pt'],
+                                    enum: ['havept', 'nopt'],
                                     description: 'Category pass by payload',
                                 },
                             },
@@ -152,7 +152,7 @@ module.exports = {
                                 },
                                 category: {
                                     type: 'string',
-                                    enum: ['free', 'class', 'pt'],
+                                    enum: ['havept', 'nopt'],
                                     description: 'Category pass by payload',
                                 },
                             },
@@ -190,7 +190,7 @@ module.exports = {
                                 },
                                 category: {
                                     type: 'string',
-                                    enum: ['free', 'class', 'pt'],
+                                    enum: ['havept', 'nopt'],
                                     description: 'Category pass by payload',
                                 },
                             },

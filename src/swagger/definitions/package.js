@@ -23,7 +23,7 @@ const packageDef = {
                 example: '30'
             },
             category: {
-                type: 'enum("class", "pt")',
+                type: 'enum("havept", "nopt")',
                 example: 'class'
             },
             object: {

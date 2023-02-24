@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         durationByMonth: DataTypes.INTEGER,
         durationByDay: DataTypes.INTEGER,
         object: DataTypes.ENUM('newbie', 'intermediate', 'professional'),
-        category: DataTypes.ENUM('class', 'pt'),
+        category: DataTypes.ENUM('havept', 'nopt'),
         createdAt: DataTypes.DATE,
         activate: DataTypes.BOOLEAN
     }, {

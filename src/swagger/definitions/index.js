@@ -4,6 +4,7 @@ import accountDef from "./account";
 import PTDef from "./PT";
 import traineeDef from "./trainee";
 import traineePackageDef from "./traineePackage";
+import sessionDef from "./session";
 
 const definitions = {
     ...centerDef,
@@ -11,6 +12,7 @@ const definitions = {
     ...accountDef,
     ...PTDef,
     ...traineeDef,
-    ...traineePackageDef
+    ...traineePackageDef,
+    ...sessionDef
 };
 export default definitions;
