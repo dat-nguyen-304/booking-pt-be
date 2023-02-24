@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -21,7 +21,7 @@ const getById = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -29,7 +29,6 @@ const getById = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        console.log("req.body: ", req.body);
         let response = await TraineeService.update(req.params.traineeId, req.body);
         if (response.errorCode === 0)
             return res.status(200).json(response);
@@ -37,7 +36,7 @@ const update = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: 'Error from server...'
         })
     }

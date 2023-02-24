@@ -6,7 +6,7 @@ const login = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: 'Error from server...'
         })
     }
@@ -19,7 +19,7 @@ const getTokens = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: 'Error from server...'
         })
     }

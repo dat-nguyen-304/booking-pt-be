@@ -34,6 +34,19 @@ const getPackageById = async (id) => {
     }
 }
 
+const create = async (packageData) => {
+    try {
+        const packageCreated = await db.Package.create(packageData);
+        return {
+            errorCode: 0,
+            package: packageCreated
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 const update = async (id, packageData) => {
     try {
         const packageFound = await db.Package.findOne({
@@ -96,5 +109,5 @@ const deleteById = async (id) => {
 }
 
 module.exports = {
-    getAllPackage, getPackageById, update, toggleActivate, deleteById
+    getAllPackage, getPackageById, create, update, toggleActivate, deleteById
 }

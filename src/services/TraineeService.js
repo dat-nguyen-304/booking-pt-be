@@ -26,7 +26,7 @@ const getById = async (id) => {
         }
         return {
             errorCode: 0,
-            trainee: trainee
+            trainee
         }
     } catch (error) {
         console.log(error);

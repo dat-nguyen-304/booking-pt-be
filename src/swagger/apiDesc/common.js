@@ -1,15 +1,19 @@
 export const errorFromServer = {
     description: 'Error from server',
-    schema: {
-        type: 'object',
-        properties: {
-            errorCode: {
-                type: 'integer',
-                example: -1,
-            },
-            message: {
-                type: 'string',
-                example: "Error from server"
+    content: {
+        'application/json': {
+            schema: {
+                type: 'object',
+                properties: {
+                    errorCode: {
+                        type: 'integer',
+                        example: -1,
+                    },
+                    message: {
+                        type: 'string',
+                        example: "Error from server"
+                    }
+                }
             }
         }
     }
@@ -17,16 +21,20 @@ export const errorFromServer = {
 
 export const idIsNotExist = {
     description: 'id does not exist',
-    schema: {
-        type: 'object',
-        properties: {
-            errorCode: {
-                type: 'integer',
-                example: 1,
-            },
-            message: {
-                type: 'string',
-                example: "id does not exist"
+    content: {
+        'application/json': {
+            schema: {
+                type: 'object',
+                properties: {
+                    errorCode: {
+                        type: 'integer',
+                        example: 1,
+                    },
+                    message: {
+                        type: 'string',
+                        example: "id does not exist"
+                    }
+                }
             }
         }
     }
@@ -34,34 +42,41 @@ export const idIsNotExist = {
 
 export const unauthorized = {
     description: 'Unauthorized',
-    schema: {
-        type: 'object',
-        properties: {
-            errorCode: {
-                type: 'integer',
-                example: -1,
-            },
-            message: {
-                type: 'string',
-                example: "Unauthorized"
+    content: {
+        'application/json': {
+            schema: {
+                type: 'object',
+                properties: {
+                    errorCode: {
+                        type: 'integer',
+                        example: -1,
+                    },
+                    message: {
+                        type: 'string',
+                        example: "Unauthorized"
+                    }
+                }
             }
         }
     }
 }
 
-
 export const forbidden = {
     description: 'Forbidden',
-    schema: {
-        type: 'object',
-        properties: {
-            errorCode: {
-                type: 'integer',
-                example: -1,
-            },
-            message: {
-                type: 'string',
-                example: "Forbidden"
+    content: {
+        'application/json': {
+            schema: {
+                type: 'object',
+                properties: {
+                    errorCode: {
+                        type: 'integer',
+                        example: -1,
+                    },
+                    message: {
+                        type: 'string',
+                        example: "Forbidden"
+                    }
+                }
             }
         }
     }
@@ -70,17 +85,21 @@ export const forbidden = {
 export const successAndReturnArray = (keyArray, modelRef) => {
     return {
         description: 'Success',
-        schema: {
-            type: 'object',
-            properties: {
-                errorCode: {
-                    type: 'integer',
-                    example: 0,
-                },
-                [keyArray]: {
-                    type: 'array',
-                    items: {
-                        $ref: `#/definitions/${modelRef}`,
+        content: {
+            'application/json': {
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errorCode: {
+                            type: 'integer',
+                            example: 0,
+                        },
+                        [keyArray]: {
+                            type: 'array',
+                            items: {
+                                $ref: `#/components/schemas/${modelRef}`,
+                            }
+                        }
                     }
                 }
             }
@@ -91,16 +110,23 @@ export const successAndReturnArray = (keyArray, modelRef) => {
 export const successAndReturnARecord = (keyRecord, modelRef) => {
     return {
         description: 'Success',
-        schema: {
-            type: 'object',
-            properties: {
-                errorCode: {
-                    type: 'integer',
-                    example: 0,
-                },
-                [keyRecord]: {
-                    type: 'object',
-                    $ref: `#definitions/${modelRef}`
+        content: {
+            'application/json': {
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                errorCode: {
+                                    type: 'integer',
+                                    example: 0,
+                                },
+                                [keyRecord]: {
+                                    $ref: `#/components/schemas/${modelRef}`
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -109,16 +135,20 @@ export const successAndReturnARecord = (keyRecord, modelRef) => {
 
 export const deleteSuccess = {
     description: 'Delete success',
-    schema: {
-        type: 'object',
-        properties: {
-            errorCode: {
-                type: 'integer',
-                example: 0,
-            },
-            message: {
-                type: 'string',
-                example: "success"
+    content: {
+        'application/json': {
+            schema: {
+                type: 'object',
+                properties: {
+                    errorCode: {
+                        type: 'integer',
+                        example: 0,
+                    },
+                    message: {
+                        type: 'string',
+                        example: "success"
+                    }
+                }
             }
         }
     }

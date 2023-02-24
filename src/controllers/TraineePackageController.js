@@ -1,54 +1,54 @@
-import PackageService from "../services/PackageService";
-const getAllPackage = async (req, res) => {
+import TraineePackageService from "../services/TraineePackageService";
+
+const getAll = async (req, res) => {
     try {
-        let response = await PackageService.getAllPackage();
+        let response = await TraineePackageService.getAll();
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
-        })
+            message: "Error from server...",
+        });
     }
-}
+};
 
-const getPackageById = async (req, res) => {
+const getById = async (req, res) => {
     try {
-        let response = await PackageService.getPackageById(req.params.packageId);
-        if (response.errorCode === 0)
-            return res.status(200).json(response);
+        let response = await TraineePackageService.getById(req.params.traineeId);
+        if (response.errorCode === 0) return res.status(200).json(response);
         else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
-        })
+            message: "Error from server...",
+        });
     }
-}
+};
 
 const create = async (req, res) => {
     try {
-        let response = await PackageService.create(req.body);
+        let response = await TraineePackageService.create(req.body);
         if (response.errorCode === 0) return res.status(200).json(response);
         else return res.status(400).json(response);
-    } catch (error) {
+    } catch (e) {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
-        })
+            message: "Error from server...",
+        });
     }
 }
 
 const updateOrToggleActivate = async (req, res) => {
     try {
-        const { operation, ...packageData } = req.body;
+        const { operation, ...traineePackageData } = req.body;
         let response;
         if (operation === 'update')
-            response = await PackageService.update(req.params.packageId, packageData);
+            response = await TraineePackageService.update(req.params.packageId, traineePackageData);
         else if (operation === 'toggleActivate')
-            response = await PackageService.toggleActivate(req.params.packageId);
+            response = await TraineePackageService.toggleActivate(req.params.packageId);
         else return res.status(400).json({
             errorCode: 1,
             message: `operation must be 'update' or 'toggleActivate'`
@@ -67,7 +67,7 @@ const updateOrToggleActivate = async (req, res) => {
 
 const deleteById = async (req, res) => {
     try {
-        let response = await PackageService.deleteById(req.params.packageId);
+        let response = await TraineePackageService.deleteById(req.params.packageId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -80,5 +80,4 @@ const deleteById = async (req, res) => {
     }
 }
 
-
-module.exports = { getAllPackage, getPackageById, create, updateOrToggleActivate, deleteById }
+module.exports = { getAll, getById, updateOrToggleActivate, create, deleteById };

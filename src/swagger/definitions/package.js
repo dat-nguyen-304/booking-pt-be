@@ -10,6 +10,10 @@ const packageDef = {
                 type: 'string',
                 example: 'Loại Basic'
             },
+            price: {
+                type: 'integer',
+                example: '1000000'
+            },
             durationByMonth: {
                 type: 'integer',
                 example: '1'
@@ -19,11 +23,11 @@ const packageDef = {
                 example: '30'
             },
             category: {
-                type: 'enum("class", "pt"',
+                type: 'enum("class", "pt")',
                 example: 'class'
             },
             object: {
-                type: 'enum("newbie", "intermediate", "professional"',
+                type: 'enum("newbie", "intermediate", "professional")',
                 example: 'newbie'
             },
             createdAt: {
@@ -35,7 +39,7 @@ const packageDef = {
                 example: true
             }
         },
-        required: ["packageId", "packageName", "durationByMonth", "durationByDay", "category", "object", "createdAt", "activate"]
+        required: ["packageId", "packageName", "price", "durationByMonth", "durationByDay", "category", "object", "createdAt", "activate"]
     }
 };
 

@@ -4,6 +4,7 @@ const packageRouter = express.Router();
 
 packageRouter
     .route("/")
+    .post(PackageController.create)
     .get(PackageController.getAllPackage);
 packageRouter
     .route("/:packageId")

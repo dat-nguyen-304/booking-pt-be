@@ -7,7 +7,7 @@ const getAllCenter = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -20,7 +20,7 @@ const postNewCenter = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -34,7 +34,7 @@ const getCenterById = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -48,7 +48,7 @@ const deleteCenterById = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }

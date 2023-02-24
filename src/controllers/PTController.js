@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -21,7 +21,7 @@ const getById = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: "Error from server...",
         });
     }
@@ -36,7 +36,7 @@ const update = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).json({
-            errCode: -1,
+            errorCode: -1,
             message: 'Error from server...'
         })
     }

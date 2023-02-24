@@ -22,9 +22,9 @@ module.exports = (sequelize, DataTypes) => {
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
         registerDate: DataTypes.DATE,
-        paymentDescription: DataTypes.STRING,
         remainDay: DataTypes.INTEGER,
-        status: DataTypes.INTEGER
+        status: DataTypes.ENUM('pending', 'active', 'expired'),
+        activate: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'TraineePackage',
