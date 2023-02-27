@@ -1,12 +1,23 @@
 import db from "../models/index";
-const getAllAccount = async () => {
+const getAllAccount = async (query) => {
     try {
-        const accounts = await db.Account.findAll({
-            raw: true
-        });
+        let { limit, page, sortBy, order } = query;
+        const options = { raw: true };
+        if (page) {
+            options.page = Number.parseInt(page);
+            options.limit = Number.parseInt(limit) || 10;
+            options.offset = (page - 1) * options.limit;
+        }
+        if (sortBy) {
+            order = order || 'asc';
+            options.order = [[sortBy, order]]
+        }
+        const accounts = await db.Account.findAndCountAll(options);
         return {
             errorCode: 0,
-            accounts
+            totalItems: accounts.count,
+            totalPage: Math.ceil(accounts.count / options.limit),
+            accounts: accounts.rows
         }
     } catch (error) {
         console.log(error);

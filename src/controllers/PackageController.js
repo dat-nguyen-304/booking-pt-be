@@ -1,7 +1,7 @@
 import PackageService from "../services/PackageService";
 const getAllPackage = async (req, res) => {
     try {
-        let response = await PackageService.getAllPackage();
+        let response = await PackageService.getAllPackage(req.query);
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);

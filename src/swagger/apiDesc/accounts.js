@@ -5,6 +5,31 @@ module.exports = {
         get: {
             tags: ["Account API"],
             description: 'Get all Account',
+            parameters: [{
+                in: 'query',
+                name: 'page',
+                type: "integer",
+                description: "No page pass by parameter in url",
+            },
+            {
+                in: 'query',
+                name: 'limit',
+                type: "integer",
+                description: "Number of item in one page pass by parameter in url",
+            },
+            {
+                in: 'query',
+                name: 'sortBy',
+                type: "integer",
+                description: "Property you want to sort pass by parameter in url",
+            },
+            {
+                in: 'query',
+                name: 'order',
+                type: "integer",
+                description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+            }
+            ],
             responses: {
                 200: successAndReturnArray('accounts', 'Account'),
                 401: unauthorized,

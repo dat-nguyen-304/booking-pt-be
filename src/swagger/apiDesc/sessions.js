@@ -6,7 +6,7 @@ module.exports = {
             tags: ["Session API"],
             description: 'Get all Session',
             responses: {
-                200: successAndReturnArray('sessions', 'Session'),
+                200: successAndReturnArray('sessions', 'SessionMoreInfo'),
                 500: errorFromServer
             },
         },
@@ -137,7 +137,7 @@ module.exports = {
                 description: "Session ID pass by parameter in url",
             }],
             responses: {
-                200: successAndReturnARecord('trainee', 'Session'),
+                200: successAndReturnARecord('session', 'SessionMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
@@ -219,7 +219,7 @@ module.exports = {
                 },
             },
             responses: {
-                200: successAndReturnARecord('package', 'Package'),
+                200: successAndReturnARecord('package', 'PackageMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }

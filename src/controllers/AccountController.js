@@ -1,7 +1,7 @@
 import AccountService from "../services/AccountService";
 const getAllAccount = async (req, res) => {
     try {
-        let response = await AccountService.getAllAccount();
+        let response = await AccountService.getAllAccount(req.query);
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
