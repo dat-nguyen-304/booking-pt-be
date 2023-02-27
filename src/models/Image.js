@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Image extends Model {
         static associate (models) {
+            Image.belongsTo(models.Session, { foreignKey: 'sessionId', as: 'session' });
         }
     };
     Image.init({

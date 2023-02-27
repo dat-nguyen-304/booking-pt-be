@@ -29,6 +29,7 @@ const getPackageById = async (req, res) => {
 
 const create = async (req, res) => {
     try {
+        console.log("REQ.BODY: ", req.body);
         let response = await PackageService.create(req.body);
         if (response.errorCode === 0) return res.status(200).json(response);
         else return res.status(400).json(response);

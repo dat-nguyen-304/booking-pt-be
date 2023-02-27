@@ -112,19 +112,15 @@ export const successAndReturnARecord = (keyRecord, modelRef) => {
         description: 'Success',
         content: {
             'application/json': {
-                content: {
-                    'application/json': {
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                errorCode: {
-                                    type: 'integer',
-                                    example: 0,
-                                },
-                                [keyRecord]: {
-                                    $ref: `#/components/schemas/${modelRef}`
-                                }
-                            }
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errorCode: {
+                            type: 'integer',
+                            example: 0,
+                        },
+                        [keyRecord]: {
+                            $ref: `#/components/schemas/${modelRef}`,
                         }
                     }
                 }

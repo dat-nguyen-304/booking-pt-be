@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class PT extends Model {
         static associate (models) {
+            PT.belongsTo(models.Center, { foreignKey: 'centerId', as: 'center' });
         }
     };
     PT.init({

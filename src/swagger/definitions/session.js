@@ -40,6 +40,44 @@ const sessionDef = {
             }
         },
         required: ["sessionId", "traineePackageId", "centerId", "PTId", "slotId", "date", "rating"]
+    },
+    SessionMoreInfo: {
+        type: 'object',
+        properties: {
+            sessionId: {
+                type: 'integer',
+                example: 1
+            },
+            traineePackage: {
+                $ref: `#/components/schemas/TraineePackage`
+            },
+            center: {
+                $ref: `#/components/schemas/Center`
+            },
+            PT: {
+                $ref: `#/components/schemas/PT`
+            },
+            slot: {
+                $ref: `#/components/schemas/Slot`
+            },
+            rating: {
+                type: 'integer',
+                example: 1
+            },
+            noteFromPT: {
+                type: 'string',
+                example: 'Nhớ mang dép theo nhé'
+            },
+            noteFromTrainee: {
+                type: 'string',
+                example: 'Nhớ mang găng tay hộ tôi nhé'
+            },
+            date: {
+                type: 'date',
+                example: 1675729720
+            }
+        },
+        required: ["session", "traineePackage", "center", "PT", "slot", "date", "rating"]
     }
 };
 

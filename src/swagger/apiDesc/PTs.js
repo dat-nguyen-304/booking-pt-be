@@ -6,7 +6,7 @@ module.exports = {
             tags: ["PT API"],
             description: 'Get all PT',
             responses: {
-                200: successAndReturnArray('PTs', 'PT'),
+                200: successAndReturnArray('PTs', 'PTMoreInfo'),
                 500: errorFromServer
             },
         }
@@ -23,7 +23,7 @@ module.exports = {
                 description: "PT ID pass by parameter in url",
             }],
             responses: {
-                200: successAndReturnARecord('PT', 'PT'),
+                200: successAndReturnARecord('PT', 'PTMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }

@@ -5,6 +5,12 @@ import PTDef from "./PT";
 import traineeDef from "./trainee";
 import traineePackageDef from "./traineePackage";
 import sessionDef from "./session";
+import imageDef from "./image";
+import indexCategoryDef from "./indexCategory";
+import indexDef from "./indexModel";
+import measure from "./measure";
+import payment from "./payment";
+import slot from "./slot";
 
 const definitions = {
     ...centerDef,
@@ -13,6 +19,12 @@ const definitions = {
     ...PTDef,
     ...traineeDef,
     ...traineePackageDef,
-    ...sessionDef
+    ...sessionDef,
+    ...imageDef,
+    ...indexCategoryDef,
+    ...indexDef,
+    ...measure,
+    ...payment,
+    ...slot
 };
 export default definitions;

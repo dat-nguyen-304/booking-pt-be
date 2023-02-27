@@ -29,12 +29,6 @@ const centerDef = {
         },
         required: ["centerId", "centerName", "address", "imgLink", "createdAt", "activate"]
     },
-    // Centers: {
-    //     type: 'array',
-    //     items: {
-    //         $ref: '#/centerDef/Center'
-    //     }
-    // }
 };
 
 export default centerDef;

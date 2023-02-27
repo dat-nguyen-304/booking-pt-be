@@ -1,8 +1,11 @@
 import db from "../models/index";
+
 const getAll = async () => {
     try {
         const PTs = await db.PT.findAll({
-            raw: true
+            include: [{ model: db.Center, as: 'center' }],
+            raw: true,
+            nest: true,
         });
         return {
             errorCode: 0,
@@ -18,7 +21,9 @@ const getById = async (id) => {
     try {
         const PT = await db.PT.findOne({
             where: { PTId: id },
-            raw: true
+            include: [{ model: db.Center, as: 'center' }],
+            raw: true,
+            nest: true,
         });
         if (!PT) return {
             errorCode: 1,
@@ -37,7 +42,10 @@ const getById = async (id) => {
 const update = async (id, PTData) => {
     try {
         const PT = await db.PT.findOne({
-            where: { PTId: id }
+            where: { PTId: id },
+            include: [{ model: db.Center, as: 'center' }],
+            raw: true,
+            nest: true,
         });
         if (!PT) return {
             errorCode: 1,
