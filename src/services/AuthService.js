@@ -15,19 +15,17 @@ const generateTokens = payload => {
 
 const login = async (email, emailName) => {
     try {
-        const [users, created] = await db.Account.findOrCreate({
+        let [user, created] = await db.Account.findOrCreate({
             where: { email },
             raw: true
-        })
-
+        });
         if (created) {
             await db.Trainee.create({
-                traineeId: users[0].id,
+                traineeId: user.accountId,
                 fullName: emailName
             })
         }
-
-        const tokens = generateTokens({ email: users[0].email, role: users[0].role });
+        const tokens = generateTokens({ email: user.email, role: user.role });
         return {
             errorCode: 0,
             tokens,

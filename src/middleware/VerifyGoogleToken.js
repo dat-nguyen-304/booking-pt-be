@@ -11,6 +11,7 @@ const verifyGoogleToken = async (req, res, next) => {
         errorCode: 1,
         message: 'Token is required'
     });
+
     try {
         const decodeValue = await admin.auth().verifyIdToken(token);
         if (decodeValue) {
@@ -30,6 +31,7 @@ const verifyGoogleToken = async (req, res, next) => {
                 message: 'Invalid Google token'
             });
         } else {
+            console.log(e);
             return res.status(403).json({
                 errorCode: -1,
                 message: 'Unauthenticated'
