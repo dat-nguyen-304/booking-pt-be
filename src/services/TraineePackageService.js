@@ -1,12 +1,12 @@
 import db from "../models/index";
 const getAll = async () => {
     try {
-        const traineePackagePackages = await db.TraineePackage.findAll({
+        const traineePackages = await db.TraineePackage.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            traineePackagePackages
+            traineePackages
         }
     } catch (error) {
         console.log(error);

@@ -7,6 +7,7 @@ import trainees from "./trainees";
 import traineePackages from "./traineePackages";
 import sessions from "./sessions";
 import images from "./images";
-const paths = Object.assign({}, centers, packages, accounts, auth, PTs, trainees, traineePackages, sessions, images);
+import payments from "./payments";
+const paths = Object.assign({}, centers, packages, accounts, auth, PTs, trainees, traineePackages, sessions, images, payments);
 
 export default paths;

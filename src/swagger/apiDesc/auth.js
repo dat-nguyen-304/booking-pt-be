@@ -1,10 +1,15 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, unauthorized, forbidden } from "./common";
+import { errorFromServer, unauthorized, forbidden } from "./common";
 
 module.exports = {
     '/api/auth/login': {
         post: {
             tags: ["Authentication API"],
             description: 'Check google token from client and return jwt tokens',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             responses: {
                 200: {
                     description: 'Success',

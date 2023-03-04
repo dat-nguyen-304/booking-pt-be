@@ -16,18 +16,21 @@ module.exports = {
         process.env.PROTOCOL_METHOD
     ],
     paths,
-    securityDefinitions: {
-        Bearer: {
-            type: 'apiKey',
-            name: 'Authorization',
-            in: 'header',
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT',
+            },
         },
+        security: [
+            {
+                bearerAuth: [],
+            },
+        ],
+        schemas: { ...definitions }
     },
-    security: [
-        {
-            Bearer: [],
-        },
-    ],
     tags: [
         {
             name: 'Authentication API',
@@ -60,9 +63,15 @@ module.exports = {
         {
             name: 'Session API',
             description: 'APIs related to Session',
+        },
+        {
+            name: 'Image API',
+            description: 'APIs related to Image',
+        },
+        {
+            name: 'Payment API',
+            description: 'APIs related to Payment',
         }
-    ],
-    components: {
-        schemas: { ...definitions }
-    }
+    ]
 };
+

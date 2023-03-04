@@ -6,6 +6,8 @@ import pushNotificationRouter from './pushNotification';
 import PTRouter from './PTRouter';
 import traineeRouter from './traineeRouter';
 import imageRouter from './imageRouter';
+import traineePackageRouter from './traineePackageRouter';
+import paymentRouter from './paymentRouter';
 
 let initWebRoutes = (app) => {
     app.use('/api/centers/', centerRouter);
@@ -16,6 +18,8 @@ let initWebRoutes = (app) => {
     app.use('/api/PTs/', PTRouter);
     app.use('/api/trainees/', traineeRouter);
     app.use('/api/images/', imageRouter);
+    app.use('/api/trainee-packages/', traineePackageRouter);
+    app.use('/api/payments/', paymentRouter);
 }
 
 module.exports = initWebRoutes;
