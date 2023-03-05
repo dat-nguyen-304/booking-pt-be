@@ -1,61 +1,61 @@
 import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
 
 module.exports = {
-    '/api/payments': {
+    '/api/index-categories': {
         get: {
-            tags: ["Payment API"],
-            description: 'Get all Payment',
+            tags: ["Index Category API"],
+            description: 'Get all IndexCategory',
 
             responses: {
-                200: successAndReturnArray('payments', 'Payment'),
+                200: successAndReturnArray('indexCategories', 'IndexCategory'),
                 500: errorFromServer
             },
         },
         post: {
-            tags: ["Payment API"],
-            description: 'Create new payment',
+            tags: ["Index Category API"],
+            description: 'Create new indexCategory',
             requestBody: {
                 content: {
                     'application/json': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                indexCategoryTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Index Category Name pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['indexCategoryTime']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                indexCategoryTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Index Category Name pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['indexCategoryTime']
                         },
                     },
                 },
             },
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('indexCategory', 'IndexCategory'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
         },
     },
-    '/api/payments/{paymentId}': {
+    '/api/index-categories/{indexCategoryId}': {
         patch: {
-            tags: ["Payment API"],
-            description: 'Update a payment by paymentId pass through parameter',
+            tags: ["Index Category API"],
+            description: 'Update a indexCategory by indexCategoryId pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'paymentId',
+                name: 'indexCategoryId',
                 type: "integer",
                 required: true,
                 description: "Image ID pass by parameter in url",
@@ -66,46 +66,46 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                indexCategoryName: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Index Category name pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['indexCategoryName']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                indexCategoryTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Index Category time pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['indexCategoryTime']
                         },
                     },
                 },
             },
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('indexCategory', 'IndexCategory'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
         },
         delete: {
-            tags: ["Payment API"],
-            description: 'Delete a payment by paymentId pass through parameter',
+            tags: ["Index Category API"],
+            description: 'Delete a indexCategory by indexCategoryId pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'paymentId',
+                name: 'indexCategoryId',
                 type: "integer",
                 required: true,
                 description: "Image ID pass by parameter in url",
             }],
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('indexCategory', 'IndexCategory'),
                 400: idIsNotExist,
                 500: errorFromServer
             }

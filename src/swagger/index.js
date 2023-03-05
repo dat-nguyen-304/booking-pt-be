@@ -69,8 +69,20 @@ module.exports = {
             description: 'APIs related to Image',
         },
         {
+            name: 'Slot API',
+            description: 'APIs related to Slot',
+        },
+        {
             name: 'Payment API',
             description: 'APIs related to Payment',
+        },
+        {
+            name: 'Index API',
+            description: 'APIs related to Index',
+        },
+        {
+            name: 'Index Category API',
+            description: 'APIs related to Index Category',
         }
     ]
 };

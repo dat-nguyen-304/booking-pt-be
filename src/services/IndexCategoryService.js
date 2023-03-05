@@ -2,12 +2,12 @@ import db from "../models/index";
 
 const getAll = async () => {
     try {
-        const payments = await db.Payment.findAll({
+        const indexCategories = await db.IndexCategory.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            payments
+            indexCategories
         }
     } catch (error) {
         console.log(error);
@@ -15,12 +15,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (payments) => {
+const create = async (indexCategories) => {
     try {
-        const payment = await db.Payment.create(payments);
+        const indexCategory = await db.IndexCategory.create(indexCategories);
         return {
             errorCode: 0,
-            payment
+            indexCategory
         }
     } catch (error) {
         console.log(error);
@@ -28,19 +28,19 @@ const create = async (payments) => {
     }
 }
 
-const update = async (id, paymentData) => {
+const update = async (id, indexCategoryData) => {
     try {
-        const payment = await db.Payment.findOne({
-            where: { paymentId: id }
+        const indexCategory = await db.IndexCategory.findOne({
+            where: { indexCategoryId: id }
         });
-        if (!payment) return {
+        if (!indexCategory) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'indexCategoryId is not exist'
         }
-        await payment.update(paymentData);
+        await indexCategory.update(indexCategoryData);
         return {
             errorCode: 0,
-            payment
+            indexCategory
         }
     } catch (error) {
         console.log(error);
@@ -50,14 +50,14 @@ const update = async (id, paymentData) => {
 
 const deleteById = async (id) => {
     try {
-        const paymentFound = await db.Payment.findOne({
-            where: { paymentId: id }
+        const indexCategoryFound = await db.IndexCategory.findOne({
+            where: { indexCategoryId: id }
         });
-        if (!paymentFound) return {
+        if (!indexCategoryFound) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'indexCategoryId is not exist'
         }
-        await paymentFound.destroy();
+        await indexCategoryFound.destroy();
         return {
             errorCode: 0,
             message: 'success'

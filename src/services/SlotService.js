@@ -2,12 +2,12 @@ import db from "../models/index";
 
 const getAll = async () => {
     try {
-        const payments = await db.Payment.findAll({
+        const slots = await db.Slot.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            payments
+            slots
         }
     } catch (error) {
         console.log(error);
@@ -15,12 +15,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (payments) => {
+const create = async (slots) => {
     try {
-        const payment = await db.Payment.create(payments);
+        const slot = await db.Slot.create(slots);
         return {
             errorCode: 0,
-            payment
+            slot
         }
     } catch (error) {
         console.log(error);
@@ -28,19 +28,19 @@ const create = async (payments) => {
     }
 }
 
-const update = async (id, paymentData) => {
+const update = async (id, slotData) => {
     try {
-        const payment = await db.Payment.findOne({
-            where: { paymentId: id }
+        const slot = await db.Slot.findOne({
+            where: { slotId: id }
         });
-        if (!payment) return {
+        if (!slot) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'slotId is not exist'
         }
-        await payment.update(paymentData);
+        await slot.update(slotData);
         return {
             errorCode: 0,
-            payment
+            slot
         }
     } catch (error) {
         console.log(error);
@@ -50,14 +50,14 @@ const update = async (id, paymentData) => {
 
 const deleteById = async (id) => {
     try {
-        const paymentFound = await db.Payment.findOne({
-            where: { paymentId: id }
+        const slotFound = await db.Slot.findOne({
+            where: { slotId: id }
         });
-        if (!paymentFound) return {
+        if (!slotFound) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'slotId is not exist'
         }
-        await paymentFound.destroy();
+        await slotFound.destroy();
         return {
             errorCode: 0,
             message: 'success'

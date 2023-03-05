@@ -1,0 +1,16 @@
+import express from "express";
+import SlotController from "../controllers/SlotController";
+import verifyAccessToken from "../middleware/VerifyAccessToken";
+import verifyAuthorization from "../middleware/VerifyAuthorization";
+import upload from "../middleware/StoreImg";
+const slotRouter = express.Router();
+
+slotRouter.route('/')
+    .get(SlotController.getAll)
+    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ SlotController.create);
+
+slotRouter.route('/:slotId')
+    .patch(SlotController.update)
+    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ SlotController.deleteById);
+
+export default slotRouter;

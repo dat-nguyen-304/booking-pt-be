@@ -1,61 +1,61 @@
 import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
 
 module.exports = {
-    '/api/payments': {
+    '/api/slots': {
         get: {
-            tags: ["Payment API"],
-            description: 'Get all Payment',
+            tags: ["Slot API"],
+            description: 'Get all Slot',
 
             responses: {
-                200: successAndReturnArray('payments', 'Payment'),
+                200: successAndReturnArray('slots', 'Slot'),
                 500: errorFromServer
             },
         },
         post: {
-            tags: ["Payment API"],
-            description: 'Create new payment',
+            tags: ["Slot API"],
+            description: 'Create new slot',
             requestBody: {
                 content: {
                     'application/json': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                slotTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Slot Name pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['slotTime']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                slotTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Slot Name pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['slotTime']
                         },
                     },
                 },
             },
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('slot', 'Slot'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
         },
     },
-    '/api/payments/{paymentId}': {
+    '/api/slots/{slotId}': {
         patch: {
-            tags: ["Payment API"],
-            description: 'Update a payment by paymentId pass through parameter',
+            tags: ["Slot API"],
+            description: 'Update a slot by slotId pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'paymentId',
+                name: 'slotId',
                 type: "integer",
                 required: true,
                 description: "Image ID pass by parameter in url",
@@ -66,46 +66,46 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                slotTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Slot time pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['slotTime']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                paymentName: {
+                                slotTime: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Slot time pass by payload',
                                 },
                             },
-                            required: ['paymentName']
+                            required: ['slotTime']
                         },
                     },
                 },
             },
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('slot', 'Slot'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
         },
         delete: {
-            tags: ["Payment API"],
-            description: 'Delete a payment by paymentId pass through parameter',
+            tags: ["Slot API"],
+            description: 'Delete a slot by slotId pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'paymentId',
+                name: 'slotId',
                 type: "integer",
                 required: true,
                 description: "Image ID pass by parameter in url",
             }],
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
+                200: successAndReturnARecord('slot', 'Slot'),
                 400: idIsNotExist,
                 500: errorFromServer
             }

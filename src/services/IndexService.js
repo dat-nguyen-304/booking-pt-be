@@ -2,12 +2,12 @@ import db from "../models/index";
 
 const getAll = async () => {
     try {
-        const payments = await db.Payment.findAll({
+        const indexes = await db.Index.findAll({
             raw: true
         });
         return {
             errorCode: 0,
-            payments
+            indexes
         }
     } catch (error) {
         console.log(error);
@@ -15,12 +15,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (payments) => {
+const create = async (indexData) => {
     try {
-        const payment = await db.Payment.create(payments);
+        const index = await db.Index.create(indexData);
         return {
             errorCode: 0,
-            payment
+            index
         }
     } catch (error) {
         console.log(error);
@@ -28,19 +28,19 @@ const create = async (payments) => {
     }
 }
 
-const update = async (id, paymentData) => {
+const update = async (id, indexData) => {
     try {
-        const payment = await db.Payment.findOne({
-            where: { paymentId: id }
+        const index = await db.Index.findOne({
+            where: { indexId: id }
         });
-        if (!payment) return {
+        if (!index) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'indexId is not exist'
         }
-        await payment.update(paymentData);
+        await index.update(indexData);
         return {
             errorCode: 0,
-            payment
+            index
         }
     } catch (error) {
         console.log(error);
@@ -50,14 +50,14 @@ const update = async (id, paymentData) => {
 
 const deleteById = async (id) => {
     try {
-        const paymentFound = await db.Payment.findOne({
-            where: { paymentId: id }
+        const indexFound = await db.Index.findOne({
+            where: { indexId: id }
         });
-        if (!paymentFound) return {
+        if (!indexFound) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            description: 'indexId is not exist'
         }
-        await paymentFound.destroy();
+        await indexFound.destroy();
         return {
             errorCode: 0,
             message: 'success'

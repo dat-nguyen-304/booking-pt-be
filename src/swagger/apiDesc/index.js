@@ -8,6 +8,11 @@ import traineePackages from "./traineePackages";
 import sessions from "./sessions";
 import images from "./images";
 import payments from "./payments";
-const paths = Object.assign({}, centers, packages, accounts, auth, PTs, trainees, traineePackages, sessions, images, payments);
+import slots from "./slots";
+import indexCategories from "./indexCategories";
+import indexes from "./indexes";
+
+const paths = Object.assign({}, centers, packages, accounts, auth, PTs, trainees, traineePackages, sessions, images, payments,
+    slots, indexCategories, indexes);
 
 export default paths;

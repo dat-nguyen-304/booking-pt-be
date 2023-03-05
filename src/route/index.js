@@ -8,6 +8,9 @@ import traineeRouter from './traineeRouter';
 import imageRouter from './imageRouter';
 import traineePackageRouter from './traineePackageRouter';
 import paymentRouter from './paymentRouter';
+import slotRouter from './slotRouter';
+import indexCategoryRouter from './indexCategoryRouter';
+import indexRouter from './indexRouter';
 
 let initWebRoutes = (app) => {
     app.use('/api/centers/', centerRouter);
@@ -20,6 +23,9 @@ let initWebRoutes = (app) => {
     app.use('/api/images/', imageRouter);
     app.use('/api/trainee-packages/', traineePackageRouter);
     app.use('/api/payments/', paymentRouter);
+    app.use('/api/slots/', slotRouter);
+    app.use('/api/index-categories', indexCategoryRouter);
+    app.use('/api/indexes', indexRouter);
 }
 
 module.exports = initWebRoutes;
