@@ -2,7 +2,7 @@ import PTService from "../services/PTService";
 
 const getAll = async (req, res) => {
     try {
-        let response = await PTService.getAll();
+        let response = await PTService.getAll(req.query);
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);
@@ -29,7 +29,7 @@ const getById = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-        let response = await PTService.update(req.params.PTId, req.body);
+        let response = await PTService.update(req.params.PTId, req.body, req.file);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);

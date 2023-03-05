@@ -1,12 +1,42 @@
 import db from "../models/index";
-const getAll = async () => {
+const { Op } = require('sequelize');
+
+const getAll = async (query) => {
     try {
-        const traineePackages = await db.TraineePackage.findAll({
-            raw: true
-        });
+        let { keyword, limit, page, sortBy, order, getBy, getByValue } = query;
+
+        const options = { raw: true };
+
+        if (keyword) {
+            options.where = {
+                traineeId: {
+                    [Op.like]: `%${keyword}%`
+                }
+            }
+        }
+
+        if (page) {
+            options.page = Number.parseInt(page);
+            options.limit = Number.parseInt(limit) || 10;
+            options.offset = (page - 1) * options.limit;
+        }
+
+        if (getBy && getByValue) {
+            options.where = { ...options.where, [getBy]: getByValue }
+        }
+
+        if (sortBy) {
+            order = order || 'asc';
+            options.order = [[sortBy, order]]
+        }
+
+        const traineePackages = await db.TraineePackage.findAndCountAll(options);
+
         return {
             errorCode: 0,
-            traineePackages
+            totalItems: traineePackages.count,
+            totalPage: Math.ceil(traineePackages.count / options.limit),
+            traineePackages: traineePackages.rows
         }
     } catch (error) {
         console.log(error);

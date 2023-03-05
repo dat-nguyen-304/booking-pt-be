@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         centerId: DataTypes.INTEGER,
         fullName: DataTypes.STRING,
         rating: DataTypes.FLOAT,
-        description: DataTypes.STRING
+        description: DataTypes.STRING,
+        imgLink: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'PT',

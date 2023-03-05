@@ -1,5 +1,6 @@
 import express from "express";
 import PTController from "../controllers/PTController";
+import upload from "../middleware/StoreImg";
 const PTRouter = express.Router();
 
 PTRouter
@@ -8,6 +9,6 @@ PTRouter
 PTRouter
     .route("/:PTId")
     .get(PTController.getById)
-    .patch(PTController.update)
+    .patch(upload.single('imgLink'),PTController.update)
 
 export default PTRouter;
