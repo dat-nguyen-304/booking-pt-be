@@ -1,10 +1,25 @@
 import db from "../models/index";
+import {redisClient} from "../config/connectDB";
 
 const getAll = async () => {
+    let isCached = false;
+    let indexCategories
     try {
-        const indexCategories = await db.IndexCategory.findAll({
-            raw: true
-        });
+        const cacheResults = await redisClient.get("indexCategories");
+        if (cacheResults) {
+            console.log("chạy vo vi da co data");
+            isCached = true;
+            indexCategories = JSON.parse(cacheResults);
+        } else {
+            indexCategories = await db.IndexCategory.findAll({
+                raw: true
+            });
+            console.log("chạy vo vi da chưa data");
+            if (indexCategories.length === 0) {
+                throw "API returned an empty array";
+            }
+            await redisClient.set("indexCategories", JSON.stringify(indexCategories));
+        }
         return {
             errorCode: 0,
             indexCategories
@@ -18,6 +33,7 @@ const getAll = async () => {
 const create = async (indexCategories) => {
     try {
         const indexCategory = await db.IndexCategory.create(indexCategories);
+        redisClient.del('indexCategories');
         return {
             errorCode: 0,
             indexCategory
@@ -38,6 +54,7 @@ const update = async (id, indexCategoryData) => {
             description: 'indexCategoryId is not exist'
         }
         await indexCategory.update(indexCategoryData);
+        redisClient.del('indexCategories');
         return {
             errorCode: 0,
             indexCategory
@@ -58,6 +75,7 @@ const deleteById = async (id) => {
             description: 'indexCategoryId is not exist'
         }
         await indexCategoryFound.destroy();
+        redisClient.del('indexCategories');
         return {
             errorCode: 0,
             message: 'success'

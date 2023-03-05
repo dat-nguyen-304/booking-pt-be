@@ -43,6 +43,7 @@ const postNewCenter = async ({ centerData, file }) => {
             ...centerData,
             imgLink
         });
+        redisClient.del('centers');
         return {
             errorCode: 0,
             center,
@@ -63,6 +64,7 @@ const getCenterById = async (id) => {
             errorCode: 1,
             description: 'centerId is not exist'
         }
+        redisClient.del('centers');
         return {
             errorCode: 0,
             center
@@ -90,6 +92,7 @@ const deleteCenterById = async (id) => {
             errorCode: 1,
             description: 'centerId is not exist'
         }
+        redisClient.del('centers');
         return {
             errorCode: 0,
             description: 'Center has been successfully deleted'

@@ -13,28 +13,30 @@ module.exports = {
         post: {
             tags: ["Center API"],
             description: 'Create new Center',
-            parameters:
-                [{
-                    in: 'formData',
-                    name: 'centerName',
-                    type: "string",
-                    required: true,
-                    description: "CenterName pass by parameter",
+            requestBody: {
+                content: {
+                    'multipart/form-data': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                centerName: {
+                                    type: 'string',
+                                    description: 'Center Name pass by payload',
+                                },
+                                address: {
+                                    type: 'string',
+                                    description: 'Address pass by payload',
+                                },
+                                centerImg: {
+                                    type: 'file',
+                                    description: 'Center Img file pass by payload',
+                                },
+                            },
+                            required: ['centerName', 'address', 'centerImg']
+                        },
+                    },
                 },
-                {
-                    in: 'formData',
-                    name: 'address',
-                    type: "string",
-                    required: true,
-                    description: "Address pass by parameter in url",
-                },
-                {
-                    in: 'formData',
-                    name: 'centerImg',
-                    type: "file",
-                    required: true,
-                    description: "ImgLink ID pass by parameter in url",
-                }],
+            },
             responses: {
                 200: successAndReturnARecord('center', 'Center'),
                 500: errorFromServer

@@ -26,10 +26,10 @@ export let connectDB = async () => {
 let redisClient;
 export let connectRedis = async () => {
     redisClient = redis.createClient({
-        password: 'KBtEPYRhcIhShn5dkd6z1hFPnXurEkRi',
+        password: process.env.REDIS_PASSWORD,
         socket: {
-            host: 'redis-16132.c292.ap-southeast-1-1.ec2.cloud.redislabs.com',
-            port: 16132
+            host: process.env.REDIS_HOST,
+            port: process.env.REDIS_PORT
         }
     });
 

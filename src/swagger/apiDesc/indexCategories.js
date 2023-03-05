@@ -20,24 +20,24 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                indexCategoryTime: {
+                                indexCategoryName: {
                                     type: 'string',
                                     description: 'Index Category Name pass by payload',
                                 },
                             },
-                            required: ['indexCategoryTime']
+                            required: ['indexCategoryName']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                indexCategoryTime: {
+                                indexCategoryName: {
                                     type: 'string',
                                     description: 'Index Category Name pass by payload',
                                 },
                             },
-                            required: ['indexCategoryTime']
+                            required: ['indexCategoryName']
                         },
                     },
                 },

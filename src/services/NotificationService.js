@@ -4,14 +4,14 @@ var serviceAccount = require("../config/serviceAccount.json");
 var fcm = new FCM(serviceAccount)
 
 const postNotification = async (notifyData) => {
-
+    console.log(notifyData);
     try {
         var message = {
-            to: '', 
+            to: 'eRziEvVAQSqFtwCjbTOgbe:APA91bE0CPoK6UNLsdUEjdsl-a5GpWpkxsbiN9sqKirgc2GpvRBlZmsVlPFJMq1VoXYxWwkuIU0EL6ujltW5pG-pGyc0Y6mKXUXXVZOK_DQO_4Yhd0yGjEgpoJ6KI093VHGDI0JlGhKn', 
             
             notification: {
-                title: 'Title of your push notification', 
-                body: 'Body of your push notification' 
+                title: notifyData.title, 
+                body: notifyData.content, 
             },
             
             data: { 
