@@ -1,5 +1,5 @@
 import db from "../models/index";
-import {redisClient} from "../config/connectDB";
+import { redisClient } from "../config/connectDB";
 const getAll = async () => {
     let isCached = false;
     let PTs

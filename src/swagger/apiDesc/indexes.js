@@ -20,24 +20,66 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                IndexTime: {
-                                    type: 'string',
-                                    description: 'Index Name pass by payload',
+                                indexCategoryId: {
+                                    type: 'integer',
+                                    description: 'Index Category ID',
                                 },
+                                measureId: {
+                                    type: 'integer',
+                                    description: 'Measure ID',
+                                },
+                                indexNumber: {
+                                    type: 'integer',
+                                    description: 'Result of measuring',
+                                },
+                                indexDescription: {
+                                    type: 'string',
+                                    description: 'Description about index if index have no number',
+                                },
+                                unit: {
+                                    type: 'string',
+                                    description: 'Unit of index',
+                                },
+                                createdAt: {
+                                    type: 'integer',
+                                    description: 'Created Date',
+                                },
+
                             },
-                            required: ['IndexTime']
+                            required: ['indexCategoryId', 'measureId', 'createdAt']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                IndexTime: {
-                                    type: 'string',
-                                    description: 'Index Name pass by payload',
+                                indexCategoryId: {
+                                    type: 'integer',
+                                    description: 'Index Category ID',
                                 },
+                                measureId: {
+                                    type: 'integer',
+                                    description: 'Measure ID',
+                                },
+                                indexNumber: {
+                                    type: 'integer',
+                                    description: 'Result of measuring',
+                                },
+                                indexDescription: {
+                                    type: 'string',
+                                    description: 'Description about index if index have no number',
+                                },
+                                unit: {
+                                    type: 'string',
+                                    description: 'Unit of index',
+                                },
+                                createdAt: {
+                                    type: 'integer',
+                                    description: 'Created Date',
+                                },
+
                             },
-                            required: ['IndexTime']
+                            required: ['indexCategoryId', 'measureId', 'createdAt']
                         },
                     },
                 },
@@ -49,7 +91,7 @@ module.exports = {
             }
         },
     },
-    '/api/indexes/{IndexId}': {
+    '/api/indexes/{indexId}': {
         patch: {
             tags: ["Index API"],
             description: 'Update a Index by IndexId pass through parameter',
@@ -91,8 +133,7 @@ module.exports = {
                                     description: 'Created Date',
                                 },
 
-                            },
-                            required: ['indexCategoryId', 'measureId', 'createdAt']
+                            }
                         },
                     },
                     'application/x-www-form-urlencoded': {
@@ -124,8 +165,7 @@ module.exports = {
                                     description: 'Created Date',
                                 },
 
-                            },
-                            required: ['indexCategoryId', 'measureId', 'createdAt']
+                            }
                         },
                     },
                 },

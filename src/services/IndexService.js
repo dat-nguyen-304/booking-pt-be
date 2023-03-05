@@ -17,7 +17,11 @@ const getAll = async () => {
 
 const create = async (indexData) => {
     try {
-        const index = await db.Index.create(indexData);
+        const indexDt = {
+            ...indexData,
+            createdAt: Number.parseInt(indexData.createdAt)
+        }
+        const index = await db.Index.create(indexDt);
         return {
             errorCode: 0,
             index
