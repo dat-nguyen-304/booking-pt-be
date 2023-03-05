@@ -131,7 +131,7 @@ module.exports = {
             description: 'Get a session by session ID pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'traineePackageId',
+                name: 'sessionId',
                 type: "integer",
                 required: true,
                 description: "Session ID pass by parameter in url",
@@ -229,10 +229,10 @@ module.exports = {
             description: 'Get a trainee package by Id pass through parameter',
             parameters: [{
                 in: 'path',
-                name: 'traineePackageId',
+                name: 'sessionId',
                 type: "integer",
                 required: true,
-                description: "Package ID pass by parameter in url",
+                description: "Session ID pass by parameter in url",
             }],
             responses: {
                 200: deleteSuccess,
