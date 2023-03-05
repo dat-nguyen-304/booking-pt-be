@@ -11,6 +11,7 @@ import paymentRouter from './paymentRouter';
 import slotRouter from './slotRouter';
 import indexCategoryRouter from './indexCategoryRouter';
 import indexRouter from './indexRouter';
+import sessionRouter from './sessionRouter';
 
 let initWebRoutes = (app) => {
     app.use('/api/centers/', centerRouter);
@@ -26,6 +27,7 @@ let initWebRoutes = (app) => {
     app.use('/api/slots/', slotRouter);
     app.use('/api/index-categories', indexCategoryRouter);
     app.use('/api/indexes', indexRouter);
+    app.use('/api/sessions', sessionRouter);
 }
 
 module.exports = initWebRoutes;
