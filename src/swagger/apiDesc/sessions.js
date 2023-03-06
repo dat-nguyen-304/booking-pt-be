@@ -23,46 +23,37 @@ module.exports = {
                                     type: 'string',
                                     description: 'Package Name pass by payload',
                                 },
-                                mainPTId: {
+                                traineePackageId: {
                                     type: 'integer',
                                     description: 'Main PT ID pass by payload',
                                 },
-                                packageId: {
+                                centerId: {
                                     type: 'integer',
                                     description: 'Package ID pass by payload',
                                 },
-                                paymentId: {
+                                PTId: {
                                     type: 'integer',
                                     description: 'Payment ID pass by payload',
                                 },
-                                defaultCenterId: {
+                                slotId: {
                                     type: 'integer',
                                     description: 'Default center ID pass by payload',
                                 },
-                                defaultSlotId: {
+                                rating: {
                                     type: 'integer',
                                     description: 'Default slot ID pass by payload',
                                 },
-                                startDate: {
+                                date: {
                                     type: 'integer',
                                     description: 'Start Date (timestamp) pass by payload',
                                 },
-                                endDate: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
-                                },
-                                registerDate: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
-                                },
-                                remainDay: {
-                                    type: 'integer',
-                                    description: 'Remain day pass by payload',
-                                },
-                                status: {
+                                noteFromPT: {
                                     type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'status of trainee package pass by payload',
+                                    description: 'Note from PT'
+                                },
+                                noteFromTrainee: {
+                                    type: 'string',
+                                    description: 'Note from PT'
                                 }
                             },
                             required: ['traineeId', 'packageId', 'paymentId']
@@ -76,52 +67,47 @@ module.exports = {
                                     type: 'string',
                                     description: 'Package Name pass by payload',
                                 },
-                                mainPTId: {
+                                traineePackageId: {
                                     type: 'integer',
                                     description: 'Main PT ID pass by payload',
                                 },
-                                packageId: {
+                                centerId: {
                                     type: 'integer',
                                     description: 'Package ID pass by payload',
                                 },
-                                paymentId: {
+                                PTId: {
                                     type: 'integer',
                                     description: 'Payment ID pass by payload',
                                 },
-                                defaultCenterId: {
+                                slotId: {
                                     type: 'integer',
                                     description: 'Default center ID pass by payload',
                                 },
-                                defaultSlotId: {
+                                rating: {
                                     type: 'integer',
                                     description: 'Default slot ID pass by payload',
                                 },
-                                startDate: {
+                                date: {
                                     type: 'integer',
                                     description: 'Start Date (timestamp) pass by payload',
                                 },
-                                endDate: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
-                                },
-                                registerDate: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
-                                },
-                                remainDay: {
-                                    type: 'integer',
-                                    description: 'Remain day pass by payload',
-                                },
-                                status: {
+                                noteFromPT: {
                                     type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'status of trainee package pass by payload',
+                                    description: 'Note from PT'
+                                },
+                                noteFromTrainee: {
+                                    type: 'string',
+                                    description: 'Note from PT'
                                 }
                             },
                             required: ['traineeId', 'packageId', 'paymentId']
                         },
                     },
                 },
+            },
+            responses: {
+                200: successAndReturnARecord('session', 'SessionMoreInfo'),
+                500: errorFromServer
             }
         }
     },
@@ -219,41 +205,9 @@ module.exports = {
                 },
             },
             responses: {
-                200: successAndReturnARecord('package', 'PackageMoreInfo'),
+                200: successAndReturnARecord('session', 'SessionMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
-            }
-        },
-        delete: {
-            tags: ["Session API"],
-            description: 'Get a trainee package by Id pass through parameter',
-            parameters: [{
-                in: 'path',
-                name: 'sessionId',
-                type: "integer",
-                required: true,
-                description: "Session ID pass by parameter in url",
-            }],
-            responses: {
-                200: deleteSuccess,
-                "400-id-not-exist": idIsNotExist,
-                500: errorFromServer,
-                "400-can-not-delete": {
-                    description: 'Can not delete this trainee package because of existing sessions of this trainee package',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            errorCode: {
-                                type: 'integer',
-                                example: 1,
-                            },
-                            message: {
-                                type: 'string',
-                                example: "Can not delete this trainee package"
-                            }
-                        }
-                    }
-                }
             }
         }
     },

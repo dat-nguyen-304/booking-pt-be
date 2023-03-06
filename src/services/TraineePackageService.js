@@ -99,8 +99,8 @@ const update = async (id, traineePackageData) => {
 
 const toggleActivate = async (id) => {
     try {
-        const traineePackageFound = await db.Package.findOne({
-            where: { packageId: id }
+        const traineePackageFound = await db.TraineePackage.findOne({
+            where: { traineePackageId: id }
         });
         if (!traineePackageFound) return {
             errorCode: 1,
@@ -119,14 +119,15 @@ const toggleActivate = async (id) => {
 
 const deleteById = async (id) => {
     try {
-        const traineePackageFound = await db.Package.findOne({
-            where: { packageId: id }
+        const traineePackageFound = await db.TraineePackage.findOne({
+            where: { traineePackageId: id }
         });
+
         if (!traineePackageFound) return {
             errorCode: 1,
             description: 'packageId is not exist'
         }
-        const sessionFound = await db.Package.findOne({
+        const sessionFound = await db.Session.findOne({
             where: { traineePackageId: traineePackageFound.traineePackageId }
         })
         if (!sessionFound) {

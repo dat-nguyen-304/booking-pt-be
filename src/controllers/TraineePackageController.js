@@ -67,7 +67,7 @@ const updateOrToggleActivate = async (req, res) => {
 
 const deleteById = async (req, res) => {
     try {
-        let response = await TraineePackageService.deleteById(req.params.packageId);
+        let response = await TraineePackageService.deleteById(req.params.traineePackageId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);

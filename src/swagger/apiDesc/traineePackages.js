@@ -343,24 +343,28 @@ module.exports = {
                 name: 'traineePackageId',
                 type: "integer",
                 required: true,
-                description: "Package ID pass by parameter in url",
+                description: "Trainee Package ID pass by parameter in url",
             }],
             responses: {
                 200: deleteSuccess,
                 "400-id-not-exist": idIsNotExist,
                 500: errorFromServer,
                 "400-can-not-delete": {
-                    description: 'Can not delete this trainee package because of existing sessions of this trainee package',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            errorCode: {
-                                type: 'integer',
-                                example: 1,
-                            },
-                            message: {
-                                type: 'string',
-                                example: "Can not delete this trainee package"
+                    content: {
+                        'application/json': {
+                            description: 'Can not delete this trainee package because of existing sessions of this trainee package',
+                            schema: {
+                                type: 'object',
+                                properties: {
+                                    errorCode: {
+                                        type: 'integer',
+                                        example: 1,
+                                    },
+                                    message: {
+                                        type: 'string',
+                                        example: "Failed! Can not delete this trainee package because of existing sessions of this trainee package"
+                                    }
+                                }
                             }
                         }
                     }

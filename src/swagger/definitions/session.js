@@ -6,6 +6,10 @@ const sessionDef = {
                 type: 'integer',
                 example: 1
             },
+            traineeId: {
+                type: 'integer',
+                example: 1
+            },
             traineePackageId: {
                 type: 'integer',
                 example: 1
@@ -48,6 +52,9 @@ const sessionDef = {
                 type: 'integer',
                 example: 1
             },
+            trainee: {
+                $ref: `#/components/schemas/Trainee`
+            },
             traineePackage: {
                 $ref: `#/components/schemas/TraineePackage`
             },
@@ -77,7 +84,7 @@ const sessionDef = {
                 example: 1675729720
             }
         },
-        required: ["session", "traineePackage", "center", "PT", "slot", "date", "rating"]
+        required: ["session", "trainee", "traineePackage", "center", "PT", "slot", "date", "rating"]
     }
 };
 

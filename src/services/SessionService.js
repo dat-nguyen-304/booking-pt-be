@@ -67,26 +67,6 @@ const update = async (id, sessionData) => {
     }
 }
 
-const deleteById = async (id) => {
-    try {
-        const sessionFound = await db.Session.findOne({
-            where: { packageId: id }
-        });
-        if (!sessionFound) return {
-            errorCode: 1,
-            description: 'packageId is not exist'
-        }
-        await sessionFound.destroy();
-        return {
-            errorCode: 0,
-            message: 'success'
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error(error);
-    }
-}
-
 module.exports = {
-    getAll, getById, update, create, deleteById
+    getAll, getById, update, create
 }

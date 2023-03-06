@@ -7,7 +7,7 @@ traineePackageRouter
     .get(TraineePackageController.getAll)
     .post(TraineePackageController.create)
 traineePackageRouter
-    .route("/:traineeId")
+    .route("/:traineePackageId")
     .get(TraineePackageController.getById)
     .patch(TraineePackageController.updateOrToggleActivate)
     .delete(TraineePackageController.deleteById)

@@ -10,6 +10,5 @@ sessionRouter
     .route("/:sessionId")
     .get(SessionController.getById)
     .patch(SessionController.update)
-    .delete(SessionController.deleteById)
 
 export default sessionRouter;
