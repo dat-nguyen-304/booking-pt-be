@@ -14,7 +14,7 @@ const login = async (req, res) => {
 
 const getTokens = async (req, res) => {
     try {
-        let response = await AuthService.getTokens({ email: req.email, role: req.role });
+        let response = await AuthService.getTokens({ email: req.email, role: req.role, accountId: req.accountId });
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);

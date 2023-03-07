@@ -7,6 +7,7 @@ const verifyRefreshToken = (req, res, next) => {
         console.log(decoded);
         req.email = decoded.email;
         req.role = decoded.role;
+        req.accountId = decoded.accountId;
         next();
     } catch (e) {
         if (e.message === 'jwt expired') {

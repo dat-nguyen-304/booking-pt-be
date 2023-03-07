@@ -2,12 +2,12 @@ import db from "../models/index";
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const generateTokens = payload => {
-    let { email, role } = payload;
-    const accessToken = jwt.sign({ email, role }, process.env.ACCESS_TOKEN_KEY, {
+    let { email, role, accountId } = payload;
+    const accessToken = jwt.sign({ email, role, accountId }, process.env.ACCESS_TOKEN_KEY, {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRATION_TIME,
     });
 
-    const refreshToken = jwt.sign({ email, role }, process.env.REFRESH_TOKEN_KEY, {
+    const refreshToken = jwt.sign({ email, role, accountId }, process.env.REFRESH_TOKEN_KEY, {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRATION_TIME,
     })
     return { accessToken, refreshToken }
@@ -25,7 +25,7 @@ const login = async (email, emailName) => {
                 fullName: emailName
             })
         }
-        const tokens = generateTokens({ email: user.email, role: user.role });
+        const tokens = generateTokens({ email: user.email, role: user.role, accountId: user.accountId });
         return {
             errorCode: 0,
             tokens,
@@ -37,9 +37,9 @@ const login = async (email, emailName) => {
     }
 }
 
-const getTokens = async (email, role) => {
+const getTokens = async ({ email, role, accountId }) => {
     try {
-        const tokens = generateTokens({ email, role });
+        const tokens = generateTokens({ email, role, accountId });
         return {
             errorCode: 0,
             tokens
