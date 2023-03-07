@@ -25,12 +25,11 @@ module.exports = (sequelize, DataTypes) => {
         mainSlotId: DataTypes.INTEGER,
         mainSlotTime: DataTypes.STRING,
         mainCenterId: DataTypes.INTEGER,
-        paymentDate: DataTypes.DATE,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
         registerDate: DataTypes.DATE,
         remainDay: DataTypes.INTEGER,
-        status: DataTypes.ENUM('pending', 'active', 'expired'),
+        status: DataTypes.ENUM('active', 'expired'),
         activate: DataTypes.BOOLEAN
     }, {
         sequelize,

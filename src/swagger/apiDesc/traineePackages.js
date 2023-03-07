@@ -85,18 +85,9 @@ module.exports = {
                                 startDate: {
                                     type: 'integer',
                                     description: 'Start Date (TimeStamp)',
-                                },
-                                paymentDate: {
-                                    type: 'integer',
-                                    description: 'Payment Date (TimeStamp)',
-                                },
-                                status: {
-                                    type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'Status of payment.',
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'mainPTId', 'paymentId', 'status'],
+                            required: ['traineeId', 'packageId', 'mainPTId', 'mainSlotId', 'paymentId', 'startDate'],
                         },
                     },
                     'application/x-www-form-urlencoded': {
@@ -126,18 +117,9 @@ module.exports = {
                                 startDate: {
                                     type: 'integer',
                                     description: 'Start Date (TimeStamp)',
-                                },
-                                paymentDate: {
-                                    type: 'integer',
-                                    description: 'Payment Date (TimeStamp)',
-                                },
-                                status: {
-                                    type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'Status of payment',
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'mainPTId', 'paymentId', 'status'],
+                            required: ['traineeId', 'packageId', 'mainPTId', 'mainSlotId', 'paymentId', 'startDate'],
                         },
                     },
                 },
@@ -200,11 +182,6 @@ module.exports = {
                                 startDate: {
                                     type: 'integer',
                                     description: 'Start Date (TimeStamp)',
-                                },
-                                status: {
-                                    type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'Status of payment',
                                 }
                             },
                             required: ['operation'],
@@ -233,11 +210,6 @@ module.exports = {
                                 startDate: {
                                     type: 'integer',
                                     description: 'Start Date (TimeStamp)',
-                                },
-                                status: {
-                                    type: 'string',
-                                    enum: ['pending', 'active', 'expired'],
-                                    description: 'Status of payment',
                                 }
                             },
                             required: ['operation'],

@@ -34,10 +34,6 @@ const traineePackageDef = {
                 type: 'integer',
                 example: 1
             },
-            paymentDate: {
-                type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
-            },
             startDate: {
                 type: 'date',
                 example: "2023-03-07T16:22:34.469Z"
@@ -55,8 +51,8 @@ const traineePackageDef = {
                 example: 30
             },
             status: {
-                type: 'enum("pending", "active", "expired")',
-                example: 'user'
+                type: 'enum("active", "expired")',
+                example: 'active'
             },
             activate: {
                 type: 'boolean',
@@ -81,10 +77,6 @@ const traineePackageDef = {
                 type: 'string',
                 example: '7:30-9:00'
             },
-            paymentDate: {
-                type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
-            },
             startDate: {
                 type: 'date',
                 example: "2023-03-07T16:22:34.469Z"
@@ -102,8 +94,8 @@ const traineePackageDef = {
                 example: 30
             },
             status: {
-                type: 'enum("pending", "active", "expired")',
-                example: 'user'
+                type: 'enum("active", "expired")',
+                example: 'active'
             },
             activate: {
                 type: 'boolean',
