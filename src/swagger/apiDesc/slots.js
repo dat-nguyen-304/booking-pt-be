@@ -20,24 +20,32 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
+                                slotName: {
+                                    type: 'string',
+                                    description: 'Slot Name',
+                                },
                                 slotTime: {
                                     type: 'string',
-                                    description: 'Slot Name pass by payload',
+                                    description: 'Slot Time',
                                 },
                             },
-                            required: ['slotTime']
+                            required: ['slotTime', 'slotName']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
+                                slotName: {
+                                    type: 'string',
+                                    description: 'Slot Name',
+                                },
                                 slotTime: {
                                     type: 'string',
-                                    description: 'Slot Name pass by payload',
+                                    description: 'Slot Time',
                                 },
                             },
-                            required: ['slotTime']
+                            required: ['slotTime', 'slotName']
                         },
                     },
                 },
@@ -58,7 +66,7 @@ module.exports = {
                 name: 'slotId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Slot ID",
             }],
             requestBody: {
                 content: {
@@ -66,24 +74,32 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
+                                slotName: {
+                                    type: 'string',
+                                    description: 'Slot Name',
+                                },
                                 slotTime: {
                                     type: 'string',
-                                    description: 'Slot time pass by payload',
+                                    description: 'Slot Time',
                                 },
                             },
-                            required: ['slotTime']
+                            required: ['slotTime', 'slotName']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
+                                slotName: {
+                                    type: 'string',
+                                    description: 'Slot Name',
+                                },
                                 slotTime: {
                                     type: 'string',
-                                    description: 'Slot time pass by payload',
+                                    description: 'Slot Time',
                                 },
                             },
-                            required: ['slotTime']
+                            required: ['slotTime', 'slotName']
                         },
                     },
                 },

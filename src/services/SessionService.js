@@ -37,6 +37,7 @@ const getById = async (id) => {
 const create = async (sessionData) => {
     try {
         const session = await db.Session.create(sessionData);
+        await session.reload();
         return {
             errorCode: 0,
             session

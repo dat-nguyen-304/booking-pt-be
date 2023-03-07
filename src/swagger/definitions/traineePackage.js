@@ -22,9 +22,13 @@ const traineePackageDef = {
                 type: 'integer',
                 example: 1
             },
-            defaultSlotId: {
+            mainSlotId: {
                 type: 'integer',
                 example: 1
+            },
+            mainSlotTime: {
+                type: 'string',
+                example: '7:30-9:00'
             },
             defaultCenterId: {
                 type: 'integer',
@@ -77,11 +81,16 @@ const traineePackageDef = {
             payment: {
                 $ref: `#/components/schemas/Payment`
             },
-            defaultSlot: {
-                $ref: `#/components/schemas/Slot`
-            },
             defaultCenterId: {
                 $ref: `#/components/schemas/Center`
+            },
+            mainSlotId: {
+                type: 'integer',
+                example: 1
+            },
+            mainSlotTime: {
+                type: 'string',
+                example: '7:30-9:00'
             },
             startDate: {
                 type: 'date',

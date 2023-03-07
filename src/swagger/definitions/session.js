@@ -26,6 +26,10 @@ const sessionDef = {
                 type: 'integer',
                 example: 1
             },
+            slotTime: {
+                type: 'string',
+                example: '7:30-9:00'
+            },
             rating: {
                 type: 'integer',
                 example: 1
@@ -64,8 +68,13 @@ const sessionDef = {
             PT: {
                 $ref: `#/components/schemas/PT`
             },
-            slot: {
-                $ref: `#/components/schemas/Slot`
+            slotId: {
+                type: 'integer',
+                example: 1
+            },
+            slotTime: {
+                type: 'string',
+                example: '7:30-9:00'
             },
             rating: {
                 type: 'integer',

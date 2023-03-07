@@ -14,9 +14,11 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         traineePackageId: DataTypes.INTEGER,
+        traineeId: DataTypes.INTEGER,
         centerId: DataTypes.INTEGER,
         PTId: DataTypes.INTEGER,
         slotId: DataTypes.INTEGER,
+        slotTime: DataTypes.STRING,
         noteFromTrainee: DataTypes.STRING,
         noteFromPT: DataTypes.STRING,
         rating: DataTypes.INTEGER,

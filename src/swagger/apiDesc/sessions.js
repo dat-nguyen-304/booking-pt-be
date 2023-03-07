@@ -19,33 +19,25 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                traineeId: {
-                                    type: 'string',
-                                    description: 'Package Name pass by payload',
-                                },
                                 traineePackageId: {
                                     type: 'integer',
-                                    description: 'Main PT ID pass by payload',
+                                    description: 'ID of your trainee package',
                                 },
                                 centerId: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'ID of Center you study',
                                 },
                                 PTId: {
                                     type: 'integer',
-                                    description: 'Payment ID pass by payload',
+                                    description: 'ID of PT of session',
                                 },
                                 slotId: {
                                     type: 'integer',
-                                    description: 'Default center ID pass by payload',
+                                    description: 'ID of slot of session',
                                 },
                                 rating: {
                                     type: 'integer',
-                                    description: 'Default slot ID pass by payload',
-                                },
-                                date: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
+                                    description: 'Rating about session from 1 to 5',
                                 },
                                 noteFromPT: {
                                     type: 'string',
@@ -53,43 +45,35 @@ module.exports = {
                                 },
                                 noteFromTrainee: {
                                     type: 'string',
-                                    description: 'Note from PT'
+                                    description: 'Note from Trainee'
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'paymentId']
+                            required: ['traineePackageId', 'centerId', 'PTId', 'slotId']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                traineeId: {
-                                    type: 'string',
-                                    description: 'Package Name pass by payload',
-                                },
                                 traineePackageId: {
                                     type: 'integer',
-                                    description: 'Main PT ID pass by payload',
+                                    description: 'ID of your trainee package',
                                 },
                                 centerId: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'ID of Center you study',
                                 },
                                 PTId: {
                                     type: 'integer',
-                                    description: 'Payment ID pass by payload',
+                                    description: 'ID of PT of session',
                                 },
                                 slotId: {
                                     type: 'integer',
-                                    description: 'Default center ID pass by payload',
+                                    description: 'ID of slot of session',
                                 },
                                 rating: {
                                     type: 'integer',
-                                    description: 'Default slot ID pass by payload',
-                                },
-                                date: {
-                                    type: 'integer',
-                                    description: 'Start Date (timestamp) pass by payload',
+                                    description: 'Rating about session from 1 to 5',
                                 },
                                 noteFromPT: {
                                     type: 'string',
@@ -97,10 +81,10 @@ module.exports = {
                                 },
                                 noteFromTrainee: {
                                     type: 'string',
-                                    description: 'Note from PT'
+                                    description: 'Note from Trainee'
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'paymentId']
+                            required: ['traineePackageId', 'centerId', 'PTId', 'slotId']
                         },
                     },
                 },
@@ -144,29 +128,29 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                PTId: {
-                                    type: 'integer',
-                                    description: 'Main PT ID pass by payload',
-                                },
                                 centerId: {
                                     type: 'integer',
                                     description: 'Session ID pass by payload',
                                 },
+                                PTId: {
+                                    type: 'integer',
+                                    description: 'ID of PT you choose for session',
+                                },
                                 slotId: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'ID of slot you choose for session',
                                 },
                                 rating: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'rating for session',
                                 },
                                 noteFromPT: {
                                     type: 'integer',
-                                    description: 'Default Center ID pass by payload',
+                                    description: 'Note from PT',
                                 },
                                 noteFromStudent: {
                                     type: 'integer',
-                                    description: 'Start Date (TimeStamp) pass by payload',
+                                    description: 'Note from student',
                                 }
                             }
                         },
@@ -175,29 +159,29 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                PTId: {
-                                    type: 'integer',
-                                    description: 'Main PT ID pass by payload',
-                                },
                                 centerId: {
                                     type: 'integer',
                                     description: 'Session ID pass by payload',
                                 },
+                                PTId: {
+                                    type: 'integer',
+                                    description: 'ID of PT you choose for session',
+                                },
                                 slotId: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'ID of slot you choose for session',
                                 },
                                 rating: {
                                     type: 'integer',
-                                    description: 'Package ID pass by payload',
+                                    description: 'rating for session',
                                 },
                                 noteFromPT: {
                                     type: 'integer',
-                                    description: 'Default Center ID pass by payload',
+                                    description: 'Note from PT',
                                 },
                                 noteFromStudent: {
                                     type: 'integer',
-                                    description: 'Start Date (TimeStamp) pass by payload',
+                                    description: 'Note from student',
                                 }
                             }
                         },
