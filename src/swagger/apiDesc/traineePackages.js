@@ -49,7 +49,7 @@ module.exports = {
                 }
             ],
             responses: {
-                200: successAndReturnArray('traineePackages', 'TraineePackage'),
+                200: successAndReturnArray('traineePackages', 'TraineePackageMoreInfo'),
                 500: errorFromServer
             },
         },
@@ -70,10 +70,6 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of Package',
                                 },
-                                mainCenterId: {
-                                    type: 'integer',
-                                    description: 'ID of Main Center',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -97,14 +93,10 @@ module.exports = {
                                 status: {
                                     type: 'string',
                                     enum: ['pending', 'active', 'expired'],
-                                    description: 'Category',
-                                },
-                                activate: {
-                                    type: 'boolean',
-                                    description: 'Determine if the trainee package is activated or not'
+                                    description: 'Status of payment.',
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'mainCenterId', 'mainPTId', 'mainSlotId', 'paymentId', 'startDate', 'paymentDate', 'status'],
+                            required: ['traineeId', 'packageId', 'mainPTId', 'paymentId', 'status'],
                         },
                     },
                     'application/x-www-form-urlencoded': {
@@ -119,10 +111,6 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of Package',
                                 },
-                                mainCenterId: {
-                                    type: 'integer',
-                                    description: 'ID of Main Center',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -146,17 +134,17 @@ module.exports = {
                                 status: {
                                     type: 'string',
                                     enum: ['pending', 'active', 'expired'],
-                                    description: 'Category',
-                                },
-                                activate: {
-                                    type: 'boolean',
-                                    description: 'Determine if the trainee package is activated or not'
+                                    description: 'Status of payment',
                                 }
                             },
-                            required: ['traineeId', 'packageId', 'mainCenterId', 'mainPTId', 'mainSlotId', 'paymentId', 'startDate', 'paymentDate', 'status'],
+                            required: ['traineeId', 'packageId', 'mainPTId', 'paymentId', 'status'],
                         },
                     },
                 },
+            },
+            responses: {
+                200: successAndReturnARecord('traineePackage', 'TraineePackageMoreInfo'),
+                500: errorFromServer
             }
         }
     },
@@ -197,10 +185,6 @@ module.exports = {
                                     type: 'string',
                                     description: 'Operation is toggleActivate or update',
                                 },
-                                mainCenterId: {
-                                    type: 'integer',
-                                    description: 'ID of Main Center',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -220,11 +204,7 @@ module.exports = {
                                 status: {
                                     type: 'string',
                                     enum: ['pending', 'active', 'expired'],
-                                    description: 'Category',
-                                },
-                                activate: {
-                                    type: 'boolean',
-                                    description: 'Determine if the trainee package is activated or not'
+                                    description: 'Status of payment',
                                 }
                             },
                             required: ['operation'],
@@ -238,10 +218,6 @@ module.exports = {
                                     type: 'string',
                                     description: 'Operation is toggleActivate or update',
                                 },
-                                mainCenterId: {
-                                    type: 'integer',
-                                    description: 'ID of Main Center',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -261,11 +237,7 @@ module.exports = {
                                 status: {
                                     type: 'string',
                                     enum: ['pending', 'active', 'expired'],
-                                    description: 'Category',
-                                },
-                                activate: {
-                                    type: 'boolean',
-                                    description: 'Determine if the trainee package is activated or not'
+                                    description: 'Status of payment',
                                 }
                             },
                             required: ['operation'],

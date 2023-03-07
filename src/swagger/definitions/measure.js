@@ -16,7 +16,7 @@ const measureDef = {
             },
             time: {
                 type: 'date',
-                example: 1675729720
+                example: "2023-03-07T16:22:34.469Z"
             }
         },
         required: ["measureId", "traineeId", "time"]
@@ -37,7 +37,7 @@ const measureDef = {
             },
             time: {
                 type: 'date',
-                example: 1675729720
+                example: "2023-03-07T16:22:34.469Z"
             }
         },
         required: ["measureId", "trainee", "time"]

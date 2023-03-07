@@ -23,10 +23,6 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of your trainee package',
                                 },
-                                centerId: {
-                                    type: 'integer',
-                                    description: 'ID of Center you study',
-                                },
                                 PTId: {
                                     type: 'integer',
                                     description: 'ID of PT of session',
@@ -48,7 +44,7 @@ module.exports = {
                                     description: 'Note from Trainee'
                                 }
                             },
-                            required: ['traineePackageId', 'centerId', 'PTId', 'slotId']
+                            required: ['traineePackageId', 'PTId', 'slotId']
                         },
                     },
                     'application/x-www-form-urlencoded': {
@@ -59,10 +55,6 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of your trainee package',
                                 },
-                                centerId: {
-                                    type: 'integer',
-                                    description: 'ID of Center you study',
-                                },
                                 PTId: {
                                     type: 'integer',
                                     description: 'ID of PT of session',
@@ -84,7 +76,7 @@ module.exports = {
                                     description: 'Note from Trainee'
                                 }
                             },
-                            required: ['traineePackageId', 'centerId', 'PTId', 'slotId']
+                            required: ['traineePackageId', 'PTId', 'slotId']
                         },
                     },
                 },
@@ -128,10 +120,6 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                centerId: {
-                                    type: 'integer',
-                                    description: 'Session ID pass by payload',
-                                },
                                 PTId: {
                                     type: 'integer',
                                     description: 'ID of PT you choose for session',

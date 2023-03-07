@@ -2,7 +2,17 @@ import db from "../models/index";
 const getAll = async () => {
     try {
         const sessions = await db.Session.findAll({
-            raw: true
+            raw: true,
+            include: [
+                { model: db.TraineePackage, as: 'traineePackage' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Center, as: 'center' }
+            ],
+            attributes: {
+                exclude: ['traineeId', 'PTId', 'traineePackageId', 'centerId'],
+            },
+            nest: true
         });
         return {
             errorCode: 0,
@@ -37,7 +47,18 @@ const getById = async (id) => {
 const create = async (sessionData) => {
     try {
         const session = await db.Session.create(sessionData);
-        await session.reload();
+        await session.reload({
+            include: [
+                { model: db.TraineePackage, as: 'traineePackage' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Center, as: 'center' }
+            ],
+            attributes: {
+                exclude: ['traineeId', 'PTId', 'traineePackageId', 'centerId'],
+            },
+            nest: true
+        });
         return {
             errorCode: 0,
             session

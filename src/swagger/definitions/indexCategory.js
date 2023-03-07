@@ -12,7 +12,7 @@ const indexCategoryDef = {
             },
             createdAt: {
                 type: 'date',
-                example: 1675729720
+                example: "2023-03-07T16:22:34.469Z"
             }
         },
         required: ["indexCategoryId", "indexCategoryName", "createdAt"]

@@ -5,6 +5,11 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class TraineePackage extends Model {
         static associate (models) {
+            TraineePackage.belongsTo(models.Center, { foreignKey: 'mainCenterId', as: 'center' });
+            TraineePackage.belongsTo(models.PT, { foreignKey: 'mainPTId', as: 'PT' });
+            TraineePackage.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
+            TraineePackage.belongsTo(models.Package, { foreignKey: 'packageId', as: 'package' });
+            TraineePackage.belongsTo(models.Payment, { foreignKey: 'paymentId', as: 'payment' });
         }
     };
     TraineePackage.init({
@@ -19,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
         paymentId: DataTypes.INTEGER,
         mainSlotId: DataTypes.INTEGER,
         mainSlotTime: DataTypes.STRING,
-        defaultCenterId: DataTypes.INTEGER,
+        mainCenterId: DataTypes.INTEGER,
+        paymentDate: DataTypes.DATE,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
         registerDate: DataTypes.DATE,

@@ -44,7 +44,7 @@ const sessionDef = {
             },
             date: {
                 type: 'date',
-                example: 1675729720
+                example: "2023-03-07T16:22:34.469Z"
             }
         },
         required: ["sessionId", "traineePackageId", "centerId", "PTId", "slotId", "date", "rating"]
@@ -55,18 +55,6 @@ const sessionDef = {
             sessionId: {
                 type: 'integer',
                 example: 1
-            },
-            trainee: {
-                $ref: `#/components/schemas/Trainee`
-            },
-            traineePackage: {
-                $ref: `#/components/schemas/TraineePackage`
-            },
-            center: {
-                $ref: `#/components/schemas/Center`
-            },
-            PT: {
-                $ref: `#/components/schemas/PT`
             },
             slotId: {
                 type: 'integer',
@@ -91,6 +79,18 @@ const sessionDef = {
             date: {
                 type: 'date',
                 example: 1675729720
+            },
+            traineePackage: {
+                $ref: `#/components/schemas/TraineePackage`
+            },
+            trainee: {
+                $ref: `#/components/schemas/Trainee`
+            },
+            PT: {
+                $ref: `#/components/schemas/PT`
+            },
+            center: {
+                $ref: `#/components/schemas/Center`
             }
         },
         required: ["session", "trainee", "traineePackage", "center", "PT", "slot", "date", "rating"]

@@ -5,6 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Session extends Model {
         static associate (models) {
+            Session.belongsTo(models.TraineePackage, { foreignKey: 'traineePackageId', as: 'traineePackage' });
+            Session.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
+            Session.belongsTo(models.Center, { foreignKey: 'centerId', as: 'center' });
+            Session.belongsTo(models.PT, { foreignKey: 'PTId', as: 'PT' });
         }
     };
     Session.init({

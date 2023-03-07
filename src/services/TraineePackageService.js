@@ -30,7 +30,20 @@ const getAll = async (query) => {
             options.order = [[sortBy, order]]
         }
 
-        const traineePackages = await db.TraineePackage.findAndCountAll(options);
+        const traineePackages = await db.TraineePackage.findAndCountAll({
+            ...options,
+            include: [
+                { model: db.Center, as: 'center' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.Package, as: 'package' },
+                { model: db.Payment, as: 'payment' },
+            ],
+            attributes: {
+                exclude: ['mainPTId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId']
+            },
+            nest: true
+        });
 
         return {
             errorCode: 0,
@@ -66,7 +79,25 @@ const getById = async (id) => {
 
 const create = async (traineePackageData) => {
     try {
+        traineePackageData = {
+            ...traineePackageData,
+            startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000),
+            paymentDate: traineePackageData.paymentDate ? new Date(Number.parseInt(traineePackageData.paymentDate) * 1000) : null
+        }
         const traineePackage = await db.TraineePackage.create(traineePackageData);
+        await traineePackage.reload({
+            include: [
+                { model: db.Center, as: 'center' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.Package, as: 'package' },
+                { model: db.Payment, as: 'payment' },
+            ],
+            attributes: {
+                exclude: ['mainPTId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
+            },
+            nest: true
+        });
         return {
             errorCode: 0,
             traineePackage
