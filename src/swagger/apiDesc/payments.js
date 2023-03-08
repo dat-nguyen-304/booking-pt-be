@@ -52,13 +52,13 @@ module.exports = {
     '/api/payments/{paymentId}': {
         patch: {
             tags: ["Payment API"],
-            description: 'Update a payment by paymentId pass through parameter',
+            description: 'Update a payment by paymentId',
             parameters: [{
                 in: 'path',
                 name: 'paymentId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             requestBody: {
                 content: {
@@ -96,13 +96,13 @@ module.exports = {
         },
         delete: {
             tags: ["Payment API"],
-            description: 'Delete a payment by paymentId pass through parameter',
+            description: 'Delete a payment by paymentId',
             parameters: [{
                 in: 'path',
                 name: 'paymentId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             responses: {
                 200: successAndReturnARecord('payment', 'Payment'),

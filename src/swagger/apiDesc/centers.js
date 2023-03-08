@@ -46,13 +46,13 @@ module.exports = {
     '/api/centers/{centerId}': {
         get: {
             tags: ["Center API"],
-            description: 'Get a center by centerId pass through parameter',
+            description: 'Get a center by centerId',
             parameters: [{
                 in: 'path',
                 name: 'centerId',
                 type: "integer",
                 required: true,
-                description: "Center ID pass by parameter in url",
+                description: "Center ID",
             }],
             responses: {
                 200: successAndReturnARecord('center', 'Center'),
@@ -68,7 +68,7 @@ module.exports = {
                 name: 'centerId',
                 type: "integer",
                 required: true,
-                description: "Center ID pass by parameter in url",
+                description: "Center ID",
             }],
             requestBody: {
                 content: {
@@ -129,13 +129,13 @@ module.exports = {
         },
         delete: {
             tags: ["Center API"],
-            description: 'Delete a center by centerId pass through parameter',
+            description: 'Delete a center by centerId',
             parameters: [{
                 in: 'path',
                 name: 'centerId',
                 type: "integer",
                 required: true,
-                description: "Center ID pass by parameter in url",
+                description: "Center ID",
             }],
             responses: {
                 200: successAndReturnARecord('center', 'Center'),

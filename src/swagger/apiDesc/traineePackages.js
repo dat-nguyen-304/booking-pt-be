@@ -16,7 +16,7 @@ module.exports = {
                     in: 'query',
                     name: 'limit',
                     type: "integer",
-                    description: "Number of item in one page pass by parameter in url",
+                    description: "Number of item in one page",
                 },
                 {
                     in: 'query',
@@ -64,13 +64,13 @@ module.exports = {
                     in: 'query',
                     name: 'sortBy',
                     type: "integer",
-                    description: "Property you want to sort pass by parameter in url",
+                    description: "Property you want to sort",
                 },
                 {
                     in: 'query',
                     name: 'order',
                     type: "integer",
-                    description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+                    description: "The order of above property can be 'asc' or 'desc'",
                 }
             ],
             responses: {
@@ -250,13 +250,13 @@ module.exports = {
         },
         delete: {
             tags: ["Trainee Package API"],
-            description: 'Get a trainee package by Id pass through parameter',
+            description: 'Get a trainee package by Id',
             parameters: [{
                 in: 'path',
                 name: 'traineePackageId',
                 type: "integer",
                 required: true,
-                description: "Trainee Package ID pass by parameter in url",
+                description: "Trainee Package ID",
             }],
             responses: {
                 200: deleteSuccess,

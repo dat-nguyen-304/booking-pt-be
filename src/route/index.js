@@ -12,6 +12,7 @@ import slotRouter from './slotRouter';
 import indexCategoryRouter from './indexCategoryRouter';
 import indexRouter from './indexRouter';
 import sessionRouter from './sessionRouter';
+import measureRouter from "./measureRouter";
 
 let initWebRoutes = (app) => {
     app.use('/api/centers/', centerRouter);
@@ -28,6 +29,7 @@ let initWebRoutes = (app) => {
     app.use('/api/index-categories', indexCategoryRouter);
     app.use('/api/indexes', indexRouter);
     app.use('/api/sessions', sessionRouter);
+    app.use('/api/measures', measureRouter);
 }
 
 module.exports = initWebRoutes;

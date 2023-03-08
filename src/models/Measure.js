@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Measure extends Model {
         static associate (models) {
+            Measure.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
         }
     };
     Measure.init({

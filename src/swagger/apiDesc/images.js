@@ -4,35 +4,35 @@ module.exports = {
     '/api/images': {
         get: {
             tags: ["Image API"],
-            description: 'Get a image by imageId pass through parameter',
+            description: 'Get a image by imageId',
             parameters: [{
                 in: 'query',
                 name: 'sessionId',
                 type: "integer",
-                description: "Session ID pass by parameter in url",
+                description: "Session ID",
             },
             {
                 in: 'query',
                 name: 'traineeId',
                 type: "integer",
-                description: "Session ID pass by parameter in url",
+                description: "Session ID",
             },
             {
                 in: 'query',
                 name: 'imageId',
                 type: "integer",
-                description: "Session ID pass by parameter in url",
+                description: "Session ID",
             }, {
                 in: 'query',
                 name: 'sortBy',
                 type: "string",
-                description: "Property you want to sort pass by parameter in url",
+                description: "Property you want to sort",
             },
             {
                 in: 'query',
                 name: 'order',
                 type: "string",
-                description: "Order you want to sort 'asc' or 'desc' pass by parameter in url",
+                description: "Order you want to sort 'asc' or 'desc'",
             },
             ],
             responses: {
@@ -56,7 +56,7 @@ module.exports = {
                                 },
                                 imgFile: {
                                     type: 'array',
-                                    items:{
+                                    items: {
                                         type: "string",
                                         format: "binary"
                                     },
@@ -77,13 +77,13 @@ module.exports = {
     '/api/images/{imageId}': {
         delete: {
             tags: ["Image API"],
-            description: 'Delete a image by imageId pass through parameter',
+            description: 'Delete a image by imageId',
             parameters: [{
                 in: 'path',
                 name: 'imageId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             responses: {
                 200: successAndReturnARecord('image', 'Image'),

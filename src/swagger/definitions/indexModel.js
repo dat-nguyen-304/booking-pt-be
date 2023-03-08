@@ -25,13 +25,9 @@ const indexDef = {
             unit: {
                 type: 'string',
                 example: 'kg'
-            },
-            createdAt: {
-                type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
             }
         },
-        required: ["indexId", "indexCategoryId", "measuredId", "indexNumber", "indexDescription", "unit", "createdAt"]
+        required: ["indexId", "indexCategoryId", "measuredId", "indexNumber", "indexDescription", "unit"]
     },
     IndexMoreInfo: {
         type: 'object',
@@ -57,13 +53,9 @@ const indexDef = {
             unit: {
                 type: 'string',
                 example: 'kg'
-            },
-            createdAt: {
-                type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
             }
         },
-        required: ["indexId", "indexCategory", "measured", "indexNumber", "indexDescription", "unit", "createdAt"]
+        required: ["indexId", "indexCategory", "measured", "indexNumber", "indexDescription", "unit"]
     }
 };
 

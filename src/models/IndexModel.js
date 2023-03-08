@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         indexNumber: DataTypes.FLOAT,
         indexDescription: DataTypes.STRING,
         unit: DataTypes.STRING,
-        createdAt: DataTypes.DATE,
     }, {
         sequelize,
         modelName: 'Index',

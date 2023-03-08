@@ -21,7 +21,7 @@ module.exports = {
                     in: 'query',
                     name: 'limit',
                     type: "integer",
-                    description: "Number of item in one page pass by parameter in url",
+                    description: "Number of item in one page",
                 },
                 {
                     in: 'query',
@@ -39,13 +39,13 @@ module.exports = {
                     in: 'query',
                     name: 'sortBy',
                     type: "integer",
-                    description: "Property you want to sort pass by parameter in url",
+                    description: "Property you want to sort",
                 },
                 {
                     in: 'query',
                     name: 'order',
                     type: "integer",
-                    description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+                    description: "The order of above property can be 'asc' or 'desc'",
                 }
             ],
             responses: {
@@ -57,13 +57,13 @@ module.exports = {
     '/api/PTs/{PTId}': {
         get: {
             tags: ["PT API"],
-            description: 'Get a PT by PT Id pass through parameter',
+            description: 'Get a PT by PT Id',
             parameters: [{
                 in: 'path',
                 name: 'PTId',
                 type: "integer",
                 required: true,
-                description: "PT ID pass by parameter in url",
+                description: "PT ID",
             }],
             responses: {
                 200: successAndReturnARecord('PT', 'PTMoreInfo'),
@@ -79,7 +79,7 @@ module.exports = {
                 name: 'PTId',
                 type: "integer",
                 required: true,
-                description: "PT ID pass by parameter in url",
+                description: "PT ID",
             }
             ],
             requestBody: {

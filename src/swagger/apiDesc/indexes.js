@@ -39,14 +39,9 @@ module.exports = {
                                 unit: {
                                     type: 'string',
                                     description: 'Unit of index',
-                                },
-                                createdAt: {
-                                    type: 'integer',
-                                    description: 'Created Date',
-                                },
-
+                                }
                             },
-                            required: ['indexCategoryId', 'measureId', 'createdAt']
+                            required: ['indexCategoryId', 'measureId']
                         },
                     },
                     'application/x-www-form-urlencoded': {
@@ -72,14 +67,10 @@ module.exports = {
                                 unit: {
                                     type: 'string',
                                     description: 'Unit of index',
-                                },
-                                createdAt: {
-                                    type: 'integer',
-                                    description: 'Created Date',
-                                },
+                                }
 
                             },
-                            required: ['indexCategoryId', 'measureId', 'createdAt']
+                            required: ['indexCategoryId', 'measureId']
                         },
                     },
                 },
@@ -94,13 +85,13 @@ module.exports = {
     '/api/indexes/{indexId}': {
         patch: {
             tags: ["Index API"],
-            description: 'Update a Index by IndexId pass through parameter',
+            description: 'Update a Index by IndexId',
             parameters: [{
                 in: 'path',
                 name: 'indexId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Index ID",
             }],
             requestBody: {
                 content: {
@@ -127,12 +118,7 @@ module.exports = {
                                 unit: {
                                     type: 'string',
                                     description: 'Unit of index',
-                                },
-                                createdAt: {
-                                    type: 'integer',
-                                    description: 'Created Date',
-                                },
-
+                                }
                             }
                         },
                     },
@@ -159,12 +145,7 @@ module.exports = {
                                 unit: {
                                     type: 'string',
                                     description: 'Unit of index',
-                                },
-                                createdAt: {
-                                    type: 'integer',
-                                    description: 'Created Date',
-                                },
-
+                                }
                             }
                         },
                     },
@@ -178,13 +159,13 @@ module.exports = {
         },
         delete: {
             tags: ["Index API"],
-            description: 'Delete a Index by IndexId pass through parameter',
+            description: 'Delete a Index by IndexId',
             parameters: [{
                 in: 'path',
                 name: 'indexId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Index ID",
             }],
             responses: {
                 200: successAndReturnARecord('index', 'Index'),

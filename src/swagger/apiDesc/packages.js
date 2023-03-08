@@ -21,7 +21,7 @@ module.exports = {
                     in: 'query',
                     name: 'limit',
                     type: "integer",
-                    description: "Number of item in one page pass by parameter in url",
+                    description: "Number of item in one page",
                 },
                 {
                     in: 'query',
@@ -51,13 +51,13 @@ module.exports = {
                     in: 'query',
                     name: 'sortBy',
                     type: "integer",
-                    description: "Property you want to sort pass by parameter in url",
+                    description: "Property you want to sort",
                 },
                 {
                     in: 'query',
                     name: 'order',
                     type: "integer",
-                    description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+                    description: "The order of above property can be 'asc' or 'desc'",
                 }
             ],
             responses: {
@@ -150,13 +150,13 @@ module.exports = {
     '/api/packages/{packageId}': {
         get: {
             tags: ["Package API"],
-            description: 'Get a package by packageId pass through parameter',
+            description: 'Get a package by packageId',
             parameters: [{
                 in: 'path',
                 name: 'packageId',
                 type: "integer",
                 required: true,
-                description: "Package ID pass by parameter in url",
+                description: "Package ID",
             }],
             responses: {
                 200: successAndReturnARecord('package', 'Package'),
@@ -172,7 +172,7 @@ module.exports = {
                 name: 'packageId',
                 type: "integer",
                 required: true,
-                description: "Package ID pass by parameter in url",
+                description: "Package ID",
             }],
             requestBody: {
                 content: {
@@ -262,13 +262,13 @@ module.exports = {
         },
         delete: {
             tags: ["Package API"],
-            description: 'Get a package by packageId pass through parameter',
+            description: 'Get a package by packageId',
             parameters: [{
                 in: 'path',
                 name: 'packageId',
                 type: "integer",
                 required: true,
-                description: "Package ID pass by parameter in url",
+                description: "Package ID",
             }],
             responses: {
                 200: deleteSuccess,

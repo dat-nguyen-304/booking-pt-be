@@ -9,25 +9,25 @@ module.exports = {
                 in: 'query',
                 name: 'page',
                 type: "integer",
-                description: "No page pass by parameter in url",
+                description: "No page",
             },
             {
                 in: 'query',
                 name: 'limit',
                 type: "integer",
-                description: "Number of item in one page pass by parameter in url",
+                description: "Number of item in one page",
             },
             {
                 in: 'query',
                 name: 'sortBy',
                 type: "integer",
-                description: "Property you want to sort pass by parameter in url",
+                description: "Property you want to sort",
             },
             {
                 in: 'query',
                 name: 'order',
                 type: "integer",
-                description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+                description: "The order of above property can be 'asc' or 'desc'",
             }
             ],
             responses: {
@@ -41,13 +41,13 @@ module.exports = {
     '/api/accounts/{accountId}': {
         get: {
             tags: ["Account API"],
-            description: 'Get a account by accountId pass through parameter',
+            description: 'Get a account by accountId',
             parameters: [{
                 in: 'path',
                 name: 'accountId',
                 type: "integer",
                 required: true,
-                description: "Account ID pass by parameter in url",
+                description: "Account ID",
             }],
             responses: {
                 200: successAndReturnARecord('account', 'Account'),

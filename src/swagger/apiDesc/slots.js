@@ -60,7 +60,7 @@ module.exports = {
     '/api/slots/{slotId}': {
         patch: {
             tags: ["Slot API"],
-            description: 'Update a slot by slotId pass through parameter',
+            description: 'Update a slot by slotId',
             parameters: [{
                 in: 'path',
                 name: 'slotId',
@@ -112,13 +112,13 @@ module.exports = {
         },
         delete: {
             tags: ["Slot API"],
-            description: 'Delete a slot by slotId pass through parameter',
+            description: 'Delete a slot by slotId',
             parameters: [{
                 in: 'path',
                 name: 'slotId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             responses: {
                 200: successAndReturnARecord('slot', 'Slot'),

@@ -52,13 +52,13 @@ module.exports = {
     '/api/index-categories/{indexCategoryId}': {
         patch: {
             tags: ["Index Category API"],
-            description: 'Update a indexCategory by indexCategoryId pass through parameter',
+            description: 'Update a indexCategory by indexCategoryId',
             parameters: [{
                 in: 'path',
                 name: 'indexCategoryId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             requestBody: {
                 content: {
@@ -96,13 +96,13 @@ module.exports = {
         },
         delete: {
             tags: ["Index Category API"],
-            description: 'Delete a indexCategory by indexCategoryId pass through parameter',
+            description: 'Delete a indexCategory by indexCategoryId',
             parameters: [{
                 in: 'path',
                 name: 'indexCategoryId',
                 type: "integer",
                 required: true,
-                description: "Image ID pass by parameter in url",
+                description: "Image ID",
             }],
             responses: {
                 200: successAndReturnARecord('indexCategory', 'IndexCategory'),

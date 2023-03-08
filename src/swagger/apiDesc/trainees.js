@@ -14,13 +14,13 @@ module.exports = {
     '/api/trainees/{traineeId}': {
         get: {
             tags: ["Trainee API"],
-            description: 'Get a trainee by trainee ID pass through parameter',
+            description: 'Get a trainee by trainee ID',
             parameters: [{
                 in: 'path',
                 name: 'traineeId',
                 type: "integer",
                 required: true,
-                description: "Trainee ID pass by parameter in url",
+                description: "Trainee ID",
             }],
             responses: {
                 200: successAndReturnARecord('trainee', 'Trainee'),
@@ -36,7 +36,7 @@ module.exports = {
                 name: 'traineeId',
                 type: "integer",
                 required: true,
-                description: "Trainee ID pass by parameter in url",
+                description: "Trainee ID",
             }
             ],
             requestBody: {

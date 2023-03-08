@@ -77,6 +77,10 @@ module.exports = {
             description: 'APIs related to Payment',
         },
         {
+            name: 'Measure API',
+            description: 'APIs related to Measure',
+        },
+        {
             name: 'Index API',
             description: 'APIs related to Index',
         },
