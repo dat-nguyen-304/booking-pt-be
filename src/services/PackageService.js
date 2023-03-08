@@ -3,9 +3,22 @@ const { Op } = require('sequelize');
 
 const getAllPackage = async (query) => {
     try {
-        let { keyword, limit, page, sortBy, order, getBy, getByValue } = query;
+        let { keyword, limit, page, object, activate, durationByMonth, category, sortBy, order } = query;
 
         const options = { raw: true };
+
+        const properties = [];
+        if (object) properties.push('object');
+        if (activate) properties.push('activate');
+        if (durationByMonth) properties.push('durationByMonth');
+        if (category) properties.push('category');
+
+        properties.forEach(property => {
+            options.where = {
+                ...options.where,
+                [property]: query[property]
+            }
+        })
 
         if (keyword) {
             options.where = {
@@ -19,10 +32,6 @@ const getAllPackage = async (query) => {
             options.page = Number.parseInt(page);
             options.limit = Number.parseInt(limit) || 10;
             options.offset = (page - 1) * options.limit;
-        }
-
-        if (getBy && getByValue) {
-            options.where = { ...options.where, [getBy]: getByValue }
         }
 
         if (sortBy) {

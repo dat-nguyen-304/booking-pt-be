@@ -6,13 +6,26 @@ const { Op } = require('sequelize');
 const getAll = async (query) => {
     let isCached = false;
     let PTs
-    let { keyword, limit, page, sortBy, order, getBy, getByValue } = query;
+    let { keyword, limit, page, centerId, rating, sortBy, order } = query;
 
-    const options = { 
+    const options = {
         include: [{ model: db.Center, as: 'center' }],
         raw: true,
         nest: true,
     };
+
+    if (centerId) {
+        options.where = {
+            ...options.where,
+            centerId
+        }
+    }
+    if (rating) {
+        options.where = {
+            ...options.where,
+            rating: { [Op.gte]: rating }
+        }
+    }
 
     if (keyword) {
         options.where = {
@@ -28,17 +41,13 @@ const getAll = async (query) => {
         options.offset = (page - 1) * options.limit;
     }
 
-    if (getBy && getByValue) {
-        options.where = { ...options.where, [getBy]: getByValue }
-    }
-
     if (sortBy) {
         order = order || 'asc';
         options.order = [[sortBy, order]]
     }
 
     try {
-        if (JSON.stringify(query) === '{}'){
+        if (JSON.stringify(query) === '{}') {
             const cacheResults = await redisClient.get("PTs");
             if (cacheResults) {
                 console.log("chạy vo vi da co data");
@@ -46,13 +55,13 @@ const getAll = async (query) => {
                 PTs = JSON.parse(cacheResults);
             } else {
                 PTs = await db.PT.findAndCountAll(options);
-    
+
                 if (PTs.length === 0) {
                     throw "API returned an empty array";
                 }
                 await redisClient.set("PTs", JSON.stringify(PTs));
             }
-        }else {
+        } else {
             PTs = await db.PT.findAndCountAll(options);
             console.log("pt", options);
         }

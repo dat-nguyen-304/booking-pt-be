@@ -25,15 +25,27 @@ module.exports = {
                 },
                 {
                     in: 'query',
-                    name: 'getBy',
+                    name: 'object',
                     type: "integer",
-                    description: "Property you want to search by it pass by parameter in url",
+                    description: "Object can be newbie, intermediate or professional",
                 },
                 {
                     in: 'query',
-                    name: 'getByValue',
+                    name: 'activate',
                     type: "integer",
-                    description: "Value of above property pass by parameter in url",
+                    description: "Status of package",
+                },
+                {
+                    in: 'query',
+                    name: 'category',
+                    type: "integer",
+                    description: "Category can be havept or nopt",
+                },
+                {
+                    in: 'query',
+                    name: 'durationByMonth',
+                    type: "integer",
+                    description: "Package duration in months",
                 },
                 {
                     in: 'query',

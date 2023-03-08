@@ -8,11 +8,6 @@ module.exports = {
             parameters: [
                 {
                     in: 'query',
-                    name: 'keyword',
-                    type: "integer",
-                    description: "Keyword you want to search by package name",
-                }, {
-                    in: 'query',
                     name: 'page',
                     type: "integer",
                     description: "Number of page",
@@ -25,15 +20,45 @@ module.exports = {
                 },
                 {
                     in: 'query',
-                    name: 'getBy',
+                    name: 'mainPTId',
                     type: "integer",
-                    description: "Property you want to search by it pass by parameter in url",
+                    description: "ID of main PT that trainee has chosen",
                 },
                 {
                     in: 'query',
-                    name: 'getByValue',
+                    name: 'mainCenterId',
                     type: "integer",
-                    description: "Value of above property pass by parameter in url",
+                    description: "ID of main center",
+                },
+                {
+                    in: 'query',
+                    name: 'mainSlotId',
+                    type: "integer",
+                    description: "ID of main slot that trainee has chosen",
+                },
+                {
+                    in: 'query',
+                    name: 'traineeId',
+                    type: "integer",
+                    description: "ID of trainee",
+                },
+                {
+                    in: 'query',
+                    name: 'packageId',
+                    type: "integer",
+                    description: "Package trainee has subscribed to",
+                },
+                {
+                    in: 'query',
+                    name: 'paymentId',
+                    type: "integer",
+                    description: "The ID of the payment method you use",
+                },
+                {
+                    in: 'query',
+                    name: 'status',
+                    type: "integer",
+                    description: "Status of trainee package can be active or expired",
                 },
                 {
                     in: 'query',

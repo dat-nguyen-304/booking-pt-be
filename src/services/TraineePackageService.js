@@ -3,26 +3,36 @@ const { Op } = require('sequelize');
 
 const getAll = async (query) => {
     try {
-        let { keyword, limit, page, sortBy, order, getBy, getByValue } = query;
+        let { limit, page, mainPTId, mainSlotId, mainCenterId, traineeId, packageId, paymentId, status, sortBy, order } = query;
 
-        const options = { raw: true };
-
-        if (keyword) {
-            options.where = {
-                traineeId: {
-                    [Op.like]: `%${keyword}%`
-                }
+        if (mainPTId && mainCenterId) {
+            return {
+                errorCode: 1,
+                message: `'mainPTId' and 'mainCenterId' can not have value at the same time`
             }
         }
+        const options = { raw: true };
+
+        const properties = [];
+        if (mainPTId) properties.push('mainPTId');
+        if (mainSlotId) properties.push('mainSlotId');
+        if (mainCenterId) properties.push('mainCenterId');
+        if (traineeId) properties.push('traineeId');
+        if (packageId) properties.push('packageId');
+        if (paymentId) properties.push('paymentId');
+        if (status) properties.push('status');
+
+        properties.forEach(property => {
+            options.where = {
+                ...options.where,
+                [property]: query[property]
+            }
+        })
 
         if (page) {
             options.page = Number.parseInt(page);
             options.limit = Number.parseInt(limit) || 10;
             options.offset = (page - 1) * options.limit;
-        }
-
-        if (getBy && getByValue) {
-            options.where = { ...options.where, [getBy]: getByValue }
         }
 
         if (sortBy) {

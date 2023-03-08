@@ -25,15 +25,15 @@ module.exports = {
                 },
                 {
                     in: 'query',
-                    name: 'getBy',
+                    name: 'centerId',
                     type: "integer",
-                    description: "Property you want to search by it pass by parameter in url",
+                    description: "The center where PT works",
                 },
                 {
                     in: 'query',
-                    name: 'getByValue',
+                    name: 'rating',
                     type: "integer",
-                    description: "Value of above property pass by parameter in url",
+                    description: "Rating of rating greater than or equal to",
                 },
                 {
                     in: 'query',

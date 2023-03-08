@@ -5,6 +5,79 @@ module.exports = {
         get: {
             tags: ["Session API"],
             description: 'Get all Session',
+            parameters: [
+                {
+                    in: 'query',
+                    name: 'keyword',
+                    type: "integer",
+                    description: "Keyword you want to search by package name",
+                }, {
+                    in: 'query',
+                    name: 'page',
+                    type: "integer",
+                    description: "Number of page",
+                },
+                {
+                    in: 'query',
+                    name: 'limit',
+                    type: "integer",
+                    description: "Number of item in one page pass by parameter in url",
+                },
+                {
+                    in: 'query',
+                    name: 'traineePackageId',
+                    type: "integer",
+                    description: "ID of Trainee Package",
+                },
+                {
+                    in: 'query',
+                    name: 'rating',
+                    type: "integer",
+                    description: "Rating for session from 1 to 5 (Integer).",
+                },
+                {
+                    in: 'query',
+                    name: 'date',
+                    type: "integer",
+                    description: "Session Date",
+                },
+                {
+                    in: 'query',
+                    name: 'traineeId',
+                    type: "integer",
+                    description: "ID of trainee",
+                },
+                {
+                    in: 'query',
+                    name: 'slotId',
+                    type: "integer",
+                    description: "ID of slot",
+                },
+                {
+                    in: 'query',
+                    name: 'PTId',
+                    type: "integer",
+                    description: "ID of PT. If it is available, please ignore centerId",
+                },
+                {
+                    in: 'query',
+                    name: 'centerId',
+                    type: "integer",
+                    description: "ID of center. If it is available, please ignore PTId",
+                },
+                {
+                    in: 'query',
+                    name: 'sortBy',
+                    type: "integer",
+                    description: "Property you want to sort pass by parameter in url",
+                },
+                {
+                    in: 'query',
+                    name: 'order',
+                    type: "integer",
+                    description: "The order of above property can be 'asc' or 'desc' pass by parameter in url",
+                }
+            ],
             responses: {
                 200: successAndReturnArray('sessions', 'SessionMoreInfo'),
                 500: errorFromServer

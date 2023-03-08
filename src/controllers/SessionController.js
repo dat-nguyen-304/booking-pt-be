@@ -2,13 +2,15 @@ import SessionService from "../services/SessionService";
 
 const getAll = async (req, res) => {
     try {
-        let response = await SessionService.getAll();
-        return res.status(200).json(response);
+        let response = await SessionService.getAll(req.query);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(500).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: e.json(e)
         });
     }
 };

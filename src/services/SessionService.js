@@ -1,7 +1,54 @@
 import db from "../models/index";
-const getAll = async () => {
+const getAll = async (query) => {
     try {
-        const sessions = await db.Session.findAll({
+        let { keyword, limit, page, traineePackageId, rating, date, traineeId, slotId, PTId, centerId, sortBy, order } = query;
+
+        if (PTId && centerId) {
+            return {
+                errorCode: 1,
+                message: `'PTId' and 'centerId' can not have value at the same time`
+            }
+        }
+
+        const options = { raw: true };
+
+        const properties = [];
+        if (traineePackageId) properties.push('traineePackageId');
+        if (rating) properties.push('rating');
+        if (date) properties.push('date');
+        if (traineeId) properties.push('traineeId');
+        if (slotId) properties.push('slotId');
+        if (PTId) properties.push('PTId');
+        if (centerId) properties.push('centerId');
+
+        properties.forEach(property => {
+            options.where = {
+                ...options.where,
+                [property]: query[property]
+            }
+        })
+
+        if (keyword) {
+            options.where = {
+                traineeId: {
+                    [Op.like]: `%${keyword}%`
+                }
+            }
+        }
+
+        if (page) {
+            options.page = Number.parseInt(page);
+            options.limit = Number.parseInt(limit) || 10;
+            options.offset = (page - 1) * options.limit;
+        }
+
+        if (sortBy) {
+            order = order || 'asc';
+            options.order = [[sortBy, order]]
+        }
+
+        const sessions = await db.Session.findAndCountAll({
+            ...options,
             raw: true,
             include: [
                 { model: db.TraineePackage, as: 'traineePackage' },
@@ -16,7 +63,9 @@ const getAll = async () => {
         });
         return {
             errorCode: 0,
-            sessions
+            totalItems: sessions.count,
+            totalPage: Math.ceil(sessions.count / options.limit),
+            sessions: sessions.rows
         }
     } catch (error) {
         console.log(error);
