@@ -1,7 +1,6 @@
 import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink"
-import { redisClient } from "../config/connectDB";
 
 const getAll = async (query) => {
     try {
@@ -20,20 +19,27 @@ const getAll = async (query) => {
     }
 }
 
-const postNew = async ({ imageData, file }) => {
+const postNew = async ({ imageData, files }) => {
     try {
-        const imgLink = await imgUrl(file, "images");
-        if (!imgLink) return {
-            errorCode: 1,
-            message: "File is required"
+        var array ={}; 
+        var i = 0;
+        for (const file of files) {
+            const imgLink = await imgUrl(file, "images");
+            if (!imgLink) return {
+                errorCode: 1,
+                message: "File is required"
+            }
+            const image = await db.Image.create({
+                ...imageData,
+                imgLink
+            });
+            var name = "file";
+            array[name + i] = image.dataValues;
+            i++;
         }
-        const image = await db.Image.create({
-            ...imageData,
-            imgLink
-        });
         return {
             errorCode: 0,
-            image,
+            array,
         };
     } catch (error) {
         console.log(error);

@@ -92,10 +92,13 @@ const getById = async (id) => {
 
 const update = async (id, PTData, file) => {
     try {
-        const imgLink = await imgUrl(file, "PTs");
-        if (!imgLink) return {
-            errorCode: 1,
-            message: "File is required"
+        if(typeof file != "undefined") {
+            const imgLink = await imgUrl(file, "PTs");
+            if (!imgLink) return {
+                errorCode: 1,
+                message: "File is required"
+            }
+            PTData.imgLink = imgLink;
         }
         const PT = await db.PT.findOne({
             where: { PTId: id },
@@ -106,7 +109,6 @@ const update = async (id, PTData, file) => {
             errorCode: 1,
             description: 'PTId is not exist'
         }
-        PTData.imgLink = imgLink
         await PT.update(PTData);
         redisClient.del('PTs');
         return {

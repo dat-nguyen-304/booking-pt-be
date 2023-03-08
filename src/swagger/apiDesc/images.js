@@ -55,7 +55,11 @@ module.exports = {
                                     description: 'Session ID pass by payload',
                                 },
                                 imgFile: {
-                                    type: 'file',
+                                    type: 'array',
+                                    items:{
+                                        type: "string",
+                                        format: "binary"
+                                    },
                                     description: 'Image file pass by payload',
                                 },
                             },

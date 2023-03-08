@@ -44,6 +44,13 @@ const PTDef = {
             center: {
                 $ref: `#/components/schemas/Center`
             },
+            slot: {
+                type: 'array',
+                items: {
+                    type: 'object',
+                    $ref: `#/components/schemas/Center`
+                }
+            },
             rating: {
                 type: 'float',
                 example: '4.5'

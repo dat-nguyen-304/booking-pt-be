@@ -9,8 +9,9 @@ centerRouter.route('/')
     .get(CenterController.getAllCenter)
     .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ upload.single('centerImg'), CenterController.postNewCenter);
 
-centerRouter.route('/:centerId')
+centerRouter.route("/:centerId")
     .get(CenterController.getCenterById)
+    .patch(upload.single('centerImg'),CenterController.updateOrToggleActivate)
     .delete(CenterController.deleteCenterById);
 
 export default centerRouter;

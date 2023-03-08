@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 
 const postNew = async (req, res) => {
     try {
-        let response = await ImageService.postNew({ imageData: req.body, file: req.file });
+        let response = await ImageService.postNew({ imageData: req.body, files: req.files });
         return res.status(200).json(response);
     } catch (e) {
         console.log(e);

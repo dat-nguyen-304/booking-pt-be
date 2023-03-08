@@ -75,8 +75,65 @@ const getCenterById = async (id) => {
     }
 }
 
+const update = async (id, centerData, file) => {
+    try {
+        if(typeof file != "undefined") {
+            const imgLink = await imgUrl(file, "users");
+            if (!imgLink) return {
+                errorCode: 1,
+                message: "File is required"
+            }
+            centerData.imgLink = imgLink;
+        }
+        const centerFound = await db.Center.findOne({
+            where: { centerId: id }
+        });
+        if (!centerFound) return {
+            errorCode: 1,
+            description: 'centerId is not exist'
+        }
+
+        await centerFound.update(centerData);
+        return {
+            errorCode: 0,
+            center: centerFound
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+const toggleActivate = async (id) => {
+    try {
+        const centerFound = await db.Center.findOne({
+            where: { centerId: id }
+        });
+        if (!centerFound) return {
+            errorCode: 1,
+            description: 'centerId is not exist'
+        }
+        await centerFound.update({ activate: !centerFound.activate });
+        return {
+            errorCode: 0,
+            center: centerFound
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 const deleteCenterById = async (id) => {
     try {
+        const PT = await db.PT.findOne({
+            where: { centerId: id },
+            raw: true,
+        });
+        if (PT) return {
+            errorCode: 1,
+            description: 'Center is being used'
+        }
         const centerRes = await getCenterById(id);
         const deleted = deleteUrl(centerRes.center.imgLink, "users");
         if (deleted) {
@@ -88,6 +145,7 @@ const deleteCenterById = async (id) => {
             where: { centerId: id },
             raw: true
         });
+        
         if (!center) return {
             errorCode: 1,
             description: 'centerId is not exist'
@@ -104,5 +162,5 @@ const deleteCenterById = async (id) => {
 }
 
 module.exports = {
-    getAllCenter, getCenterById, postNewCenter, deleteCenterById
+    getAllCenter, getCenterById, postNewCenter, deleteCenterById, update, toggleActivate
 }
