@@ -1,7 +1,7 @@
 import db from "../models/index";
 import { redisClient } from "../config/connectDB";
 import imgUrl from "../utils/GetImgLink";
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 
 const getAll = async (query) => {
     let isCached = false;
@@ -101,14 +101,10 @@ const getAll = async (query) => {
 
 const getById = async (id) => {
     try {
-        const slot = [
-            {mainSlotId: 1},
-            {mainSlotId: 2},
-            {mainSlotId: 3},
-            {mainSlotId: 4},
-            {mainSlotId: 5},
-            {mainSlotId: 6}
-          ];
+        const slot =  await db.Slot.findAll({
+            where: { activate: true },
+            raw: true
+        });
         const PT = await db.PT.findOne({
             where: { PTId: id },
             include: [{ model: db.Center, as: "center" }],
@@ -118,9 +114,13 @@ const getById = async (id) => {
         const bookedSlot = await db.TraineePackage.findAll({
             attributes: ['mainSlotId'] ,
             where: { mainPTId: id, remainDay: { [Op.gt]: 0 } },
+            include: [
+                { model: db.Slot, as: 'slot' ,where:{activate: true}},
+            ],
+            nest: true,
             raw: true,
         });
-        const remainSlot = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.mainSlotId));
+        const remainSlot = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.slotId));
         for (let i = 0; i < remainSlot.length; i++) {
             let objName = "remainSlot";
             if (PT.hasOwnProperty(objName)) {
