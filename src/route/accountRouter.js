@@ -6,7 +6,7 @@ import verifyAuthorization from "../middleware/VerifyAuthorization";
 const accountRouter = express.Router();
 
 accountRouter.route('/')
-    .get(/*verifyAccessToken, verifyAuthorization(['admin']), */AccountController.getAllAccount)
+    .get(verifyAccessToken, verifyAuthorization(['admin']), AccountController.getAllAccount)
 
 accountRouter.route('/:accountId')
     .get(verifyAccessToken, AccountController.getAccountById)

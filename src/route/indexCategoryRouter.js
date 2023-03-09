@@ -7,10 +7,10 @@ const indexCategoryRouter = express.Router();
 
 indexCategoryRouter.route('/')
     .get(IndexCategoryController.getAll)
-    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ IndexCategoryController.create);
+    .post(verifyAccessToken, verifyAuthorization(['admin']), IndexCategoryController.create);
 
 indexCategoryRouter.route('/:indexCategoryId')
-    .patch(IndexCategoryController.updateOrToggleActivate)
-    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ IndexCategoryController.deleteById);
+    .patch(verifyAccessToken, verifyAuthorization(['admin']), IndexCategoryController.updateOrToggleActivate)
+    .delete(verifyAccessToken, verifyAuthorization(['admin']), IndexCategoryController.deleteById);
 
 export default indexCategoryRouter;

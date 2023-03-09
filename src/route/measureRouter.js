@@ -7,10 +7,10 @@ const measureRouter = express.Router();
 
 measureRouter.route('/')
     .get(MeasureController.getAll)
-    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ MeasureController.create);
+    .post(verifyAccessToken, verifyAuthorization(['admin']), MeasureController.create);
 
 measureRouter.route('/:measureId')
-    .patch(MeasureController.update)
-    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ MeasureController.deleteById);
+    .patch(verifyAccessToken, verifyAuthorization(['admin']), MeasureController.update)
+    .delete(verifyAccessToken, verifyAuthorization(['admin']), MeasureController.deleteById);
 
 export default measureRouter;
