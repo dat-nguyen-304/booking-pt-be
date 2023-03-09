@@ -11,7 +11,6 @@ centerRouter.route('/')
 
 centerRouter.route("/:centerId")
     .get(CenterController.getCenterById)
-    .patch(upload.single('centerImg'),CenterController.updateOrToggleActivate)
-    .delete(CenterController.deleteCenterById);
+    .patch(upload.single('centerImg'), CenterController.updateOrToggleActivate);
 
 export default centerRouter;

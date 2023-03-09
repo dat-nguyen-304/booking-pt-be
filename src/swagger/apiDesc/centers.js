@@ -78,7 +78,7 @@ module.exports = {
                             properties: {
                                 operation: {
                                     type: 'string',
-                                    description: 'Operation is deactivate or update',
+                                    description: `Operation is 'toggleActivate' or 'update'`,
                                 },
                                 centerName: {
                                     type: 'string',
@@ -93,6 +93,7 @@ module.exports = {
                                     description: 'Center Img file',
                                 },
                             },
+                            required: ['operation'],
                         },
                     },
                     // 'application/json': {
@@ -121,22 +122,6 @@ module.exports = {
                     // },
                 },
             },
-            responses: {
-                200: successAndReturnARecord('center', 'Center'),
-                400: idIsNotExist,
-                500: errorFromServer
-            }
-        },
-        delete: {
-            tags: ["Center API"],
-            description: 'Delete a center by centerId',
-            parameters: [{
-                in: 'path',
-                name: 'centerId',
-                type: "integer",
-                required: true,
-                description: "Center ID",
-            }],
             responses: {
                 200: successAndReturnARecord('center', 'Center'),
                 400: idIsNotExist,

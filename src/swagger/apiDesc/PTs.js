@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, successAndReturnPTDetail } from "./common";
 
 module.exports = {
     '/api/PTs': {
@@ -52,6 +52,46 @@ module.exports = {
                 200: successAndReturnArray('PTs', 'PTMoreInfo'),
                 500: errorFromServer
             },
+        },
+        post: {
+            tags: ["PT API"],
+            description: 'Create new PT',
+            requestBody: {
+                content: {
+                    'multipart/form-data': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                email: {
+                                    type: 'string',
+                                    description: 'Email of PT',
+                                },
+                                centerId: {
+                                    type: 'integer',
+                                    description: 'ID of center',
+                                },
+                                fullName: {
+                                    type: 'string',
+                                    description: 'Full name of PT',
+                                },
+                                imgLink: {
+                                    type: 'file',
+                                    description: 'Avatar file of PT',
+                                },
+                                description: {
+                                    type: 'string',
+                                    description: 'Description about PT',
+                                },
+                            },
+                            required: ['email', 'centerId', 'fullName', 'imgLink'],
+                        },
+                    }
+                },
+            },
+            responses: {
+                200: successAndReturnARecord('PT', 'PTMoreInfo'),
+                500: errorFromServer
+            }
         }
     },
     '/api/PTs/{PTId}': {
@@ -66,7 +106,7 @@ module.exports = {
                 description: "PT ID",
             }],
             responses: {
-                200: successAndReturnARecord('PT', 'PTMoreInfo'),
+                200: successAndReturnPTDetail,
                 400: idIsNotExist,
                 500: errorFromServer
             }

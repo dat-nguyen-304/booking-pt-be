@@ -127,16 +127,16 @@ const getById = async (id) => {
             raw: true,
         });
 
-        const remainSlot = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.slotId));
-        for (let i = 0; i < remainSlot.length; i++) {
-            let objName = "remainSlot";
+        const remainSlots = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.slotId));
+        for (let i = 0; i < remainSlots.length; i++) {
+            let objName = "remainSlots";
             if (PT.hasOwnProperty(objName)) {
-                PT[objName].push(remainSlot[i]);
+                PT[objName].push(remainSlots[i]);
             } else {
-                PT[objName] = [remainSlot[i]];
+                PT[objName] = [remainSlots[i]];
             }
         }
-        // PtT.remainSlot.forEach(element => {
+        // PtT.remainSlots.forEach(element => {
         //     console.log(element.mainSlotId);
         // });
         return {
@@ -148,6 +148,46 @@ const getById = async (id) => {
         throw new Error(error);
     }
 };
+
+const create = async (requestData, file) => {
+    try {
+        if (typeof file != "undefined") {
+            const imgLink = await imgUrl(file, "PTs");
+            if (!imgLink)
+                return {
+                    errorCode: 1,
+                    message: "File is required",
+                };
+            requestData.imgLink = imgLink;
+        }
+
+        const { email, ...PTData } = requestData;
+        const account = await db.Account.create({
+            email,
+            role: 'pt',
+        });
+
+        await db.PT.create({ PTId: account.accountId, ...PTData });
+        const PT = await db.PT.findOne({
+            where: { PTId: account.accountId },
+            include: [
+                { model: db.Center, as: 'center' }
+            ],
+            attributes: {
+                exclude: ['centerId'],
+            },
+            nest: true,
+            raw: true,
+        });
+        return {
+            errorCode: 0,
+            PT
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
 
 const update = async (id, PTData, file) => {
     try {
@@ -185,5 +225,6 @@ const update = async (id, PTData, file) => {
 module.exports = {
     getAll,
     getById,
+    create,
     update,
 };

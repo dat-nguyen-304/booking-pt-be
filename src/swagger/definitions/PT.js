@@ -26,7 +26,7 @@ const PTDef = {
                 type: 'string',
                 example: 'https://kickfit-sports.com/wp-content/uploads/2022/05/vo-si-Muay-Thai-so-1-Viet-Nam-nguyen-tran-duy-nhat.jpg'
             }
-            
+
         },
         required: ["PTId", "fullName", "centerId", "description"]
     },
@@ -41,16 +41,6 @@ const PTDef = {
                 type: 'string',
                 example: 'Nguyễn Trần Duy Nhất'
             },
-            center: {
-                $ref: `#/components/schemas/Center`
-            },
-            slot: {
-                type: 'array',
-                items: {
-                    type: 'object',
-                    $ref: `#/components/schemas/Center`
-                }
-            },
             rating: {
                 type: 'float',
                 example: '4.5'
@@ -59,10 +49,13 @@ const PTDef = {
                 type: 'string',
                 example: 'Tôi là PT số 1 VN'
             },
-            imgLink :{
+            imgLink: {
                 type: 'string',
                 example: 'https://kickfit-sports.com/wp-content/uploads/2022/05/vo-si-Muay-Thai-so-1-Viet-Nam-nguyen-tran-duy-nhat.jpg'
-            }
+            },
+            center: {
+                $ref: `#/components/schemas/Center`
+            },
         },
         required: ["PTId", "fullName", "center", "description"]
     }

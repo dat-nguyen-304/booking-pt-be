@@ -1,7 +1,7 @@
 import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink"
-import {redisClient} from "../config/connectDB";
+import { redisClient } from "../config/connectDB";
 
 const getAllCenter = async () => {
     let isCached = false;
@@ -77,7 +77,7 @@ const getCenterById = async (id) => {
 
 const update = async (id, centerData, file) => {
     try {
-        if(typeof file != "undefined") {
+        if (typeof file != "undefined") {
             const imgLink = await imgUrl(file, "users");
             if (!imgLink) return {
                 errorCode: 1,
@@ -124,43 +124,6 @@ const toggleActivate = async (id) => {
     }
 }
 
-const deleteCenterById = async (id) => {
-    try {
-        const PT = await db.PT.findOne({
-            where: { centerId: id },
-            raw: true,
-        });
-        if (PT) return {
-            errorCode: 1,
-            description: 'Center is being used'
-        }
-        const centerRes = await getCenterById(id);
-        const deleted = deleteUrl(centerRes.center.imgLink, "users");
-        if (deleted) {
-            console.log("đã xóa");
-        } else {
-            console.log("chưa xóa")
-        }
-        const center = await db.Center.destroy({
-            where: { centerId: id },
-            raw: true
-        });
-        
-        if (!center) return {
-            errorCode: 1,
-            description: 'centerId is not exist'
-        }
-        redisClient.del('centers');
-        return {
-            errorCode: 0,
-            description: 'Center has been successfully deleted'
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error(error);
-    }
-}
-
 module.exports = {
-    getAllCenter, getCenterById, postNewCenter, deleteCenterById, update, toggleActivate
+    getAllCenter, getCenterById, postNewCenter, update, toggleActivate
 }

@@ -5,10 +5,11 @@ const PTRouter = express.Router();
 
 PTRouter
     .route("/")
-    .get(PTController.getAll);
+    .get(PTController.getAll)
+    .post(upload.single('imgLink'), PTController.create);
 PTRouter
     .route("/:PTId")
     .get(PTController.getById)
-    .patch(upload.single('imgLink'),PTController.update)
+    .patch(upload.single('imgLink'), PTController.update);
 
 export default PTRouter;
