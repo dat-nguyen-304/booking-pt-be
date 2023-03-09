@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Trainee extends Model {
         static associate (models) {
+            Trainee.belongsTo(models.TraineePackage, { foreignKey: 'currentTraineePackageId', as: 'currentTraineePackage' });
         }
     };
     Trainee.init({
@@ -14,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         fullName: DataTypes.STRING,
-        currentPackageId: DataTypes.INTEGER,
+        currentTraineePackageId: DataTypes.INTEGER,
     }, {
         sequelize,
         modelName: 'Trainee',

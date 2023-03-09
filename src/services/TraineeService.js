@@ -2,7 +2,14 @@ import db from "../models/index";
 const getAll = async () => {
     try {
         const trainees = await db.Trainee.findAll({
-            raw: true
+            include: [
+                { model: db.TraineePackage, as: 'currentTraineePackage' },
+            ],
+            attributes: {
+                exclude: ['currentTraineePackageId']
+            },
+            raw: true,
+            nest: true
         });
         return {
             errorCode: 0,
@@ -18,7 +25,14 @@ const getById = async (id) => {
     try {
         const trainee = await db.Trainee.findOne({
             where: { traineeId: id },
-            raw: true
+            include: [
+                { model: db.TraineePackage, as: 'currentTraineePackage' },
+            ],
+            attributes: {
+                exclude: ['currentTraineePackageId']
+            },
+            raw: true,
+            nest: true
         });
         if (!trainee) return {
             errorCode: 1,
@@ -37,7 +51,14 @@ const getById = async (id) => {
 const update = async (id, traineeData) => {
     try {
         const trainee = await db.Trainee.findOne({
-            where: { traineeId: id }
+            where: { traineeId: id },
+            include: [
+                { model: db.TraineePackage, as: 'currentTraineePackage' },
+            ],
+            attributes: {
+                exclude: ['currentTraineePackageId']
+            },
+            nest: true
         });
         if (!trainee) return {
             errorCode: 1,

@@ -8,9 +8,9 @@ import sessionDef from "./session";
 import imageDef from "./image";
 import indexCategoryDef from "./indexCategory";
 import indexDef from "./indexModel";
-import measure from "./measure";
-import payment from "./payment";
-import slot from "./slot";
+import measureDef from "./measure";
+import paymentDef from "./payment";
+import slotDef from "./slot";
 
 const definitions = {
     ...centerDef,
@@ -23,8 +23,8 @@ const definitions = {
     ...imageDef,
     ...indexCategoryDef,
     ...indexDef,
-    ...measure,
-    ...payment,
-    ...slot
+    ...measureDef,
+    ...paymentDef,
+    ...slotDef
 };
 export default definitions;

@@ -6,7 +6,7 @@ module.exports = {
             tags: ["Trainee API"],
             description: 'Get all Trainee',
             responses: {
-                200: successAndReturnArray('trainees', 'Trainee'),
+                200: successAndReturnArray('trainees', 'TraineeMoreInfo'),
                 500: errorFromServer
             },
         }
@@ -23,7 +23,7 @@ module.exports = {
                 description: "Trainee ID",
             }],
             responses: {
-                200: successAndReturnARecord('trainee', 'Trainee'),
+                200: successAndReturnARecord('trainee', 'TraineeMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
@@ -66,7 +66,7 @@ module.exports = {
                 },
             },
             responses: {
-                200: successAndReturnARecord('trainee', 'Trainee'),
+                200: successAndReturnARecord('trainee', 'TraineeMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
