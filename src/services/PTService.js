@@ -9,7 +9,9 @@ const getAll = async (query) => {
     let { keyword, limit, page, centerId, rating, sortBy, order } = query;
 
     const options = {
-        include: [{ model: db.Center, as: "center" }],
+        include: [
+            { model: db.Center, as: "center" },
+            { model: db.Slot, as: 'slot' }],
         raw: true,
         nest: true,
     };
@@ -101,42 +103,45 @@ const getAll = async (query) => {
 
 const getById = async (id) => {
     try {
-        const slot =  await db.Slot.findAll({
-            where: { activate: true },
-            raw: true
-        });
         const PT = await db.PT.findOne({
             where: { PTId: id },
             include: [{ model: db.Center, as: "center" }],
             raw: true,
             nest: true,
         });
+        if (!PT)
+        return {
+            errorCode: 1,
+            description: "PT Id is not exist",
+        };
+
+        const slot = await db.Slot.findAll({
+            where: { activate: true },
+            raw: true
+        });
+
         const bookedSlot = await db.TraineePackage.findAll({
-            attributes: ['mainSlotId'] ,
+            attributes: ['mainSlotId'],
             where: { mainPTId: id, remainDay: { [Op.gt]: 0 } },
             include: [
-                { model: db.Slot, as: 'slot' ,where:{activate: true}},
+                { model: db.Slot, as: 'slot', where: { activate: true } },
             ],
             nest: true,
             raw: true,
         });
+
         const remainSlot = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.slotId));
         for (let i = 0; i < remainSlot.length; i++) {
             let objName = "remainSlot";
             if (PT.hasOwnProperty(objName)) {
                 PT[objName].push(remainSlot[i]);
-              } else {
+            } else {
                 PT[objName] = [remainSlot[i]];
-              }
+            }
         }
         // PtT.remainSlot.forEach(element => {
         //     console.log(element.mainSlotId);
         // });
-        if (!PT)
-            return {
-                errorCode: 1,
-                description: "PT Id is not exist",
-            };
         return {
             errorCode: 0,
             PT,
