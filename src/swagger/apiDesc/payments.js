@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, canNotDelete } from "./common";
 
 module.exports = {
     '/api/payments': {
@@ -22,7 +22,7 @@ module.exports = {
                             properties: {
                                 paymentName: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Payment Name',
                                 },
                             },
                             required: ['paymentName']
@@ -34,7 +34,7 @@ module.exports = {
                             properties: {
                                 paymentName: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Payment Name',
                                 },
                             },
                             required: ['paymentName']
@@ -68,7 +68,7 @@ module.exports = {
                             properties: {
                                 paymentName: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Payment Name',
                                 },
                             },
                             required: ['paymentName']
@@ -80,7 +80,7 @@ module.exports = {
                             properties: {
                                 paymentName: {
                                     type: 'string',
-                                    description: 'Payment Name pass by payload',
+                                    description: 'Payment Name',
                                 },
                             },
                             required: ['paymentName']
@@ -96,7 +96,7 @@ module.exports = {
         },
         delete: {
             tags: ["Payment API"],
-            description: 'Delete a payment by paymentId',
+            description: 'You can delete payment if it does not use in any trainee package',
             parameters: [{
                 in: 'path',
                 name: 'paymentId',
@@ -105,9 +105,10 @@ module.exports = {
                 description: "Image ID",
             }],
             responses: {
-                200: successAndReturnARecord('payment', 'Payment'),
-                400: idIsNotExist,
-                500: errorFromServer
+                200: deleteSuccess,
+                "400-id-not-exist": idIsNotExist,
+                500: errorFromServer,
+                "400-can-not-delete": canNotDelete("payment", "trainee package")
             }
         }
     },

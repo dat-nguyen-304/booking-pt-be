@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, canNotDelete } from "./common";
 
 module.exports = {
     '/api/index-categories': {
@@ -22,7 +22,7 @@ module.exports = {
                             properties: {
                                 indexCategoryName: {
                                     type: 'string',
-                                    description: 'Index Category Name pass by payload',
+                                    description: 'Index Category Name',
                                 },
                             },
                             required: ['indexCategoryName']
@@ -34,7 +34,7 @@ module.exports = {
                             properties: {
                                 indexCategoryName: {
                                     type: 'string',
-                                    description: 'Index Category Name pass by payload',
+                                    description: 'Index Category Name',
                                 },
                             },
                             required: ['indexCategoryName']
@@ -68,7 +68,7 @@ module.exports = {
                             properties: {
                                 indexCategoryName: {
                                     type: 'string',
-                                    description: 'Index Category name pass by payload',
+                                    description: 'Index category name',
                                 },
                             },
                             required: ['indexCategoryName']
@@ -78,12 +78,12 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                indexCategoryTime: {
+                                indexCategoryName: {
                                     type: 'string',
-                                    description: 'Index Category time pass by payload',
+                                    description: 'Index category time',
                                 },
                             },
-                            required: ['indexCategoryTime']
+                            required: ['indexCategoryName']
                         },
                     },
                 },
@@ -96,7 +96,7 @@ module.exports = {
         },
         delete: {
             tags: ["Index Category API"],
-            description: 'Delete a indexCategory by indexCategoryId',
+            description: `You can delete a index category if that index category doesn't have any index`,
             parameters: [{
                 in: 'path',
                 name: 'indexCategoryId',
@@ -105,9 +105,10 @@ module.exports = {
                 description: "Image ID",
             }],
             responses: {
-                200: successAndReturnARecord('indexCategory', 'IndexCategory'),
-                400: idIsNotExist,
-                500: errorFromServer
+                200: deleteSuccess,
+                "400-id-not-exist": idIsNotExist,
+                500: errorFromServer,
+                "400-can-not-delete": canNotDelete("index category", "index")
             }
         }
     },

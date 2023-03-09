@@ -149,3 +149,26 @@ export const deleteSuccess = {
         }
     }
 }
+
+export const canNotDelete = (model, existModel) => {
+    return {
+        content: {
+            'application/json': {
+                description: `Can not delete this ${model} because of existing ${existModel}`,
+                schema: {
+                    type: 'object',
+                    properties: {
+                        errorCode: {
+                            type: 'integer',
+                            example: 1,
+                        },
+                        message: {
+                            type: 'string',
+                            example: `Failed! Can not delete this ${model} because of existing ${existModel}`
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

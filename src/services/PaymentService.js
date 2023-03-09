@@ -57,6 +57,24 @@ const deleteById = async (id) => {
             errorCode: 1,
             description: 'paymentId is not exist'
         }
+
+        const traineePackageFound = await db.TraineePackage.findOne({
+            where: { paymentId: paymentFound.paymentId }
+        });
+
+        if (!traineePackageFound) {
+            await paymentFound.destroy();
+            return {
+                errorCode: 0,
+                message: 'success'
+            }
+        } else {
+            return {
+                errorCode: 1,
+                message: 'Can not delete this payment because of existing trainee package'
+            }
+        }
+
         await paymentFound.destroy();
         return {
             errorCode: 0,

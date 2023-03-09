@@ -151,38 +151,6 @@ const update = async (id, traineePackageData) => {
     }
 }
 
-const toggleActivate = async (id) => {
-    try {
-        const traineePackageFound = await db.TraineePackage.findOne({
-            where: { traineePackageId: id },
-            include: [
-                { model: db.Center, as: 'center' },
-                { model: db.PT, as: 'PT' },
-                { model: db.Slot, as: 'slot' },
-                { model: db.Trainee, as: 'trainee' },
-                { model: db.Package, as: 'package' },
-                { model: db.Payment, as: 'payment' },
-            ],
-            attributes: {
-                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
-            },
-            nest: true
-        });
-        if (!traineePackageFound) return {
-            errorCode: 1,
-            description: 'TraineePackageId is not exist'
-        }
-        await traineePackageFound.update({ activate: !traineePackageFound.activate });
-        return {
-            errorCode: 0,
-            traineePackage: traineePackageFound
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error(error);
-    }
-}
-
 const deleteById = async (id) => {
     try {
         const traineePackageFound = await db.TraineePackage.findOne({
@@ -215,5 +183,5 @@ const deleteById = async (id) => {
 }
 
 module.exports = {
-    getAll, getById, update, create, toggleActivate, deleteById
+    getAll, getById, update, create, deleteById
 }

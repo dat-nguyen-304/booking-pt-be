@@ -90,20 +90,20 @@ module.exports = {
                             properties: {
                                 centerId: {
                                     type: 'integer',
-                                    description: `Center ID pass by payload`,
+                                    description: `Center ID`,
                                 },
                                 fullName: {
                                     type: 'string',
-                                    description: `PT's full name pass by payload`,
+                                    description: `PT's full name`,
                                 },
                                 rating: {
                                     type: 'number',
                                     format: 'float',
-                                    description: `PT's rating pass by payload`,
+                                    description: `PT's rating`,
                                 },
                                 description: {
                                     type: 'string',
-                                    description: `Description pass by payload`,
+                                    description: `Description`,
                                 }
                             }
                         },
@@ -114,20 +114,20 @@ module.exports = {
                             properties: {
                                 centerId: {
                                     type: 'integer',
-                                    description: `Center ID pass by payload`,
+                                    description: `Center ID`,
                                 },
                                 fullName: {
                                     type: 'string',
-                                    description: `PT's full name pass by payload`,
+                                    description: `PT's full name`,
                                 },
                                 rating: {
                                     type: 'number',
                                     format: 'float',
-                                    description: `PT's rating pass by payload`,
+                                    description: `PT's rating`,
                                 },
                                 description: {
                                     type: 'string',
-                                    description: `Description pass by payload`,
+                                    description: `Description`,
                                 }
                             }
                         },
@@ -138,24 +138,24 @@ module.exports = {
                             properties: {
                                 centerId: {
                                     type: 'integer',
-                                    description: `Center ID pass by payload`,
+                                    description: `Center ID`,
                                 },
                                 fullName: {
                                     type: 'string',
-                                    description: `PT's full name pass by payload`,
+                                    description: `PT's full name`,
                                 },
                                 rating: {
                                     type: 'number',
                                     format: 'float',
-                                    description: `PT's rating pass by payload`,
+                                    description: `PT's rating`,
                                 },
                                 description: {
                                     type: 'string',
-                                    description: `Description pass by payload`,
+                                    description: `Description`,
                                 },
                                 imgLink: {
                                     type: 'file',
-                                    description: `Img pass by payload`,
+                                    description: `Img`,
                                 }
                             },
                         },

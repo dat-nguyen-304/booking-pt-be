@@ -30,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         registerDate: DataTypes.DATE,
         remainDay: DataTypes.INTEGER,
         status: DataTypes.ENUM('active', 'expired'),
-        activate: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'TraineePackage',

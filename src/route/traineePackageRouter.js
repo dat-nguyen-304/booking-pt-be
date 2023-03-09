@@ -9,7 +9,7 @@ traineePackageRouter
 traineePackageRouter
     .route("/:traineePackageId")
     .get(TraineePackageController.getById)
-    .patch(TraineePackageController.updateOrToggleActivate)
+    .patch(TraineePackageController.update)
     .delete(TraineePackageController.deleteById)
 
 export default traineePackageRouter;

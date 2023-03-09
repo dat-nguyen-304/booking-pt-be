@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, canNotDelete } from "./common";
 
 module.exports = {
     '/api/trainee-packages': {
@@ -188,10 +188,6 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                operation: {
-                                    type: 'string',
-                                    description: 'Operation is toggleActivate or update',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -209,17 +205,13 @@ module.exports = {
                                     description: 'Start Date (TimeStamp)',
                                 }
                             },
-                            required: ['operation'],
+                            required: [],
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
-                                operation: {
-                                    type: 'string',
-                                    description: 'Operation is toggleActivate or update',
-                                },
                                 mainPTId: {
                                     type: 'integer',
                                     description: 'ID of Main PT',
@@ -237,7 +229,7 @@ module.exports = {
                                     description: 'Start Date (TimeStamp)',
                                 }
                             },
-                            required: ['operation'],
+                            required: [],
                         },
                     },
                 },
@@ -250,7 +242,7 @@ module.exports = {
         },
         delete: {
             tags: ["Trainee Package API"],
-            description: 'Get a trainee package by Id',
+            description: `If trainee who doesn't need to learn anymore but there is no session in the system, you can delete this trainee package`,
             parameters: [{
                 in: 'path',
                 name: 'traineePackageId',
@@ -262,26 +254,7 @@ module.exports = {
                 200: deleteSuccess,
                 "400-id-not-exist": idIsNotExist,
                 500: errorFromServer,
-                "400-can-not-delete": {
-                    content: {
-                        'application/json': {
-                            description: 'Can not delete this trainee package because of existing sessions of this trainee package',
-                            schema: {
-                                type: 'object',
-                                properties: {
-                                    errorCode: {
-                                        type: 'integer',
-                                        example: 1,
-                                    },
-                                    message: {
-                                        type: 'string',
-                                        example: "Failed! Can not delete this trainee package because of existing sessions of this trainee package"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                "400-can-not-delete": canNotDelete("trainee package", "session")
             }
         }
     },

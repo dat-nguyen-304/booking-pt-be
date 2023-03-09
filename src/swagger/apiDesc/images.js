@@ -52,7 +52,7 @@ module.exports = {
                             properties: {
                                 sessionId: {
                                     type: 'integer',
-                                    description: 'Session ID pass by payload',
+                                    description: 'Session ID',
                                 },
                                 imgFile: {
                                     type: 'array',
@@ -60,7 +60,7 @@ module.exports = {
                                         type: "string",
                                         format: "binary"
                                     },
-                                    description: 'Image file pass by payload',
+                                    description: 'Image file',
                                 },
                             },
                             required: ['sessionId', 'imgFile']

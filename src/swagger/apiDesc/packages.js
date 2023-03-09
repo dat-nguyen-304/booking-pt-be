@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, canNotDelete } from "./common";
 
 module.exports = {
     '/api/packages': {
@@ -76,29 +76,29 @@ module.exports = {
                             properties: {
                                 packageName: {
                                     type: 'string',
-                                    description: 'Package Name pass by payload',
+                                    description: 'Package Name',
                                 },
                                 price: {
                                     type: 'integer',
-                                    description: 'Price pass by payload',
+                                    description: 'Price',
                                 },
                                 durationByDay: {
                                     type: 'integer',
-                                    description: 'Duration By Day pass by payload',
+                                    description: 'Duration By Day',
                                 },
                                 durationByMonth: {
                                     type: 'integer',
-                                    description: 'Duration By Month pass by payload',
+                                    description: 'Duration By Month',
                                 },
                                 object: {
                                     type: 'string',
                                     enum: ['newbie', 'intermediate', 'professional'],
-                                    description: 'Object pass by payload',
+                                    description: 'Object',
                                 },
                                 category: {
                                     type: 'string',
                                     enum: ['havept', 'nopt'],
-                                    description: 'Category pass by payload',
+                                    description: 'Category',
                                 },
                             },
                             required: ['packageName', 'price', 'durationByDay', 'durationByMonth', 'object', 'category']
@@ -110,29 +110,29 @@ module.exports = {
                             properties: {
                                 packageName: {
                                     type: 'string',
-                                    description: 'Package Name pass by payload',
+                                    description: 'Package Name',
                                 },
                                 price: {
                                     type: 'integer',
-                                    description: 'Price pass by payload',
+                                    description: 'Price',
                                 },
                                 durationByDay: {
                                     type: 'integer',
-                                    description: 'Duration By Day pass by payload',
+                                    description: 'Duration By Day',
                                 },
                                 durationByMonth: {
                                     type: 'integer',
-                                    description: 'Duration By Month pass by payload',
+                                    description: 'Duration By Month',
                                 },
                                 object: {
                                     type: 'string',
                                     enum: ['newbie', 'intermediate', 'professional'],
-                                    description: 'Object pass by payload',
+                                    description: 'Object',
                                 },
                                 category: {
                                     type: 'string',
                                     enum: ['havept', 'nopt'],
-                                    description: 'Category pass by payload',
+                                    description: 'Category',
                                 },
                             },
                             required: ['packageName', 'price', 'durationByDay', 'durationByMonth', 'object', 'category']
@@ -166,7 +166,7 @@ module.exports = {
         },
         patch: {
             tags: ["Package API"],
-            description: 'Update one PT if operation you pass by payload is "update". Or you activate/deactivate one package if operation is "toggleActivate"',
+            description: 'Update one PT if operation you is "update". Or you activate/deactivate one package if operation is "toggleActivate"',
             parameters: [{
                 in: 'path',
                 name: 'packageId',
@@ -186,29 +186,29 @@ module.exports = {
                                 },
                                 packageName: {
                                     type: 'string',
-                                    description: 'Package Name pass by payload',
+                                    description: 'Package Name',
                                 },
                                 price: {
                                     type: 'integer',
-                                    description: 'Price pass by payload',
+                                    description: 'Price',
                                 },
                                 durationByDay: {
                                     type: 'integer',
-                                    description: 'Duration By Day pass by payload',
+                                    description: 'Duration By Day',
                                 },
                                 durationByMonth: {
                                     type: 'integer',
-                                    description: 'Duration By Month pass by payload',
+                                    description: 'Duration By Month',
                                 },
                                 object: {
                                     type: 'string',
                                     enum: ['newbie', 'intermediate', 'professional'],
-                                    description: 'Object pass by payload',
+                                    description: 'Object',
                                 },
                                 category: {
                                     type: 'string',
                                     enum: ['havept', 'nopt'],
-                                    description: 'Category pass by payload',
+                                    description: 'Category',
                                 },
                             },
                             required: ['operation'],
@@ -224,29 +224,29 @@ module.exports = {
                                 },
                                 packageName: {
                                     type: 'string',
-                                    description: 'Package Name pass by payload',
+                                    description: 'Package Name',
                                 },
                                 price: {
                                     type: 'integer',
-                                    description: 'Price pass by payload',
+                                    description: 'Price',
                                 },
                                 durationByDay: {
                                     type: 'integer',
-                                    description: 'Duration By Day pass by payload',
+                                    description: 'Duration By Day',
                                 },
                                 durationByMonth: {
                                     type: 'integer',
-                                    description: 'Duration By Month pass by payload',
+                                    description: 'Duration By Month',
                                 },
                                 object: {
                                     type: 'string',
                                     enum: ['newbie', 'intermediate', 'professional'],
-                                    description: 'Object pass by payload',
+                                    description: 'Object',
                                 },
                                 category: {
                                     type: 'string',
                                     enum: ['havept', 'nopt'],
-                                    description: 'Category pass by payload',
+                                    description: 'Category',
                                 },
                             },
                             required: ['operation'],
@@ -272,8 +272,9 @@ module.exports = {
             }],
             responses: {
                 200: deleteSuccess,
-                400: idIsNotExist,
-                500: errorFromServer
+                "400-id-not-exist": idIsNotExist,
+                500: errorFromServer,
+                "400-can-not-delete": canNotDelete("package", "trainee package")
             }
         }
     },

@@ -43,18 +43,9 @@ const create = async (req, res) => {
     }
 }
 
-const updateOrToggleActivate = async (req, res) => {
+const update = async (req, res) => {
     try {
-        const { operation, ...traineePackageData } = req.body;
-        let response;
-        if (operation === 'update')
-            response = await TraineePackageService.update(req.params.packageId, traineePackageData);
-        else if (operation === 'toggleActivate')
-            response = await TraineePackageService.toggleActivate(req.params.packageId);
-        else return res.status(400).json({
-            errorCode: 1,
-            message: `operation must be 'update' or 'toggleActivate'`
-        });
+        const response = await TraineePackageService.update(req.params.packageId, req.body);
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -82,4 +73,4 @@ const deleteById = async (req, res) => {
     }
 }
 
-module.exports = { getAll, getById, updateOrToggleActivate, create, deleteById };
+module.exports = { getAll, getById, update, create, deleteById };

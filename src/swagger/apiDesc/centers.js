@@ -21,15 +21,15 @@ module.exports = {
                             properties: {
                                 centerName: {
                                     type: 'string',
-                                    description: 'Center Name pass by payload',
+                                    description: 'Center Name',
                                 },
                                 address: {
                                     type: 'string',
-                                    description: 'Address pass by payload',
+                                    description: 'Address',
                                 },
                                 centerImg: {
                                     type: 'file',
-                                    description: 'Center Img file pass by payload',
+                                    description: 'Center Img file',
                                 },
                             },
                             required: ['centerName', 'address', 'centerImg']
@@ -62,7 +62,7 @@ module.exports = {
         },
         patch: {
             tags: ["Center API"],
-            description: 'Update one center if operation you pass by payload is "update". Or you activate/deactivate one center if operation is "toggleActivate"',
+            description: 'Update one center if operation you is "update". Or you activate/deactivate one center if operation is "toggleActivate"',
             parameters: [{
                 in: 'path',
                 name: 'centerId',
@@ -82,15 +82,15 @@ module.exports = {
                                 },
                                 centerName: {
                                     type: 'string',
-                                    description: 'Center Name pass by payload',
+                                    description: 'Center Name',
                                 },
                                 address: {
                                     type: 'string',
-                                    description: 'Address pass by payload',
+                                    description: 'Address',
                                 },
                                 centerImg: {
                                     type: 'file',
-                                    description: 'Center Img file pass by payload',
+                                    description: 'Center Img file',
                                 },
                             },
                         },
@@ -105,15 +105,15 @@ module.exports = {
                     //             },
                     //             centerName: {
                     //                 type: 'string',
-                    //                 description: 'Center Name pass by payload',
+                    //                 description: 'Center Name',
                     //             },
                     //             address: {
                     //                 type: 'string',
-                    //                 description: 'Address pass by payload',
+                    //                 description: 'Address',
                     //             },
                     //             centerImg: {
                     //                 type: 'file',
-                    //                 description: 'Center Img file pass by payload',
+                    //                 description: 'Center Img file',
                     //             },
                     //         },
                     //         required: ['operation'],

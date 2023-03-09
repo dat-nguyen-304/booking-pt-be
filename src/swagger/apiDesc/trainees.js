@@ -47,7 +47,7 @@ module.exports = {
                             properties: {
                                 fullName: {
                                     type: 'string',
-                                    description: `Trainee's full name pass by payload`,
+                                    description: `Trainee's full name`,
                                 }
                             }
                         },
@@ -58,7 +58,7 @@ module.exports = {
                             properties: {
                                 fullName: {
                                     type: 'string',
-                                    description: `Trainee's full name pass by payload`,
+                                    description: `Trainee's full name`,
                                 }
                             }
                         },

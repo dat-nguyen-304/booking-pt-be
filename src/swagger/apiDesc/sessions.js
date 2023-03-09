@@ -222,7 +222,7 @@ module.exports = {
                             properties: {
                                 centerId: {
                                     type: 'integer',
-                                    description: 'Session ID pass by payload',
+                                    description: 'Session ID',
                                 },
                                 PTId: {
                                     type: 'integer',

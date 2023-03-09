@@ -1,4 +1,4 @@
-import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess } from "./common";
+import { errorFromServer, idIsNotExist, successAndReturnArray, successAndReturnARecord, deleteSuccess, canNotDelete } from "./common";
 
 module.exports = {
     '/api/measures': {
@@ -147,7 +147,7 @@ module.exports = {
         },
         delete: {
             tags: ["Measure API"],
-            description: 'Delete a Measure by MeasureId',
+            description: `You can delete a measure if that measure doesn't have any index`,
             parameters: [{
                 in: 'path',
                 name: 'measureId',
@@ -156,9 +156,10 @@ module.exports = {
                 description: "Measure ID",
             }],
             responses: {
-                200: successAndReturnARecord('measure', 'Measure'),
-                400: idIsNotExist,
-                500: errorFromServer
+                200: deleteSuccess,
+                "400-id-not-exist": idIsNotExist,
+                500: errorFromServer,
+                "400-can-not-delete": canNotDelete("measure", "index")
             }
         }
     },
