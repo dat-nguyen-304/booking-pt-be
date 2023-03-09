@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Measure API"],
             description: 'Get all Measure',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [
                 {
                     in: 'query',
@@ -51,6 +56,11 @@ module.exports = {
         post: {
             tags: ["Measure API"],
             description: 'Create new Measure',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -98,6 +108,11 @@ module.exports = {
         patch: {
             tags: ["Measure API"],
             description: 'Update a measure by measureId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'measureId',
@@ -148,6 +163,11 @@ module.exports = {
         delete: {
             tags: ["Measure API"],
             description: `You can delete a measure if that measure doesn't have any index`,
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'measureId',

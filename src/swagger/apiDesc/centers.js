@@ -13,6 +13,11 @@ module.exports = {
         post: {
             tags: ["Center API"],
             description: 'Create new Center',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'multipart/form-data': {

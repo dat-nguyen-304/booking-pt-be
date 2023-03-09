@@ -14,6 +14,11 @@ module.exports = {
         post: {
             tags: ["Slot API"],
             description: 'Create new slot',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -61,6 +66,11 @@ module.exports = {
         patch: {
             tags: ["Slot API"],
             description: 'Update or deactivate a slot by slotId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'slotId',

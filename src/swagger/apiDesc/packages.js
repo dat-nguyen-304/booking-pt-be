@@ -68,6 +68,11 @@ module.exports = {
         post: {
             tags: ["Package API"],
             description: 'Create new package',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -167,6 +172,11 @@ module.exports = {
         patch: {
             tags: ["Package API"],
             description: 'Update one PT if operation you is "update". Or you activate/deactivate one package if operation is "toggleActivate"',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'packageId',
@@ -263,6 +273,11 @@ module.exports = {
         delete: {
             tags: ["Package API"],
             description: 'You can delete a package if it is not registered by any trainee package',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'packageId',

@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Trainee API"],
             description: 'Get all Trainee',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             responses: {
                 200: successAndReturnArray('trainees', 'TraineeMoreInfo'),
                 500: errorFromServer
@@ -15,6 +20,11 @@ module.exports = {
         get: {
             tags: ["Trainee API"],
             description: 'Get a trainee by trainee ID',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'traineeId',
@@ -31,6 +41,11 @@ module.exports = {
         patch: {
             tags: ["Trainee API"],
             description: 'Update one trainee. You can change full name of that trainee',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'traineeId',

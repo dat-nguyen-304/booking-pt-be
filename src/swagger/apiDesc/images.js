@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Image API"],
             description: 'Get a image by imageId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'query',
                 name: 'sessionId',
@@ -44,6 +49,11 @@ module.exports = {
         post: {
             tags: ["Image API"],
             description: 'Create new image',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'multipart/form-data': {
@@ -78,6 +88,11 @@ module.exports = {
         delete: {
             tags: ["Image API"],
             description: 'Delete a image by imageId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'imageId',

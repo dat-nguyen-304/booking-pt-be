@@ -90,6 +90,13 @@ const getById = async (id) => {
 
 const create = async (traineePackageData) => {
     try {
+        const traineePackageFound = await db.TraineePackage.findOne({
+            where: { traineeId: traineePackageData.traineeId, status: 'active' }
+        });
+        if (traineePackageFound) return {
+            errorCode: 1,
+            message: `Can't register for this package because your current package is still valid`
+        }
         traineePackageData = {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)

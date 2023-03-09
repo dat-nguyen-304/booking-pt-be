@@ -14,6 +14,11 @@ module.exports = {
         post: {
             tags: ["Payment API"],
             description: 'Create new payment',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -53,6 +58,11 @@ module.exports = {
         patch: {
             tags: ["Payment API"],
             description: 'Update a payment by paymentId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'paymentId',
@@ -97,6 +107,11 @@ module.exports = {
         delete: {
             tags: ["Payment API"],
             description: 'You can delete payment if it does not use in any trainee package',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'paymentId',

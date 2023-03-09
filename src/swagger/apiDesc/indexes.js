@@ -5,7 +5,11 @@ module.exports = {
         get: {
             tags: ["Index API"],
             description: 'Get all Index',
-
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             responses: {
                 200: successAndReturnArray('indexes', 'Index'),
                 500: errorFromServer
@@ -14,6 +18,11 @@ module.exports = {
         post: {
             tags: ["Index API"],
             description: 'Create new Index',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -86,6 +95,11 @@ module.exports = {
         patch: {
             tags: ["Index API"],
             description: 'Update a Index by IndexId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'indexId',
@@ -160,6 +174,11 @@ module.exports = {
         delete: {
             tags: ["Index API"],
             description: 'Delete a Index by IndexId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'indexId',

@@ -56,6 +56,11 @@ module.exports = {
         post: {
             tags: ["PT API"],
             description: 'Create new PT',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'multipart/form-data': {
@@ -114,6 +119,11 @@ module.exports = {
         patch: {
             tags: ["PT API"],
             description: 'Update one PT. You can change Center, Full name, Rating, Description of that PT',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'PTId',
@@ -124,54 +134,6 @@ module.exports = {
             ],
             requestBody: {
                 content: {
-                    'application/json': {
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                centerId: {
-                                    type: 'integer',
-                                    description: `Center ID`,
-                                },
-                                fullName: {
-                                    type: 'string',
-                                    description: `PT's full name`,
-                                },
-                                rating: {
-                                    type: 'number',
-                                    format: 'float',
-                                    description: `PT's rating`,
-                                },
-                                description: {
-                                    type: 'string',
-                                    description: `Description`,
-                                }
-                            }
-                        },
-                    },
-                    'application/x-www-form-urlencoded': {
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                centerId: {
-                                    type: 'integer',
-                                    description: `Center ID`,
-                                },
-                                fullName: {
-                                    type: 'string',
-                                    description: `PT's full name`,
-                                },
-                                rating: {
-                                    type: 'number',
-                                    format: 'float',
-                                    description: `PT's rating`,
-                                },
-                                description: {
-                                    type: 'string',
-                                    description: `Description`,
-                                }
-                            }
-                        },
-                    },
                     'multipart/form-data': {
                         schema: {
                             type: 'object',
@@ -195,7 +157,7 @@ module.exports = {
                                 },
                                 imgLink: {
                                     type: 'file',
-                                    description: `Img`,
+                                    description: `New avatar file`,
                                 }
                             },
                         },

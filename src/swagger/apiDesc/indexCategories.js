@@ -14,6 +14,11 @@ module.exports = {
         post: {
             tags: ["Index Category API"],
             description: 'Create new indexCategory',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -53,6 +58,11 @@ module.exports = {
         patch: {
             tags: ["Index Category API"],
             description: 'Update a indexCategory by indexCategoryId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'indexCategoryId',

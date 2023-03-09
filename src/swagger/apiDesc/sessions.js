@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Session API"],
             description: 'Get all Session',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [
                 {
                     in: 'query',
@@ -86,6 +91,11 @@ module.exports = {
         post: {
             tags: ["Session API"],
             description: 'Create new trainee package',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -164,6 +174,11 @@ module.exports = {
         get: {
             tags: ["Session API"],
             description: 'Get a session by session ID',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'sessionId',
@@ -180,6 +195,11 @@ module.exports = {
         patch: {
             tags: ["Session API"],
             description: 'Update one session"',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'sessionId',

@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Trainee Package API"],
             description: 'Get all Trainee',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [
                 {
                     in: 'query',
@@ -81,6 +86,11 @@ module.exports = {
         post: {
             tags: ["Trainee Package API"],
             description: 'Create new trainee package',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             requestBody: {
                 content: {
                     'application/json': {
@@ -159,6 +169,11 @@ module.exports = {
         get: {
             tags: ["Trainee Package API"],
             description: 'Get a trainee by trainee package ID',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'traineePackageId',
@@ -175,6 +190,11 @@ module.exports = {
         patch: {
             tags: ["Trainee Package API"],
             description: 'Update one package of trainee if operation is "update". Or you activate/deactivate one package if operation is "toggleActivate"',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'traineePackageId',
@@ -243,6 +263,11 @@ module.exports = {
         delete: {
             tags: ["Trainee Package API"],
             description: `If trainee who doesn't need to learn anymore but there is no session in the system, you can delete this trainee package`,
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'traineePackageId',

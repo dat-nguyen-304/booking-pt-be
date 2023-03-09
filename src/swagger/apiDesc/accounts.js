@@ -5,6 +5,11 @@ module.exports = {
         get: {
             tags: ["Account API"],
             description: 'Get all Account',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'query',
                 name: 'page',
