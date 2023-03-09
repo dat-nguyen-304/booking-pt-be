@@ -101,16 +101,22 @@ const getAll = async (query) => {
 
 const getById = async (id) => {
     try {
-        const slot =  await db.Slot.findAll({
-            where: { activate: true },
-            raw: true
-        });
         const PT = await db.PT.findOne({
             where: { PTId: id },
             include: [{ model: db.Center, as: "center" }],
             raw: true,
             nest: true,
         });
+        if (!PT)
+        return {
+            errorCode: 1,
+            description: "PT Id is not exist",
+        };
+        const slot =  await db.Slot.findAll({
+            where: { activate: true },
+            raw: true
+        });
+
         const bookedSlot = await db.TraineePackage.findAll({
             attributes: ['mainSlotId'] ,
             where: { mainPTId: id, remainDay: { [Op.gt]: 0 } },
@@ -120,6 +126,7 @@ const getById = async (id) => {
             nest: true,
             raw: true,
         });
+
         const remainSlot = slot.filter((slot) => !bookedSlot.some((bookedSlot) => bookedSlot.mainSlotId === slot.slotId));
         for (let i = 0; i < remainSlot.length; i++) {
             let objName = "remainSlot";
@@ -132,11 +139,6 @@ const getById = async (id) => {
         // PtT.remainSlot.forEach(element => {
         //     console.log(element.mainSlotId);
         // });
-        if (!PT)
-            return {
-                errorCode: 1,
-                description: "PT Id is not exist",
-            };
         return {
             errorCode: 0,
             PT,
