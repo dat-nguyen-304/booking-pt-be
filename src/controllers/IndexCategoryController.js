@@ -30,9 +30,18 @@ const create = async (req, res) => {
     }
 };
 
-const update = async (req, res) => {
+const updateOrToggleActivate = async (req, res) => {
     try {
-        let response = await IndexCategoryService.update(req.params.indexCategoryId, req.body);
+        const { operation, ...indexCategoryData } = req.body;
+        let response;
+        if (operation === 'update')
+            response = await IndexCategoryService.update(req.params.indexCategoryId, indexCategoryData);
+        else if (operation === 'toggleActivate')
+            response = await IndexCategoryService.toggleActivate(req.params.indexCategoryId);
+        else return res.status(400).json({
+            errorCode: 1,
+            message: `operation must be 'update' or 'toggleActivate'`
+        });
         if (response.errorCode === 0)
             return res.status(200).json(response);
         else return res.status(400).json(response);
@@ -40,10 +49,10 @@ const update = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
-        });
+            message: 'Error from server...'
+        })
     }
-};
+}
 
 const deleteById = async (req, res) => {
     try {
@@ -60,4 +69,4 @@ const deleteById = async (req, res) => {
     }
 };
 
-module.exports = { getAll, create, update, deleteById };
+module.exports = { getAll, create, updateOrToggleActivate, deleteById };

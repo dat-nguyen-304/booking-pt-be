@@ -10,7 +10,7 @@ indexCategoryRouter.route('/')
     .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ IndexCategoryController.create);
 
 indexCategoryRouter.route('/:indexCategoryId')
-    .patch(IndexCategoryController.update)
+    .patch(IndexCategoryController.updateOrToggleActivate)
     .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ IndexCategoryController.deleteById);
 
 export default indexCategoryRouter;

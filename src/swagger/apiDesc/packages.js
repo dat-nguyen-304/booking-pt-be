@@ -182,7 +182,7 @@ module.exports = {
                             properties: {
                                 operation: {
                                     type: 'string',
-                                    description: 'Operation is deactivate or update',
+                                    description: `Operation is 'toggleActivate' or 'update'`,
                                 },
                                 packageName: {
                                     type: 'string',
@@ -220,7 +220,7 @@ module.exports = {
                             properties: {
                                 operation: {
                                     type: 'string',
-                                    description: 'Operation is deactivate or update',
+                                    description: `Operation is 'toggleActivate' or 'update'`,
                                 },
                                 packageName: {
                                     type: 'string',

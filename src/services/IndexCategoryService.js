@@ -65,11 +65,35 @@ const update = async (id, indexCategoryData) => {
     }
 }
 
+const toggleActivate = async (id) => {
+    try {
+        const indexCategoryFound = await db.IndexCategory.findOne({
+            where: { indexCategoryId: id }
+        });
+        if (!indexCategoryFound) return {
+            errorCode: 1,
+            description: 'indexCategoryId is not exist'
+        }
+        await indexCategoryFound.update({ activate: !indexCategoryFound.activate });
+        return {
+            errorCode: 0,
+            indexCategory: indexCategoryFound
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
 const deleteById = async (id) => {
     try {
         const indexCategoryFound = await db.IndexCategory.findOne({
             where: { indexCategoryId: id }
         });
+        if (!indexCategoryFound) return {
+            errorCode: 1,
+            description: 'indexCategoryId is not exist'
+        }
         const indexFound = await db.Index.findOne({ indexCategoryId: indexCategoryFound.indexCategoryId });
         if (!indexFound) {
             await indexCategoryFound.destroy();
@@ -89,5 +113,5 @@ const deleteById = async (id) => {
 }
 
 module.exports = {
-    getAll, create, update, deleteById
+    getAll, create, update, toggleActivate, deleteById
 }

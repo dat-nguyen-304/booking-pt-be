@@ -58,7 +58,7 @@ module.exports = {
                 name: 'indexCategoryId',
                 type: "integer",
                 required: true,
-                description: "Image ID",
+                description: "Index Category ID",
             }],
             requestBody: {
                 content: {
@@ -66,24 +66,32 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
+                                operation: {
+                                    type: 'string',
+                                    description: `Operation is 'toggleActivate' or 'update'`,
+                                },
                                 indexCategoryName: {
                                     type: 'string',
                                     description: 'Index category name',
                                 },
                             },
-                            required: ['indexCategoryName']
+                            required: ['operation']
                         },
                     },
                     'application/x-www-form-urlencoded': {
                         schema: {
                             type: 'object',
                             properties: {
+                                operation: {
+                                    type: 'string',
+                                    description: `Operation is 'toggleActivate' or 'update'`,
+                                },
                                 indexCategoryName: {
                                     type: 'string',
-                                    description: 'Index category time',
+                                    description: 'Index category name',
                                 },
                             },
-                            required: ['indexCategoryName']
+                            required: ['operation']
                         },
                     },
                 },
@@ -102,7 +110,7 @@ module.exports = {
                 name: 'indexCategoryId',
                 type: "integer",
                 required: true,
-                description: "Image ID",
+                description: "Index Category ID",
             }],
             responses: {
                 200: deleteSuccess,
