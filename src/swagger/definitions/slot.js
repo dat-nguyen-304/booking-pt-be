@@ -13,9 +13,13 @@ const slotDef = {
             slotTime: {
                 type: 'string',
                 example: '7:00 - 8:30'
+            },
+            activate: {
+                type: 'boolean',
+                example: true
             }
         },
-        required: ["slotId", "slotName"]
+        required: ["slotId", "slotName", "slotTime", "activate"]
     }
 };
 

@@ -10,7 +10,6 @@ slotRouter.route('/')
     .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ SlotController.create);
 
 slotRouter.route('/:slotId')
-    .patch(SlotController.update)
-    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ SlotController.deleteById);
+    .patch(SlotController.updateOrDeactivate)
 
 export default slotRouter;

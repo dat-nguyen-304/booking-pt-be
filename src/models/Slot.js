@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         slotName: DataTypes.STRING,
-        slotTime: DataTypes.STRING
+        slotTime: DataTypes.STRING,
+        activate: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Slot',

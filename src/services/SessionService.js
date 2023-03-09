@@ -54,10 +54,11 @@ const getAll = async (query) => {
                 { model: db.TraineePackage, as: 'traineePackage' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
                 { model: db.Center, as: 'center' }
             ],
             attributes: {
-                exclude: ['traineeId', 'PTId', 'traineePackageId', 'centerId'],
+                exclude: ['traineeId', 'slotId', 'PTId', 'traineePackageId', 'centerId'],
             },
             nest: true
         });
@@ -77,6 +78,17 @@ const getById = async (id) => {
     try {
         const session = await db.Session.findOne({
             where: { sessionId: id },
+            include: [
+                { model: db.TraineePackage, as: 'traineePackage' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
+                { model: db.Center, as: 'center' }
+            ],
+            attributes: {
+                exclude: ['traineeId', 'slotId', 'PTId', 'traineePackageId', 'centerId'],
+            },
+            nest: true,
             raw: true
         });
         if (!session) return {
@@ -101,10 +113,11 @@ const create = async (sessionData) => {
                 { model: db.TraineePackage, as: 'traineePackage' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
                 { model: db.Center, as: 'center' }
             ],
             attributes: {
-                exclude: ['traineeId', 'PTId', 'traineePackageId', 'centerId'],
+                exclude: ['traineeId', 'slotId', 'PTId', 'traineePackageId', 'centerId'],
             },
             nest: true
         });
@@ -121,7 +134,18 @@ const create = async (sessionData) => {
 const update = async (id, sessionData) => {
     try {
         const session = await db.Session.findOne({
-            where: { sessionId: id }
+            where: { sessionId: id },
+            include: [
+                { model: db.TraineePackage, as: 'traineePackage' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
+                { model: db.Center, as: 'center' }
+            ],
+            attributes: {
+                exclude: ['traineeId', 'slotId', 'PTId', 'traineePackageId', 'centerId'],
+            },
+            nest: true
         });
         if (!session) return {
             errorCode: 1,

@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate (models) {
             TraineePackage.belongsTo(models.Center, { foreignKey: 'mainCenterId', as: 'center' });
             TraineePackage.belongsTo(models.PT, { foreignKey: 'mainPTId', as: 'PT' });
+            TraineePackage.belongsTo(models.Slot, { foreignKey: 'mainSlotId', as: 'slot' });
             TraineePackage.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
             TraineePackage.belongsTo(models.Package, { foreignKey: 'packageId', as: 'package' });
             TraineePackage.belongsTo(models.Payment, { foreignKey: 'paymentId', as: 'payment' });
@@ -23,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
         packageId: DataTypes.INTEGER,
         paymentId: DataTypes.INTEGER,
         mainSlotId: DataTypes.INTEGER,
-        mainSlotTime: DataTypes.STRING,
         mainCenterId: DataTypes.INTEGER,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,

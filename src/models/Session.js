@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             Session.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
             Session.belongsTo(models.Center, { foreignKey: 'centerId', as: 'center' });
             Session.belongsTo(models.PT, { foreignKey: 'PTId', as: 'PT' });
+            Session.belongsTo(models.Slot, { foreignKey: 'slotId', as: 'slot' });
         }
     };
     Session.init({
@@ -22,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         centerId: DataTypes.INTEGER,
         PTId: DataTypes.INTEGER,
         slotId: DataTypes.INTEGER,
-        slotTime: DataTypes.STRING,
         noteFromTrainee: DataTypes.STRING,
         noteFromPT: DataTypes.STRING,
         rating: DataTypes.INTEGER,

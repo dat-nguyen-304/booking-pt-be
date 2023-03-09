@@ -26,10 +26,6 @@ const traineePackageDef = {
                 type: 'integer',
                 example: 1
             },
-            mainSlotTime: {
-                type: 'string',
-                example: '7:30-9:00'
-            },
             mainCenterId: {
                 type: 'integer',
                 example: 1
@@ -69,14 +65,6 @@ const traineePackageDef = {
                 type: 'integer',
                 example: 1
             },
-            mainSlotId: {
-                type: 'integer',
-                example: 1
-            },
-            mainSlotTime: {
-                type: 'string',
-                example: '7:30-9:00'
-            },
             startDate: {
                 type: 'date',
                 example: "2023-03-07T16:22:34.469Z"
@@ -104,6 +92,9 @@ const traineePackageDef = {
             mainPT: {
                 $ref: `#/components/schemas/PT`
             },
+            mainSlot: {
+                $ref: `#/components/schemas/Slot`
+            },
             trainee: {
                 $ref: `#/components/schemas/Trainee`
             },
@@ -118,7 +109,7 @@ const traineePackageDef = {
             }
         },
         required: ["traineePackageId", "mainPT", "trainee", "package", "payment",
-            "defaultSlot", "startDate", "endDate", "registerDate", "remainDay", "status", "defaultCenter"]
+            "mainSlot", "startDate", "endDate", "registerDate", "remainDay", "status", "defaultCenter"]
     }
 };
 

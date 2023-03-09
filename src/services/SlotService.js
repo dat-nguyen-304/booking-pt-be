@@ -3,6 +3,7 @@ import db from "../models/index";
 const getAll = async () => {
     try {
         const slots = await db.Slot.findAll({
+            where: { activate: true },
             raw: true
         });
         return {
@@ -48,19 +49,19 @@ const update = async (id, slotData) => {
     }
 }
 
-const deleteById = async (id) => {
+const deactivate = async (id) => {
     try {
         const slotFound = await db.Slot.findOne({
             where: { slotId: id }
         });
         if (!slotFound) return {
             errorCode: 1,
-            description: 'slotId is not exist'
+            description: 'slot is not exist'
         }
-        await slotFound.destroy();
+        await slotFound.update({ activate: false });
         return {
             errorCode: 0,
-            message: 'success'
+            slot: slotFound
         }
     } catch (error) {
         console.log(error);
@@ -69,5 +70,5 @@ const deleteById = async (id) => {
 }
 
 module.exports = {
-    getAll, create, update, deleteById
+    getAll, create, update, deactivate
 }

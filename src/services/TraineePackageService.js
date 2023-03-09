@@ -45,12 +45,13 @@ const getAll = async (query) => {
             include: [
                 { model: db.Center, as: 'center' },
                 { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.Package, as: 'package' },
                 { model: db.Payment, as: 'payment' },
             ],
             attributes: {
-                exclude: ['mainPTId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId']
+                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId']
             },
             nest: true
         });
@@ -91,20 +92,20 @@ const create = async (traineePackageData) => {
     try {
         traineePackageData = {
             ...traineePackageData,
-            startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000),
-            paymentDate: traineePackageData.paymentDate ? new Date(Number.parseInt(traineePackageData.paymentDate) * 1000) : null
+            startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)
         }
         const traineePackage = await db.TraineePackage.create(traineePackageData);
         await traineePackage.reload({
             include: [
                 { model: db.Center, as: 'center' },
                 { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.Package, as: 'package' },
                 { model: db.Payment, as: 'payment' },
             ],
             attributes: {
-                exclude: ['mainPTId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
+                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
             },
             nest: true
         });
@@ -121,7 +122,19 @@ const create = async (traineePackageData) => {
 const update = async (id, traineePackageData) => {
     try {
         const traineePackage = await db.TraineePackage.findOne({
-            where: { traineePackageId: id }
+            where: { traineePackageId: id },
+            include: [
+                { model: db.Center, as: 'center' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.Package, as: 'package' },
+                { model: db.Payment, as: 'payment' },
+            ],
+            attributes: {
+                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
+            },
+            nest: true
         });
         if (!traineePackage) return {
             errorCode: 1,
@@ -141,7 +154,19 @@ const update = async (id, traineePackageData) => {
 const toggleActivate = async (id) => {
     try {
         const traineePackageFound = await db.TraineePackage.findOne({
-            where: { traineePackageId: id }
+            where: { traineePackageId: id },
+            include: [
+                { model: db.Center, as: 'center' },
+                { model: db.PT, as: 'PT' },
+                { model: db.Slot, as: 'slot' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.Package, as: 'package' },
+                { model: db.Payment, as: 'payment' },
+            ],
+            attributes: {
+                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
+            },
+            nest: true
         });
         if (!traineePackageFound) return {
             errorCode: 1,
