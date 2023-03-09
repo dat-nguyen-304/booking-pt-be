@@ -159,7 +159,7 @@ const deleteById = async (id) => {
 
         if (!traineePackageFound) return {
             errorCode: 1,
-            description: 'packageId is not exist'
+            description: 'traineePackageId is not exist'
         }
         const sessionFound = await db.Session.findOne({
             where: { traineePackageId: traineePackageFound.traineePackageId }

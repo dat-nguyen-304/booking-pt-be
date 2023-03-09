@@ -3,7 +3,9 @@ import PaymentService from "../services/PaymentService";
 const getAll = async (req, res) => {
     try {
         let response = await PaymentService.getAll();
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -16,7 +18,9 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
     try {
         let response = await PaymentService.create(req.body);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -29,7 +33,9 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     try {
         let response = await PaymentService.update(req.params.paymentId, req.body);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -42,7 +48,9 @@ const update = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         let response = await PaymentService.deleteById(req.params.paymentId);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

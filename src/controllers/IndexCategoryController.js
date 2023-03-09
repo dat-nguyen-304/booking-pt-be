@@ -3,7 +3,9 @@ import IndexCategoryService from "../services/IndexCategoryService";
 const getAll = async (req, res) => {
     try {
         let response = await IndexCategoryService.getAll();
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -16,7 +18,9 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
     try {
         let response = await IndexCategoryService.create(req.body);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -29,7 +33,9 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     try {
         let response = await IndexCategoryService.update(req.params.indexCategoryId, req.body);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -42,7 +48,9 @@ const update = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         let response = await IndexCategoryService.deleteById(req.params.indexCategoryId);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

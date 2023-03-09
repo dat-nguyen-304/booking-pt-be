@@ -1,5 +1,5 @@
 import db from "../models/index";
-import {redisClient} from "../config/connectDB";
+import { redisClient } from "../config/connectDB";
 
 const getAll = async () => {
     let isCached = false;
@@ -70,15 +70,17 @@ const deleteById = async (id) => {
         const indexCategoryFound = await db.IndexCategory.findOne({
             where: { indexCategoryId: id }
         });
-        if (!indexCategoryFound) return {
-            errorCode: 1,
-            description: 'indexCategoryId is not exist'
+        const indexFound = await db.Index.findOne({ indexCategoryId: indexCategoryFound.indexCategoryId });
+        if (!indexFound) {
+            await indexCategoryFound.destroy();
+            return {
+                errorCode: 0,
+                message: 'success'
+            }
         }
-        await indexCategoryFound.destroy();
-        redisClient.del('indexCategories');
-        return {
-            errorCode: 0,
-            message: 'success'
+        else return {
+            errorCode: 1,
+            message: 'Can not delete this index category because of existing index'
         }
     } catch (error) {
         console.log(error);

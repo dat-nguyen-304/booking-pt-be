@@ -9,9 +9,7 @@ const getAll = async (query) => {
     let { keyword, limit, page, centerId, rating, sortBy, order } = query;
 
     const options = {
-        include: [
-            { model: db.Center, as: "center" },
-            { model: db.Slot, as: 'slot' }],
+        include: [{ model: db.Center, as: "center" }],
         raw: true,
         nest: true,
     };
@@ -110,11 +108,10 @@ const getById = async (id) => {
             nest: true,
         });
         if (!PT)
-        return {
-            errorCode: 1,
-            description: "PT Id is not exist",
-        };
-
+            return {
+                errorCode: 1,
+                description: "PT Id is not exist",
+            };
         const slot = await db.Slot.findAll({
             where: { activate: true },
             raw: true

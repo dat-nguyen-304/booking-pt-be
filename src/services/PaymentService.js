@@ -74,12 +74,6 @@ const deleteById = async (id) => {
                 message: 'Can not delete this payment because of existing trainee package'
             }
         }
-
-        await paymentFound.destroy();
-        return {
-            errorCode: 0,
-            message: 'success'
-        }
     } catch (error) {
         console.log(error);
         throw new Error(error);

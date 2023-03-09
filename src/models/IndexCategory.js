@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true
         },
         indexCategoryName: DataTypes.STRING,
+        activate: DataTypes.BOOLEAN,
         createdAt: DataTypes.DATE
     }, {
         sequelize,

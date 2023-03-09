@@ -3,7 +3,9 @@ import SlotService from "../services/SlotService";
 const getAll = async (req, res) => {
     try {
         let response = await SlotService.getAll();
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -16,7 +18,9 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
     try {
         let response = await SlotService.create(req.body);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

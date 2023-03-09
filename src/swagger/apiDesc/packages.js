@@ -262,7 +262,7 @@ module.exports = {
         },
         delete: {
             tags: ["Package API"],
-            description: 'Get a package by packageId',
+            description: 'You can delete a package if it is not registered by any trainee package',
             parameters: [{
                 in: 'path',
                 name: 'packageId',

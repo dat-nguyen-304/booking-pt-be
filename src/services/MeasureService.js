@@ -97,15 +97,16 @@ const deleteById = async (id) => {
             description: 'measureId is not exist'
         }
         const indexFound = await db.Index.findOne({ measureId: measureFound.measureId });
-        if (!indexFound)
+        if (!indexFound) {
             await measureFound.destroy();
+            return {
+                errorCode: 0,
+                message: 'success'
+            }
+        }
         else return {
             errorCode: 1,
-            message: 'Can not delete this measure because existing index'
-        }
-        return {
-            errorCode: 0,
-            message: 'success'
+            message: 'Can not delete this measure because of existing index'
         }
     } catch (error) {
         console.log(error);

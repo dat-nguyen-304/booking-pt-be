@@ -102,7 +102,7 @@ module.exports = {
                 name: 'paymentId',
                 type: "integer",
                 required: true,
-                description: "Image ID",
+                description: "Payment ID",
             }],
             responses: {
                 200: deleteSuccess,

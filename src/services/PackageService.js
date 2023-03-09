@@ -135,7 +135,21 @@ const deleteById = async (id) => {
             errorCode: 1,
             description: 'packageId is not exist'
         }
-
+        const traineePackageFound = await db.TraineePackage.findOne({
+            where: { packageId: packageFound.packageId }
+        })
+        if (!traineePackageFound) {
+            await packageFound.destroy();
+            return {
+                errorCode: 0,
+                message: 'success'
+            }
+        } else {
+            return {
+                errorCode: 1,
+                message: 'Can not delete this package because of existing trainee package'
+            }
+        }
         await packageFound.destroy();
         return {
             errorCode: 0,

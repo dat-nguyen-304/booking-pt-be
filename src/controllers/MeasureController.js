@@ -20,7 +20,7 @@ const create = async (req, res) => {
         let response = await MeasureService.create(req.body);
         if (response.errorCode === 0)
             return res.status(200).json(response);
-        else return res.status(500).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -35,7 +35,7 @@ const update = async (req, res) => {
         let response = await MeasureService.update(req.params.measureId, req.body);
         if (response.errorCode === 0)
             return res.status(200).json(response);
-        else return res.status(500).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -50,7 +50,7 @@ const deleteById = async (req, res) => {
         let response = await MeasureService.deleteById(req.params.measureId);
         if (response.errorCode === 0)
             return res.status(200).json(response);
-        else return res.status(500).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

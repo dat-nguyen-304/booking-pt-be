@@ -3,7 +3,9 @@ import ImageService from "../services/ImageService";
 const getAll = async (req, res) => {
     try {
         let response = await ImageService.getAll(req.query);
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({
@@ -16,7 +18,9 @@ const getAll = async (req, res) => {
 const postNew = async (req, res) => {
     try {
         let response = await ImageService.postNew({ imageData: req.body, files: req.files });
-        return res.status(200).json(response);
+        if (response.errorCode === 0)
+            return res.status(200).json(response);
+        else return res.status(400).json(response);
     } catch (e) {
         console.log(e);
         return res.status(500).json({

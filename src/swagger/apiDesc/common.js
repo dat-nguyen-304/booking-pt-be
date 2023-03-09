@@ -164,7 +164,7 @@ export const canNotDelete = (model, existModel) => {
                         },
                         message: {
                             type: 'string',
-                            example: `Failed! Can not delete this ${model} because of existing ${existModel}`
+                            example: `Can not delete this ${model} because of existing ${existModel}`
                         }
                     }
                 }
