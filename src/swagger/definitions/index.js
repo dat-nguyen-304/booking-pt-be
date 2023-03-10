@@ -11,6 +11,7 @@ import indexDef from "./indexModel";
 import measureDef from "./measure";
 import paymentDef from "./payment";
 import slotDef from "./slot";
+import notifyDef from "./notify";
 
 const definitions = {
     ...centerDef,
@@ -25,6 +26,7 @@ const definitions = {
     ...indexDef,
     ...measureDef,
     ...paymentDef,
-    ...slotDef
+    ...slotDef,
+    ...notifyDef
 };
 export default definitions;
