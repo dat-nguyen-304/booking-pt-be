@@ -115,6 +115,11 @@ module.exports = {
         delete: {
             tags: ["Index Category API"],
             description: `You can delete a index category if that index category doesn't have any index`,
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'indexCategoryId',

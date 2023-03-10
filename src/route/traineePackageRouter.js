@@ -7,7 +7,7 @@ const traineePackageRouter = express.Router();
 traineePackageRouter
     .route("/")
     .get(verifyAccessToken, verifyAuthorization(['admin']), TraineePackageController.getAll)
-    .post(verifyAccessToken, verifyAuthorization(['admin']), TraineePackageController.create)
+    .post(verifyAccessToken, verifyAuthorization(['admin', 'user']), TraineePackageController.create)
 traineePackageRouter
     .route("/:traineePackageId")
     .get(TraineePackageController.getById)

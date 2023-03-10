@@ -47,6 +47,11 @@ module.exports = {
         get: {
             tags: ["Account API"],
             description: 'Get a account by accountId',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'accountId',

@@ -68,6 +68,11 @@ module.exports = {
         patch: {
             tags: ["Center API"],
             description: 'Update one center if operation you is "update". Or you activate/deactivate one center if operation is "toggleActivate"',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
             parameters: [{
                 in: 'path',
                 name: 'centerId',
