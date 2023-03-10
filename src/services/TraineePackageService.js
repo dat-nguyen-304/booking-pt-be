@@ -43,9 +43,9 @@ const getAll = async (query) => {
         const traineePackages = await db.TraineePackage.findAndCountAll({
             ...options,
             include: [
-                { model: db.Center, as: 'center' },
-                { model: db.PT, as: 'PT' },
-                { model: db.Slot, as: 'slot' },
+                { model: db.Center, as: 'mainCenter' },
+                { model: db.PT, as: 'mainPT' },
+                { model: db.Slot, as: 'mainSlot' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.Package, as: 'package' },
                 { model: db.Payment, as: 'payment' },
@@ -72,6 +72,18 @@ const getById = async (id) => {
     try {
         const traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: id },
+            include: [
+                { model: db.Center, as: 'mainCenter' },
+                { model: db.PT, as: 'mainPT' },
+                { model: db.Slot, as: 'mainSlot' },
+                { model: db.Trainee, as: 'trainee' },
+                { model: db.Package, as: 'package' },
+                { model: db.Payment, as: 'payment' },
+            ],
+            attributes: {
+                exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId']
+            },
+            nest: true,
             raw: true
         });
         if (!traineePackage) return {
@@ -104,9 +116,9 @@ const create = async (traineePackageData) => {
         const traineePackage = await db.TraineePackage.create(traineePackageData);
         await traineePackage.reload({
             include: [
-                { model: db.Center, as: 'center' },
-                { model: db.PT, as: 'PT' },
-                { model: db.Slot, as: 'slot' },
+                { model: db.Center, as: 'mainCenter' },
+                { model: db.PT, as: 'mainPT' },
+                { model: db.Slot, as: 'mainSlot' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.Package, as: 'package' },
                 { model: db.Payment, as: 'payment' },
@@ -131,9 +143,9 @@ const update = async (id, traineePackageData) => {
         const traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: id },
             include: [
-                { model: db.Center, as: 'center' },
-                { model: db.PT, as: 'PT' },
-                { model: db.Slot, as: 'slot' },
+                { model: db.Center, as: 'mainCenter' },
+                { model: db.PT, as: 'mainPT' },
+                { model: db.Slot, as: 'mainSlot' },
                 { model: db.Trainee, as: 'trainee' },
                 { model: db.Package, as: 'package' },
                 { model: db.Payment, as: 'payment' },

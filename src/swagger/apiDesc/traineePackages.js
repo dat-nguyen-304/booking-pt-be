@@ -182,7 +182,7 @@ module.exports = {
                 description: "Trainee Package ID",
             }],
             responses: {
-                200: successAndReturnARecord('traineePackage', 'Trainee'),
+                200: successAndReturnARecord('traineePackage', 'TraineePackageMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
@@ -255,7 +255,7 @@ module.exports = {
                 },
             },
             responses: {
-                200: successAndReturnARecord('traineePackage', 'TraineePackage'),
+                200: successAndReturnARecord('traineePackage', 'TraineePackageMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }

@@ -7,10 +7,10 @@ const imageRouter = express.Router();
 
 imageRouter.route('/')
     .get(ImageController.getAll)
-    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ upload.array('imgFile', 12), ImageController.postNew);
+    .post(verifyAccessToken, verifyAuthorization(['user', 'pt']), upload.array('imgFile', 12), ImageController.postNew);
 
 imageRouter.route('/:imageId')
     .get(ImageController.getById)
-    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ ImageController.deleteById);
+    .delete(verifyAccessToken, verifyAuthorization(['user']), ImageController.deleteById);
 
 export default imageRouter;

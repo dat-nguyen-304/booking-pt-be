@@ -6,11 +6,11 @@ const sessionRouter = express.Router();
 
 sessionRouter
     .route("/")
-    .get(verifyAccessToken, SessionController.getAll)
+    .get(SessionController.getAll)
     .post(SessionController.create)
 sessionRouter
     .route("/:sessionId")
     .get(SessionController.getById)
-    .patch(verifyAccessToken, SessionController.update)
+    .patch(SessionController.update)
 
 export default sessionRouter;
