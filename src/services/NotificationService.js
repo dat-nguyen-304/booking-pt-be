@@ -1,22 +1,28 @@
-var admin = require("firebase-admin");
+var admin = require("../config/firebase-config");
 const FCM = require('fcm-node')
 var serviceAccount = require("../config/serviceAccount.json");
 var fcm = new FCM(serviceAccount)
 
-const postNotification = async (notifyData) => {
+const postNotification = async (userId, notifyData) => {
     console.log(notifyData);
+
+    let fcmToken;
     try {
+        await admin
+        .database()
+        .ref(`/users/${userId}/fcmToken`)
+        .once('value')
+        .then((snapshot) => {
+          fcmToken = snapshot.val();
+        })
+        console.log("mess",fcmToken);
         var message = {
-            to: 'eRziEvVAQSqFtwCjbTOgbe:APA91bE0CPoK6UNLsdUEjdsl-a5GpWpkxsbiN9sqKirgc2GpvRBlZmsVlPFJMq1VoXYxWwkuIU0EL6ujltW5pG-pGyc0Y6mKXUXXVZOK_DQO_4Yhd0yGjEgpoJ6KI093VHGDI0JlGhKn', 
-            
-            // notification: {
-            //     title: notifyData.title, 
-            //     body: notifyData.content, 
-            // },
+
+            to: fcmToken,
 
             notification: {
-                title: "Chúc mừng", 
-                body: "Bạn đã thành công tham gia lớp học.", 
+                title: notifyData.title, 
+                body: notifyData.message, 
             },
             
             data: { 

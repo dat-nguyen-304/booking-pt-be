@@ -12,8 +12,10 @@ import slots from "./slots";
 import indexCategories from "./indexCategories";
 import indexes from "./indexes";
 import measures from "./measures";
+import notifies from "./notify";
+
 
 const paths = Object.assign({}, centers, packages, accounts, auth, PTs, trainees, traineePackages, sessions, images, payments,
-    slots, indexCategories, indexes, measures);
+    slots, indexCategories, indexes, measures, notifies);
 
 export default paths;
