@@ -205,7 +205,7 @@ module.exports = {
                 name: 'sessionId',
                 type: "integer",
                 required: true,
-                description: "Package ID",
+                description: "Session ID",
             }],
             requestBody: {
                 content: {

@@ -130,23 +130,25 @@ const create = async (traineePackageData) => {
             nest: true
         })
 
-        let startDate = traineePackage.startDate;
-        startDate.setHours(0);
-        startDate.setMinutes(0);
-        startDate.setSeconds(0);
-        startDate.setMilliseconds(0);
+        if (traineePackage.package.category === 'havept') {
+            let startDate = traineePackage.startDate;
+            startDate.setHours(0);
+            startDate.setMinutes(0);
+            startDate.setSeconds(0);
+            startDate.setMilliseconds(0);
 
-        for (let day = 0; day < traineePackage.remainDay; day++) {
-            const dateTimestamp = startDate.getTime() + day * 86400 * 1000;
-            const date = new Date(dateTimestamp);
-            const dayOfWeek = date.getDay();
-            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                await db.Session.create({
-                    traineePackageId: traineePackage.traineePackageId,
-                    PTId: traineePackage.mainPT.PTId,
-                    slotId: traineePackage.mainSlot.slotId,
-                    date
-                });
+            for (let day = 0; day < traineePackage.remainDay; day++) {
+                const dateTimestamp = startDate.getTime() + day * 86400 * 1000;
+                const date = new Date(dateTimestamp);
+                const dayOfWeek = date.getDay();
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                    await db.Session.create({
+                        traineePackageId: traineePackage.traineePackageId,
+                        PTId: traineePackage.mainPT.PTId,
+                        slotId: traineePackage.mainSlot.slotId,
+                        date
+                    });
+                }
             }
         }
 
@@ -181,6 +183,7 @@ const update = async (id, traineePackageData) => {
             errorCode: 1,
             description: 'TraineePackageId is not exist'
         }
+
         await traineePackage.update(traineePackageData);
         return {
             errorCode: 0,

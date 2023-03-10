@@ -17,6 +17,18 @@ const getAll = async () => {
 
 const create = async (indexData) => {
     try {
+        const indexFound = await db.Index.findOne({
+            where: {
+                indexCategoryId: indexData.indexCategoryId,
+                measureId: indexData.measureId
+            }
+        });
+        if (indexFound) {
+            return {
+                errorCode: 1,
+                message: 'You already added this index category for this measurement'
+            }
+        }
         const index = await db.Index.create(indexData);
         return {
             errorCode: 0,
