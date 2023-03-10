@@ -6,10 +6,10 @@ const traineeRouter = express.Router();
 
 traineeRouter
     .route("/")
-    .get(verifyAccessToken, verifyAuthorization(['admin']), TraineeController.getAll);
+    .get(/*verifyAccessToken, verifyAuthorization(['admin']),*/ TraineeController.getAll);
 traineeRouter
     .route("/:traineeId")
     .get(TraineeController.getById)
-    .patch(verifyAccessToken, verifyAuthorization(['admin', 'trainee']), TraineeController.update)
+    .patch(/*verifyAccessToken, verifyAuthorization(['admin', 'user']),*/ TraineeController.update)
 
 export default traineeRouter;

@@ -17,7 +17,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
     try {
-        let response = await TraineePackageService.getById(req.params.traineeId);
+        let response = await TraineePackageService.getById(req.params.traineePackageId);
         if (response.errorCode === 0) return res.status(200).json(response);
         else return res.status(400).json(response);
     } catch (e) {

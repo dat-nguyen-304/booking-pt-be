@@ -7,10 +7,10 @@ const centerRouter = express.Router();
 
 centerRouter.route('/')
     .get(CenterController.getAllCenter)
-    .post(verifyAccessToken, verifyAuthorization(['admin']), upload.single('centerImg'), CenterController.postNewCenter);
+    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/upload.single('centerImg'), CenterController.postNewCenter);
 
 centerRouter.route("/:centerId")
     .get(CenterController.getCenterById)
-    .patch(verifyAccessToken, verifyAuthorization(['admin']), upload.single('centerImg'), CenterController.updateOrToggleActivate);
+    .patch(/*verifyAccessToken, verifyAuthorization(['admin']),*/ upload.single('centerImg'), CenterController.updateOrToggleActivate);
 
 export default centerRouter;

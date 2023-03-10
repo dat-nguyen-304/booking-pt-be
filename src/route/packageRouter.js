@@ -6,12 +6,12 @@ const packageRouter = express.Router();
 
 packageRouter
     .route("/")
-    .post(verifyAccessToken, verifyAuthorization(['admin']), PackageController.create)
+    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/PackageController.create)
     .get(PackageController.getAllPackage);
 packageRouter
     .route("/:packageId")
     .get(PackageController.getPackageById)
-    .patch(verifyAccessToken, verifyAuthorization(['admin']), PackageController.updateOrToggleActivate)
-    .delete(verifyAccessToken, verifyAuthorization(['admin']), PackageController.deleteById)
+    .patch(/*verifyAccessToken, verifyAuthorization(['admin']),*/ PackageController.updateOrToggleActivate)
+    .delete(/*verifyAccessToken, verifyAuthorization(['admin']),*/ PackageController.deleteById)
 
 export default packageRouter;

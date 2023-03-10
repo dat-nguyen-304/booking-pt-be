@@ -9,9 +9,14 @@ const postNotification = async (notifyData) => {
         var message = {
             to: 'eRziEvVAQSqFtwCjbTOgbe:APA91bE0CPoK6UNLsdUEjdsl-a5GpWpkxsbiN9sqKirgc2GpvRBlZmsVlPFJMq1VoXYxWwkuIU0EL6ujltW5pG-pGyc0Y6mKXUXXVZOK_DQO_4Yhd0yGjEgpoJ6KI093VHGDI0JlGhKn', 
             
+            // notification: {
+            //     title: notifyData.title, 
+            //     body: notifyData.content, 
+            // },
+
             notification: {
-                title: notifyData.title, 
-                body: notifyData.content, 
+                title: "Chúc mừng", 
+                body: "Bạn đã thành công tham gia lớp học.", 
             },
             
             data: { 

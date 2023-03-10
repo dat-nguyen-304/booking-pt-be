@@ -8,10 +8,10 @@ const PTRouter = express.Router();
 PTRouter
     .route("/")
     .get(PTController.getAll)
-    .post(verifyAccessToken, verifyAuthorization(['admin']), upload.single('imgLink'), PTController.create);
+    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ upload.single('imgLink'), PTController.create);
 PTRouter
     .route("/:PTId")
     .get(PTController.getById)
-    .patch(verifyAccessToken, verifyAuthorization(['admin, pt']), upload.single('imgLink'), PTController.update);
+    .patch(/*verifyAccessToken, verifyAuthorization(['admin','pt']),*/ upload.single('imgLink'), PTController.update);
 
 export default PTRouter;
