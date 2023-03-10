@@ -9,6 +9,6 @@ accountRouter.route('/')
     .get(/*verifyAccessToken, verifyAuthorization(['admin']),*/ AccountController.getAllAccount)
 
 accountRouter.route('/:accountId')
-    .get(/*verifyAccessToken,*/ AccountController.getAccountById)
+    .get(verifyAccessToken, AccountController.getAccountById)
 
 export default accountRouter;
