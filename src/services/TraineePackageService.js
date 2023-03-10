@@ -113,8 +113,9 @@ const create = async (traineePackageData) => {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)
         }
-        const traineePackage = await db.TraineePackage.create(traineePackageData);
-        await traineePackage.reload({
+        let traineePackage = await db.TraineePackage.create(traineePackageData);
+        traineePackage = await db.TraineePackage.findOne({
+            where: { traineePackageId: traineePackage.traineePackageId },
             include: [
                 { model: db.Center, as: 'mainCenter' },
                 { model: db.PT, as: 'mainPT' },
@@ -127,7 +128,28 @@ const create = async (traineePackageData) => {
                 exclude: ['mainPTId', 'mainSlotId', 'mainCenterId', 'traineeId', 'packageId', 'paymentId'],
             },
             nest: true
-        });
+        })
+
+        let startDate = traineePackage.startDate;
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        startDate.setMilliseconds(0);
+
+        for (let day = 0; day < traineePackage.remainDay; day++) {
+            const dateTimestamp = startDate.getTime() + day * 86400 * 1000;
+            const date = new Date(dateTimestamp);
+            const dayOfWeek = date.getDay();
+            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                await db.Session.create({
+                    traineePackageId: traineePackage.traineePackageId,
+                    PTId: traineePackage.mainPT.PTId,
+                    slotId: traineePackage.mainSlot.slotId,
+                    date
+                });
+            }
+        }
+
         return {
             errorCode: 0,
             traineePackage

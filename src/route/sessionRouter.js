@@ -6,11 +6,11 @@ const sessionRouter = express.Router();
 
 sessionRouter
     .route("/")
-    .get(SessionController.getAll)
-    .post(SessionController.create)
+    .get(verifyAccessToken, SessionController.getAll)
+    .post(verifyAccessToken, verifyAuthorization(['admin']), SessionController.create)
 sessionRouter
     .route("/:sessionId")
-    .get(SessionController.getById)
-    .patch(SessionController.update)
+    .get(verifyAccessToken, SessionController.getById)
+    .patch(verifyAccessToken, verifyAuthorization(['user']), SessionController.update)
 
 export default sessionRouter;
