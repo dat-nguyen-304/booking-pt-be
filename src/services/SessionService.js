@@ -151,8 +151,6 @@ const update = async (id, sessionData) => {
             errorCode: 1,
             description: 'SessionId is not exist'
         }
-        console.log(session.date.getTime());
-        console.log((new Date()).getTime());
 
         if (session.date.getTime() <= (new Date()).getTime()) return {
             errorCode: 1,
