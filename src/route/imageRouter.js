@@ -7,7 +7,7 @@ const imageRouter = express.Router();
 
 imageRouter.route('/')
     .get(ImageController.getAll)
-    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/ upload.array('imgFile', 12), ImageController.postNew);
+    .post(/*verifyAccessToken, verifyAuthorization(['admin']),*/upload.array('imgFile', 12), ImageController.postNew);
 
 imageRouter.route('/:imageId')
     .get(ImageController.getById)
