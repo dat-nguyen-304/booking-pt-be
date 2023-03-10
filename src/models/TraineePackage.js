@@ -5,9 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class TraineePackage extends Model {
         static associate (models) {
-            TraineePackage.belongsTo(models.Center, { foreignKey: 'mainCenterId', as: 'center' });
-            TraineePackage.belongsTo(models.PT, { foreignKey: 'mainPTId', as: 'PT' });
-            TraineePackage.belongsTo(models.Slot, { foreignKey: 'mainSlotId', as: 'slot' });
+            TraineePackage.belongsTo(models.Center, { foreignKey: 'mainCenterId', as: 'mainCenter' });
+            TraineePackage.belongsTo(models.PT, { foreignKey: 'mainPTId', as: 'mainPT' });
+            TraineePackage.belongsTo(models.Slot, { foreignKey: 'mainSlotId', as: 'mainSlot' });
             TraineePackage.belongsTo(models.Trainee, { foreignKey: 'traineeId', as: 'trainee' });
             TraineePackage.belongsTo(models.Package, { foreignKey: 'packageId', as: 'package' });
             TraineePackage.belongsTo(models.Payment, { foreignKey: 'paymentId', as: 'payment' });

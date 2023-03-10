@@ -121,7 +121,7 @@ const getById = async (id) => {
             attributes: ['mainSlotId'],
             where: { mainPTId: id, remainDay: { [Op.gt]: 0 } },
             include: [
-                { model: db.Slot, as: 'slot', where: { activate: true } },
+                { model: db.Slot, as: 'mainSlot', where: { activate: true } },
             ],
             nest: true,
             raw: true,
