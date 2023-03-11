@@ -1,5 +1,6 @@
 import db from "../models/index";
 const { Op } = require('sequelize');
+import NotificationService from "../services/NotificationService";
 
 const getAll = async (query) => {
     try {
@@ -136,6 +137,12 @@ const create = async (traineePackageData) => {
         startDate.setSeconds(0);
         startDate.setMilliseconds(0);
 
+        const message = {
+            title : "Chúc mừng "+ traineePackage.trainee.fullName + " đã mua thành công khóa học",
+            message : "Bạn đã mua " + traineePackage.package.packageName + " của " + traineePackage.mainPT.fullName + " tại slot " + traineePackage.mainSlot.slotTime,
+        }
+        await NotificationService.postNotification(1, message);
+        
         for (let day = 0; day < traineePackage.remainDay; day++) {
             const dateTimestamp = startDate.getTime() + day * 86400 * 1000;
             const date = new Date(dateTimestamp);

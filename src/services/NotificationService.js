@@ -15,7 +15,8 @@ const postNotification = async (userId, notifyData) => {
         .then((snapshot) => {
           fcmToken = snapshot.val();
         })
-        console.log("mess",fcmToken);
+        console.log("mess",notifyData.title);
+        console.log("mess",notifyData.message);
         var message = {
 
             to: fcmToken,

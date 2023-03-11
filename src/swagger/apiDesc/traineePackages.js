@@ -118,7 +118,8 @@ module.exports = {
                                     description: 'ID of payment',
                                 },
                                 startDate: {
-                                    type: 'integer',
+                                    type: 'string',
+                                    format:'date-time',
                                     description: 'Start Date (TimeStamp)',
                                 }
                             },
