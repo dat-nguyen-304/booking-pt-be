@@ -11,6 +11,6 @@ sessionRouter
 sessionRouter
     .route("/:sessionId")
     .get(verifyAccessToken, SessionController.getById)
-    .patch(verifyAccessToken, verifyAuthorization(['user']), SessionController.update)
+    .patch(verifyAccessToken, verifyAuthorization(['user', 'admin']), SessionController.update)
 
 export default sessionRouter;

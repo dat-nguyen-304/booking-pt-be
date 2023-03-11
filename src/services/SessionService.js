@@ -151,6 +151,11 @@ const update = async (id, sessionData) => {
             errorCode: 1,
             description: 'SessionId is not exist'
         }
+
+        if (session.date.getTime() <= (new Date()).getTime()) return {
+            errorCode: 1,
+            description: 'You cannot change session information for today and in the past'
+        }
         await session.update(sessionData);
         return {
             errorCode: 0,

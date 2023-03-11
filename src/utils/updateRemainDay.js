@@ -7,11 +7,13 @@ async function updateRemainDay () {
         });
 
         for (const traineePackage of traineePackages) {
-            const newRemainDay = traineePackage.remainDay - 1;
-            if (newRemainDay > 0) {
-                await traineePackage.update({ remainDay: newRemainDay });
-            } else {
-                await traineePackage.update({ remainDay: null, status: 'expired' });
+            if (traineePackage.status === 'active' && traineePackage.startDate.getTime() <= (new Date()).getTime()) {
+                const newRemainDay = traineePackage.remainDay - 1;
+                if (newRemainDay > 0) {
+                    await traineePackage.update({ remainDay: newRemainDay });
+                } else {
+                    await traineePackage.update({ remainDay: null, status: 'expired' });
+                }
             }
         }
     } catch (error) {
