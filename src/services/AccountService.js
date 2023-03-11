@@ -33,7 +33,7 @@ const getAccountById = async (id) => {
         });
         if (!account) return {
             errorCode: 1,
-            description: 'accountId is not exist'
+            message: 'Account ID does not exist'
         }
         return {
             errorCode: 0,

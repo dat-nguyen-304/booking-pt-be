@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -25,7 +25,7 @@ const create = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -49,7 +49,7 @@ const updateOrToggleActivate = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
+            message: 'Error from server.'
         })
     }
 }
@@ -64,7 +64,7 @@ const deleteById = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };

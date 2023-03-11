@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -25,7 +25,7 @@ const postNew = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -39,7 +39,7 @@ const getById = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -53,7 +53,7 @@ const deleteById = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };

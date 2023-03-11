@@ -62,7 +62,7 @@ const getCenterById = async (id) => {
         });
         if (!center) return {
             errorCode: 1,
-            description: 'centerId is not exist'
+            message: 'Center ID does not exist'
         }
         redisClient.del('centers');
         return {
@@ -90,7 +90,7 @@ const update = async (id, centerData, file) => {
         });
         if (!centerFound) return {
             errorCode: 1,
-            description: 'centerId is not exist'
+            message: 'Center ID does not exist'
         }
 
         await centerFound.update(centerData);
@@ -111,7 +111,7 @@ const toggleActivate = async (id) => {
         });
         if (!centerFound) return {
             errorCode: 1,
-            description: 'centerId is not exist'
+            message: 'Center ID does not exist'
         }
         await centerFound.update({ activate: !centerFound.activate });
         return {

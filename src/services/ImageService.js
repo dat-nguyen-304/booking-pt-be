@@ -21,7 +21,7 @@ const getAll = async (query) => {
 
 const postNew = async ({ imageData, files }) => {
     try {
-        var array ={}; 
+        var array = {};
         var i = 0;
         for (const file of files) {
             const imgLink = await imgUrl(file, "images");
@@ -55,7 +55,7 @@ const getById = async (id) => {
         });
         if (!image) return {
             errorCode: 1,
-            description: 'imageId is not exist'
+            message: 'Image ID does not exist'
         }
         return {
             errorCode: 0,
@@ -82,11 +82,11 @@ const deleteById = async (id) => {
         });
         if (!image) return {
             errorCode: 1,
-            description: 'imageId is not exist'
+            message: 'Image ID does not exist'
         }
         return {
             errorCode: 0,
-            description: ' has been successfully deleted'
+            message: 'success'
         }
     } catch (error) {
         console.log(error);

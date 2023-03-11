@@ -25,7 +25,7 @@ const create = async (indexData) => {
         });
         if (indexFound) {
             return {
-                errorCode: 1,
+                errorCode: 0,
                 message: 'You already added this index category for this measurement'
             }
         }
@@ -47,7 +47,7 @@ const update = async (id, indexData) => {
         });
         if (!index) return {
             errorCode: 1,
-            description: 'indexId is not exist'
+            message: 'Index ID does not exist'
         }
         await index.update(indexData);
         return {
@@ -67,7 +67,7 @@ const deleteById = async (id) => {
         });
         if (!indexFound) return {
             errorCode: 1,
-            description: 'indexId is not exist'
+            message: 'Index ID does not exist'
         }
         await indexFound.destroy();
         return {

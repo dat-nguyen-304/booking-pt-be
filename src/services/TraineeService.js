@@ -36,7 +36,7 @@ const getById = async (id) => {
         });
         if (!trainee) return {
             errorCode: 1,
-            description: 'Trainee Id is not exist'
+            message: 'Trainee ID does not exist'
         }
         return {
             errorCode: 0,
@@ -62,7 +62,7 @@ const update = async (id, traineeData) => {
         });
         if (!trainee) return {
             errorCode: 1,
-            description: 'TraineeId is not exist'
+            message: 'Trainee ID does not exist'
         }
         console.log(traineeData);
         await trainee.update(traineeData);

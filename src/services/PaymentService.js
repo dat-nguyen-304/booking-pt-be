@@ -35,7 +35,7 @@ const update = async (id, paymentData) => {
         });
         if (!payment) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            message: 'Payment ID does not exist'
         }
         await payment.update(paymentData);
         return {
@@ -55,7 +55,7 @@ const deleteById = async (id) => {
         });
         if (!paymentFound) return {
             errorCode: 1,
-            description: 'paymentId is not exist'
+            message: 'Payment ID does not exist'
         }
 
         const traineePackageFound = await db.TraineePackage.findOne({
@@ -70,7 +70,7 @@ const deleteById = async (id) => {
             }
         } else {
             return {
-                errorCode: 1,
+                errorCode: 0,
                 message: 'Can not delete this payment because of existing trainee package'
             }
         }

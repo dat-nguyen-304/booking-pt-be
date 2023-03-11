@@ -93,7 +93,7 @@ const getById = async (id) => {
         });
         if (!session) return {
             errorCode: 1,
-            description: 'Session Id is not exist'
+            message: 'Session ID does not exist'
         }
         return {
             errorCode: 0,
@@ -149,12 +149,12 @@ const update = async (id, sessionData) => {
         });
         if (!session) return {
             errorCode: 1,
-            description: 'SessionId is not exist'
+            message: 'Session ID does not exist'
         }
 
         if (session.date.getTime() <= (new Date()).getTime()) return {
-            errorCode: 1,
-            description: 'You cannot change session information for today and in the past'
+            errorCode: 0,
+            message: 'You cannot change session information for today and in the past'
         }
         await session.update(sessionData);
         return {

@@ -9,7 +9,7 @@ const getAllAccount = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
+            message: 'Error from server.'
         })
     }
 }
@@ -24,7 +24,7 @@ const getAccountById = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
+            message: 'Error from server.'
         })
     }
 }

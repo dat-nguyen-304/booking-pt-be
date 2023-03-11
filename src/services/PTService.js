@@ -87,7 +87,7 @@ const getAll = async (query) => {
 //         });
 //         if (!PT) return {
 //             errorCode: 1,
-//             description: 'PT Id is not exist'
+//             description: 'PT Id does not exist'
 //         }
 //         return {
 //             errorCode: 0,
@@ -110,7 +110,7 @@ const getById = async (id) => {
         if (!PT)
             return {
                 errorCode: 1,
-                description: "PT Id is not exist",
+                message: "PT ID does not exist",
             };
         const slot = await db.Slot.findAll({
             where: { activate: true },
@@ -208,7 +208,7 @@ const update = async (id, PTData, file) => {
         if (!PT)
             return {
                 errorCode: 1,
-                description: "PTId is not exist",
+                message: "PT ID does not exist",
             };
         await PT.update(PTData);
         redisClient.del("PTs");

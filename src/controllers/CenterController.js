@@ -10,7 +10,7 @@ const getAllCenter = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -25,7 +25,7 @@ const postNewCenter = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -39,7 +39,7 @@ const getCenterById = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: "Error from server...",
+            message: "Error from server.",
         });
     }
 };
@@ -64,7 +64,7 @@ const updateOrToggleActivate = async (req, res) => {
         console.log(e);
         return res.status(500).json({
             errorCode: -1,
-            message: 'Error from server...'
+            message: 'Error from server.'
         })
     }
 }

@@ -61,7 +61,7 @@ const getPackageById = async (id) => {
         });
         if (!packageFound) return {
             errorCode: 1,
-            description: 'packageId is not exist'
+            message: 'Package ID does not exist'
         }
         return {
             errorCode: 0,
@@ -93,7 +93,7 @@ const update = async (id, packageData) => {
         });
         if (!packageFound) return {
             errorCode: 1,
-            description: 'packageId is not exist'
+            message: 'Package ID does not exist'
         }
         await packageFound.update(packageData);
         return {
@@ -113,7 +113,7 @@ const toggleActivate = async (id) => {
         });
         if (!packageFound) return {
             errorCode: 1,
-            description: 'packageId is not exist'
+            message: 'Package ID does not exist'
         }
         await packageFound.update({ activate: !packageFound.activate });
         return {
@@ -133,7 +133,7 @@ const deleteById = async (id) => {
         });
         if (!packageFound) return {
             errorCode: 1,
-            description: 'packageId is not exist'
+            message: 'Package ID does not exist'
         }
         const traineePackageFound = await db.TraineePackage.findOne({
             where: { packageId: packageFound.packageId }
@@ -146,14 +146,9 @@ const deleteById = async (id) => {
             }
         } else {
             return {
-                errorCode: 1,
+                errorCode: 0,
                 message: 'Can not delete this package because of existing trainee package'
             }
-        }
-        await packageFound.destroy();
-        return {
-            errorCode: 0,
-            message: 'success'
         }
     } catch (error) {
         console.log(error);

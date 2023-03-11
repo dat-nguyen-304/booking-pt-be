@@ -36,7 +36,7 @@ const update = async (id, slotData) => {
         });
         if (!slot) return {
             errorCode: 1,
-            description: 'slotId is not exist'
+            message: 'Slot ID does not exist'
         }
         await slot.update(slotData);
         return {
@@ -56,7 +56,7 @@ const deactivate = async (id) => {
         });
         if (!slotFound) return {
             errorCode: 1,
-            description: 'slot is not exist'
+            message: 'Slot does not exist'
         }
         await slotFound.update({ activate: false });
         return {

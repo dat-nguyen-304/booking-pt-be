@@ -51,7 +51,7 @@ const update = async (id, indexCategoryData) => {
         });
         if (!indexCategory) return {
             errorCode: 1,
-            description: 'indexCategoryId is not exist'
+            message: 'IndexCategory ID does not exist'
         }
         await indexCategory.update(indexCategoryData);
         redisClient.del('indexCategories');
@@ -72,7 +72,7 @@ const toggleActivate = async (id) => {
         });
         if (!indexCategoryFound) return {
             errorCode: 1,
-            description: 'indexCategoryId is not exist'
+            message: 'IndexCategory ID does not exist'
         }
         await indexCategoryFound.update({ activate: !indexCategoryFound.activate });
         return {
@@ -92,7 +92,7 @@ const deleteById = async (id) => {
         });
         if (!indexCategoryFound) return {
             errorCode: 1,
-            description: 'indexCategoryId is not exist'
+            message: 'IndexCategory ID does not exist'
         }
         const indexFound = await db.Index.findOne({ indexCategoryId: indexCategoryFound.indexCategoryId });
         if (!indexFound) {
@@ -103,7 +103,7 @@ const deleteById = async (id) => {
             }
         }
         else return {
-            errorCode: 1,
+            errorCode: 0,
             message: 'Can not delete this index category because of existing index'
         }
     } catch (error) {

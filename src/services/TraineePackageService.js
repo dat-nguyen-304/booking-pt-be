@@ -89,7 +89,7 @@ const getById = async (id) => {
         });
         if (!traineePackage) return {
             errorCode: 1,
-            description: 'TraineePackage Id is not exist'
+            message: 'Trainee Package ID does not exist'
         }
         return {
             errorCode: 0,
@@ -107,7 +107,7 @@ const create = async (traineePackageData) => {
             where: { traineeId: traineePackageData.traineeId, status: 'active' }
         });
         if (traineePackageFound) return {
-            errorCode: 1,
+            errorCode: 0,
             message: `Can't register for this package because your current package is still valid`
         }
         traineePackageData = {
@@ -139,8 +139,8 @@ const create = async (traineePackageData) => {
             startDate.setMilliseconds(0);
 
             const message = {
-                title : "Chúc mừng "+ traineePackage.trainee.fullName + " đã mua thành công khóa học",
-                message : "Bạn đã mua " + traineePackage.package.packageName + " của " + traineePackage.mainPT.fullName + " tại slot " + traineePackage.mainSlot.slotTime,
+                title: "Chúc mừng " + traineePackage.trainee.fullName + " đã mua thành công khóa học",
+                message: "Bạn đã mua " + traineePackage.package.packageName + " của " + traineePackage.mainPT.fullName + " tại slot " + traineePackage.mainSlot.slotTime,
             }
             await NotificationService.postNotification(1, message);
 
@@ -189,7 +189,7 @@ const update = async (id, traineePackageData) => {
         });
         if (!traineePackage) return {
             errorCode: 1,
-            description: 'TraineePackageId is not exist'
+            message: 'Trainee Package ID does not exist'
         }
 
         await traineePackage.update(traineePackageData);
@@ -211,7 +211,7 @@ const deleteById = async (id) => {
 
         if (!traineePackageFound) return {
             errorCode: 1,
-            description: 'traineePackageId is not exist'
+            message: 'Trainee Package ID does not exist'
         }
         const sessionFound = await db.Session.findOne({
             where: { traineePackageId: traineePackageFound.traineePackageId }
@@ -224,7 +224,7 @@ const deleteById = async (id) => {
             }
         } else {
             return {
-                errorCode: 1,
+                errorCode: 0,
                 message: 'Can not delete this trainee package because of existing session'
             }
         }
