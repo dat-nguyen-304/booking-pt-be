@@ -1,4 +1,6 @@
 import db from "../models/index";
+import NotificationService from "../services/NotificationService";
+const { Op } = require('sequelize');
 const getAll = async (query) => {
     try {
         let { keyword, limit, page, traineePackageId, rating, date, traineeId, slotId, PTId, centerId, sortBy, order } = query;
@@ -155,6 +157,14 @@ const update = async (id, sessionData) => {
         if (session.date.getTime() <= (new Date()).getTime()) return {
             errorCode: 0,
             message: 'You cannot change session information for today and in the past'
+        }
+
+        if (!sessionData.noteFromPT || !sessionData.noteFromStudent) {
+            const message = {
+                title: "Bạn có một thông báo về lớp học",
+                message: "Bạn nhận được một note từ PT"
+            }
+            await NotificationService.postNotification(1, message);
         }
         await session.update(sessionData);
         return {

@@ -1,6 +1,7 @@
 import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
-import deleteUrl from "../utils/DeleteImgLink"
+import deleteUrl from "../utils/DeleteImgLink";
+import NotificationService from "../services/NotificationService";
 
 const getAll = async (query) => {
     try {
@@ -37,6 +38,11 @@ const postNew = async ({ imageData, files }) => {
             array[name + i] = image.dataValues;
             i++;
         }
+        const message = {
+            title: "Bạn có một thông báo về lớp học",
+            message: "PT vừa cập nhật ảnh của bạn trong buổi học"
+        }
+        await NotificationService.postNotification(1, message);
         return {
             errorCode: 0,
             array,

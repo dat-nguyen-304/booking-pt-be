@@ -226,11 +226,11 @@ module.exports = {
                                     description: 'rating for session',
                                 },
                                 noteFromPT: {
-                                    type: 'integer',
+                                    type: 'string',
                                     description: 'Note from PT',
                                 },
                                 noteFromStudent: {
-                                    type: 'integer',
+                                    type: 'string',
                                     description: 'Note from student',
                                 }
                             }

@@ -7,6 +7,8 @@ import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "./swagger/index";
 import updateRemainDay from "./utils/updateRemainDay";
 import cron from 'node-cron';
+const schedule = require('node-schedule');
+import checkNotify from "./utils/checkNoti";
 
 require('dotenv').config();
 connectDB();
@@ -22,6 +24,18 @@ app.use(express.static("./src/public"));
 initWebRoutes(app);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+const scheduleArr = ['7:30', '9:15', '11:00', '13:00', '14:45', '16:30', '18:15'];
+const rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = new schedule.Range(1, 5);
+rule.minute = [0, 30];
+rule.hour = new schedule.Range(7, 20);
+rule.tz = 'Asia/Ho_Chi_Minh';
+
+schedule.scheduleJob(rule, function() {
+    console.log("chạy roi nay");
+    checkNotify();
+});
 
 cron.schedule('0 0 * * *', () => {
     updateRemainDay();
