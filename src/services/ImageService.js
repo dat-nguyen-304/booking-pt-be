@@ -2,6 +2,7 @@ import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink";
 import NotificationService from "../services/NotificationService";
+import { checkExist } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -53,6 +54,9 @@ const getAll = async (query) => {
 
 const postNew = async ({ imageData, files }) => {
     try {
+        const notExistSession = await checkExist("Session", { sessionId: imageData.sessionId });
+        if (notExistSession) return notExistSession;
+        
         var array = {};
         var i = 0;
         for (const file of files) {

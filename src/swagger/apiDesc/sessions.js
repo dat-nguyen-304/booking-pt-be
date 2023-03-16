@@ -105,6 +105,10 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of PT of session',
                                 },
+                                date: {
+                                    type: 'integer',
+                                    description: 'Date of session',
+                                },
                                 slotId: {
                                     type: 'integer',
                                     description: 'ID of slot of session',
@@ -136,6 +140,10 @@ module.exports = {
                                 PTId: {
                                     type: 'integer',
                                     description: 'ID of PT of session',
+                                },
+                                date: {
+                                    type: 'integer',
+                                    description: 'Date of session',
                                 },
                                 slotId: {
                                     type: 'integer',

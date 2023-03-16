@@ -1,4 +1,5 @@
 import db from "../models/index";
+import { checkExist } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -56,6 +57,9 @@ const getAll = async (query) => {
 
 const create = async (measureData) => {
     try {
+        const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
+        if (notExistTrainee) return notExistTrainee;
+        
         const measure = await db.Measure.create(measureData);
         return {
             errorCode: 0,

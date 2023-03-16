@@ -1,6 +1,8 @@
 import db from "../models/index";
 import NotificationService from "../services/NotificationService";
 const { Op } = require('sequelize');
+import { checkExist } from "./commonService";
+
 const getAll = async (query) => {
     try {
         let { limit, page, traineePackageId, rating, date, traineeId, slotId, PTId, centerId, sortBy, order } = query;
@@ -101,6 +103,48 @@ const getById = async (id) => {
 
 const create = async (sessionData) => {
     try {
+
+        const notExistTraineePackage = await checkExist("TraineePackage", { traineePackageId: sessionData.traineePackageId});
+        if (notExistTraineePackage) return notExistTraineePackage;
+        const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
+        if (notExistPT) return notExistPT;
+        const notExistSlot = await checkExist("Slot", { slotId: sessionData.slotId });
+        if (notExistSlot) return notExistSlot;
+
+        const startDate = new Date(sessionData.date * 1000);
+        const today = new Date();
+        const latestDate = 14;
+        const futureDate = new Date();
+        futureDate.setDate(today.getDate() + latestDate);
+        if(startDate.getDay() != today.getDay()){
+            if (startDate < today || startDate > futureDate) {
+                return {
+                    errorCode: 0,
+                    message: `Date must be within 14 days from today`
+                }
+            }
+        }
+
+        sessionData = {
+            ...sessionData,
+            date: new Date(Number.parseInt(sessionData.date) * 1000)
+        }
+
+        const sessionFound = await db.Session.findOne({
+            where: {
+                PTId: sessionData.PTId,
+                slotId: sessionData.slotId,
+                date: sessionData.date
+            }
+        });
+
+        if (sessionFound) {
+            return {
+                errorCode: 0,
+                message: 'Pt is busy at this time'
+            }
+        }
+
         const session = await db.Session.create(sessionData);
         await session.reload({
             include: [

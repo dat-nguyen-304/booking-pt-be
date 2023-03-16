@@ -1,4 +1,5 @@
 import db from "../models/index";
+import { checkExist } from "./commonService";
 
 const getAll = async () => {
     try {
@@ -17,6 +18,12 @@ const getAll = async () => {
 
 const create = async (indexData) => {
     try {
+
+        const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
+        if (notExistIndexCategory) return notExistIndexCategory;
+        const notExistMeasure = await checkExist("Measure", { measureId: indexData.measureId });
+        if (notExistMeasure) return notExistMeasure;
+
         const indexFound = await db.Index.findOne({
             where: {
                 indexCategoryId: indexData.indexCategoryId,

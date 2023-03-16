@@ -116,17 +116,19 @@ const create = async (traineePackageData) => {
         const notExistPayment = await checkExist("Payment", { paymentId: traineePackageData.paymentId });
         if (notExistPayment) return notExistPayment;
 
-
+        console.log("êre" ,typeof traineePackageData.startDate);
         //check timestamp within 14 days
         const startDate = new Date(traineePackageData.startDate * 1000);
         const today = new Date();
         const latestDate = 14;
         const futureDate = new Date();
         futureDate.setDate(today.getDate() + latestDate);
-        if (startDate < today || startDate > futureDate) {
-            return {
-                errorCode: 0,
-                message: `Start date must be within 14 days from today`
+        if(startDate.getDay() != today.getDay()){
+            if (startDate < today || startDate > futureDate) {
+                return {
+                    errorCode: 0,
+                    message: `Start date must be within 14 days from today`
+                }
             }
         }
 
@@ -153,6 +155,7 @@ const create = async (traineePackageData) => {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)
         }
+        console.log("êre" ,typeof traineePackageData.startDate);
         let traineePackage = await db.TraineePackage.create(traineePackageData);
         traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: traineePackage.traineePackageId },
@@ -171,11 +174,7 @@ const create = async (traineePackageData) => {
         })
 
         if (traineePackage.package.category === 'havept') {
-            let startDate = traineePackage.startDate;
-            startDate.setHours(0);
-            startDate.setMinutes(0);
-            startDate.setSeconds(0);
-            startDate.setMilliseconds(0);
+            let startDate = new Date(traineePackage.startDate);
 
             const message = {
                 title: "Chúc mừng " + traineePackage.trainee.fullName + " đã mua thành công khóa học",
