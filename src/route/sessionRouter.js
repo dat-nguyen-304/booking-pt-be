@@ -6,7 +6,7 @@ const sessionRouter = express.Router();
 
 sessionRouter
     .route("/")
-    .get(verifyAccessToken, SessionController.getAll)
+    .get(/*verifyAccessToken, */SessionController.getAll)
     .post(verifyAccessToken, verifyAuthorization(['admin']), SessionController.create)
 sessionRouter
     .route("/:sessionId")

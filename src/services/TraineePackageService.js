@@ -1,6 +1,7 @@
 import db from "../models/index";
 const { Op } = require('sequelize');
 import NotificationService from "../services/NotificationService";
+import { checkExist } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -103,6 +104,42 @@ const getById = async (id) => {
 
 const create = async (traineePackageData) => {
     try {
+        //check ID exist
+        const notExistTrainee = await checkExist("Trainee", { traineeId: traineePackageData.traineeId });
+        if (notExistTrainee) return notExistTrainee;
+        const notExistPackage = await checkExist("Package", { packageId: traineePackageData.packageId });
+        if (notExistPackage) return notExistPackage;
+        const notExistPT = await checkExist("PT", { PTId: traineePackageData.mainPTId });
+        if (notExistPT) return notExistPT;
+        const notExistSlot = await checkExist("Slot", { slotId: traineePackageData.mainSlotId });
+        if (notExistSlot) return notExistSlot;
+        const notExistPayment = await checkExist("Payment", { paymentId: traineePackageData.paymentId });
+        if (notExistPayment) return notExistPayment;
+
+
+        //check timestamp within 14 days
+        const startDate = new Date(traineePackageData.startDate * 1000);
+        const today = new Date();
+        const latestDate = 14;
+        const futureDate = new Date();
+        futureDate.setDate(today.getDate() + latestDate);
+        if (startDate < today || startDate > futureDate) {
+            return {
+                errorCode: 0,
+                message: `Start date must be within 14 days from today`
+            }
+        }
+
+        //check slot PT 
+        const checkSlotOfPT = await db.TraineePackage.findOne({
+            where: { mainPTId: traineePackageData.mainPTId, mainSlotId: traineePackageData.mainSlotId }
+        });
+        if (checkSlotOfPT) return {
+            errorCode: 0,
+            message: `Can't register for this package because PT has a schedule to this slot`
+        }
+
+        //check trainee registered
         const traineePackageFound = await db.TraineePackage.findOne({
             where: { traineeId: traineePackageData.traineeId, status: 'active' }
         });
@@ -110,6 +147,8 @@ const create = async (traineePackageData) => {
             errorCode: 0,
             message: `Can't register for this package because your current package is still valid`
         }
+
+        //start create
         traineePackageData = {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)

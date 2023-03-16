@@ -44,7 +44,7 @@ const sessionDef = {
             },
             date: {
                 type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
+                example: "2023-03-07"
             }
         },
         required: ["sessionId", "traineePackageId", "centerId", "PTId", "slotId", "date", "rating"]

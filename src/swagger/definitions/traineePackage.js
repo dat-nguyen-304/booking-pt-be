@@ -32,11 +32,11 @@ const traineePackageDef = {
             },
             startDate: {
                 type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
+                example: "2023-03-07"
             },
             endDate: {
                 type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
+                example: "2023-04-07"
             },
             registerDate: {
                 type: 'date',
@@ -67,11 +67,11 @@ const traineePackageDef = {
             },
             startDate: {
                 type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
+                example: "2023-03-07"
             },
             endDate: {
                 type: 'date',
-                example: "2023-03-07T16:22:34.469Z"
+                example: "2023-04-07"
             },
             registerDate: {
                 type: 'date',

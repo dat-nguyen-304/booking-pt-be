@@ -1,6 +1,7 @@
 import db from "../models/index";
 import { redisClient } from "../config/connectDB";
 import imgUrl from "../utils/GetImgLink";
+import { checkExist } from "./commonService";
 const { Op, where } = require("sequelize");
 
 const getAll = async (query) => {
@@ -160,6 +161,9 @@ const create = async (requestData, file) => {
                 };
             requestData.imgLink = imgLink;
         }
+
+        const notExistCenter = await checkExist("Center", { centerId: requestData.centerId });
+        if (notExistCenter) return notExistCenter;
 
         const { email, ...PTData } = requestData;
         const account = await db.Account.create({
