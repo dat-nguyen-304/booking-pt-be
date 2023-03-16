@@ -3,7 +3,7 @@ import NotificationService from "../services/NotificationService";
 const { Op } = require('sequelize');
 const getAll = async (query) => {
     try {
-        let { keyword, limit, page, traineePackageId, rating, date, traineeId, slotId, PTId, centerId, sortBy, order } = query;
+        let { limit, page, traineePackageId, rating, date, traineeId, slotId, PTId, centerId, sortBy, order } = query;
 
         if (PTId && centerId) {
             return {
@@ -29,14 +29,6 @@ const getAll = async (query) => {
                 [property]: query[property]
             }
         })
-
-        if (keyword) {
-            options.where = {
-                traineeId: {
-                    [Op.like]: `%${keyword}%`
-                }
-            }
-        }
 
         if (page) {
             options.page = Number.parseInt(page);

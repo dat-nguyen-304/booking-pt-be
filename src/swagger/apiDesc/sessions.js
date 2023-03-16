@@ -13,11 +13,6 @@ module.exports = {
             parameters: [
                 {
                     in: 'query',
-                    name: 'keyword',
-                    type: "integer",
-                    description: "Keyword you want to search by package name",
-                }, {
-                    in: 'query',
                     name: 'page',
                     type: "integer",
                     description: "Number of page",

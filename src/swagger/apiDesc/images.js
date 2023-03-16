@@ -10,38 +10,40 @@ module.exports = {
                     bearerAuth: [],
                 },
             ],
-            parameters: [{
-                in: 'query',
-                name: 'sessionId',
-                type: "integer",
-                description: "Session ID",
-            },
-            {
-                in: 'query',
-                name: 'traineeId',
-                type: "integer",
-                description: "Session ID",
-            },
-            {
-                in: 'query',
-                name: 'imageId',
-                type: "integer",
-                description: "Session ID",
-            }, {
-                in: 'query',
-                name: 'sortBy',
-                type: "string",
-                description: "Property you want to sort",
-            },
-            {
-                in: 'query',
-                name: 'order',
-                type: "string",
-                description: "Order you want to sort 'asc' or 'desc'",
-            },
+            parameters: [
+                {
+                    in: 'query',
+                    name: 'page',
+                    type: "integer",
+                    description: "Number of page",
+                },
+                {
+                    in: 'query',
+                    name: 'limit',
+                    type: "integer",
+                    description: "Number of item in one page",
+                },
+                {
+                    in: 'query',
+                    name: 'sessionId',
+                    type: "integer",
+                    description: "Session ID",
+                },
+                {
+                    in: 'query',
+                    name: 'sortBy',
+                    type: "string",
+                    description: "Property you want to sort",
+                },
+                {
+                    in: 'query',
+                    name: 'order',
+                    type: "string",
+                    description: "Order you want to sort 'asc' or 'desc'",
+                },
             ],
             responses: {
-                200: successAndReturnARecord('image', 'Image'),
+                200: successAndReturnARecord('image', 'ImageMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
@@ -79,12 +81,33 @@ module.exports = {
                 },
             },
             responses: {
-                200: successAndReturnARecord('image', 'Image'),
+                200: successAndReturnARecord('image', 'ImageMoreInfo'),
                 500: errorFromServer
             },
         },
     },
     '/api/images/{imageId}': {
+        get: {
+            tags: ["Image API"],
+            description: 'Get a image by image ID',
+            security: [
+                {
+                    bearerAuth: [],
+                },
+            ],
+            parameters: [{
+                in: 'path',
+                name: 'imageId',
+                type: "integer",
+                required: true,
+                description: "Image ID",
+            }],
+            responses: {
+                200: successAndReturnARecord('image', 'ImageMoreInfo'),
+                400: idIsNotExist,
+                500: errorFromServer
+            }
+        },
         delete: {
             tags: ["Image API"],
             description: 'Delete a image by imageId',
@@ -101,7 +124,7 @@ module.exports = {
                 description: "Image ID",
             }],
             responses: {
-                200: successAndReturnARecord('image', 'Image'),
+                200: successAndReturnARecord('image', 'ImageMoreInfo'),
                 400: idIsNotExist,
                 500: errorFromServer
             }
