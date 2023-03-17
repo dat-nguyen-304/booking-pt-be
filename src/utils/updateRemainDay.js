@@ -7,7 +7,7 @@ async function updateRemainDay () {
         });
 
         for (const traineePackage of traineePackages) {
-            if (traineePackage.status === 'active' && traineePackage.startDate.getTime() <= (new Date()).getTime()) {
+            if (traineePackage.status === 'active' && new Date(traineePackage.startDate) <= (new Date())) {
                 const newRemainDay = traineePackage.remainDay - 1;
                 if (newRemainDay > 0) {
                     await traineePackage.update({ remainDay: newRemainDay });
