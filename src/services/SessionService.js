@@ -172,7 +172,7 @@ const create = async (sessionData) => {
 const update = async (id, sessionData) => {
     try {
 
-        if (typeof indexData.indexCategoryId !== 'undefined' || indexData.indexCategoryId !== null || typeof indexData.measureId !== 'undefined' || indexData.measureId !== null){
+        if (typeof sessionData.PTId !== 'undefined' || sessionData.PTId !== null || typeof sessionData.slotId !== 'undefined' || sessionData.slotId !== null){
             const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
             if (notExistPT) return notExistPT;
             const notExistSlot = await checkExist("Slot", { slotId: sessionData.slotId });

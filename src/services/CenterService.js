@@ -2,6 +2,7 @@ import db from "../models/index";
 import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink"
 import { redisClient } from "../config/connectDB";
+import checkNotify from "../utils/checkNoti";
 
 const getAllCenter = async () => {
     let isCached = false;
@@ -22,6 +23,7 @@ const getAllCenter = async () => {
             }
             await redisClient.set("centers", JSON.stringify(centers));
         }
+        checkNotify();
         return {
             errorCode: 0,
             centers

@@ -1,14 +1,18 @@
 import db from "../models/index";
 const moment = require('moment');
+moment.tz.setDefault("Asia/Bangkok");
 const { Op } = require('sequelize');
 import NotificationService from "../services/NotificationService";
 
 async function checkNotify () {
 
     try {
-        const today = new Date();
+        const nop = new Date();
+        const options = { timeZone: "Asia/Bangkok" };
+        const today = new Date(nop.toLocaleString("en-US", options));
         const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        console.log("1232", today + "  " + startOfDay + "  " + endOfDay);
         const now = moment();
         const notificationTime = now.clone().add(30, 'minutes'); 
         const session = await db.Session.findAll({
