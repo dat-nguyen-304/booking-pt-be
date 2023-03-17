@@ -49,11 +49,12 @@ const create = async (indexData) => {
 
 const update = async (id, indexData) => {
     try {
-        const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
-        if (notExistIndexCategory) return notExistIndexCategory;
-        const notExistMeasure = await checkExist("Measure", { measureId: indexData.measureId });
-        if (notExistMeasure) return notExistMeasure;
-        
+        if (typeof indexData.indexCategoryId !== 'undefined' || indexData.indexCategoryId !== null || typeof indexData.measureId !== 'undefined' || indexData.measureId !== null){
+            const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
+            if (notExistIndexCategory) return notExistIndexCategory;
+            const notExistMeasure = await checkExist("Measure", { measureId: indexData.measureId });
+            if (notExistMeasure) return notExistMeasure;
+        }
         const index = await db.Index.findOne({
             where: { indexId: id }
         });

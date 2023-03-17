@@ -73,9 +73,12 @@ const create = async (measureData) => {
 
 const update = async (id, measureData) => {
     try {
-        const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
-        if (notExistTrainee) return notExistTrainee;
-        
+        if (typeof measureData.traineeId !== 'undefined' || measureData.traineeId !== null){
+            const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
+            if (notExistTrainee) return notExistTrainee;
+        }
+
+
         const measure = await db.Measure.findOne({
             where: { measureId: id }
         });
