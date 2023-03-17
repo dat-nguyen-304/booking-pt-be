@@ -73,7 +73,7 @@ const create = async (measureData) => {
 
 const update = async (id, measureData) => {
     try {
-        if (typeof measureData.traineeId !== 'undefined' || measureData.traineeId !== null){
+        if (typeof measureData.traineeId !== 'undefined'){
             const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
             if (notExistTrainee) return notExistTrainee;
         }

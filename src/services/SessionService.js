@@ -171,14 +171,13 @@ const create = async (sessionData) => {
 
 const update = async (id, sessionData) => {
     try {
-
-        if (typeof sessionData.PTId !== 'undefined' || sessionData.PTId !== null || typeof sessionData.slotId !== 'undefined' || sessionData.slotId !== null){
+        if (typeof sessionData.PTId !== 'undefined'|| typeof sessionData.slotId !== 'undefined'){
             const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
             if (notExistPT) return notExistPT;
             const notExistSlot = await checkExist("Slot", { slotId: sessionData.slotId });
             if (notExistSlot) return notExistSlot;
         }
-
+        
         const session = await db.Session.findOne({
             where: { sessionId: id },
             include: [
@@ -210,6 +209,7 @@ const update = async (id, sessionData) => {
             }
             await NotificationService.postNotification(1, message);
         }
+
         await session.update(sessionData);
         return {
             errorCode: 0,

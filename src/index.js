@@ -24,8 +24,7 @@ app.use(express.static("./src/public"));
 initWebRoutes(app);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-const today = new Date();
-console.log("alolo", today);
+
 const rule = new schedule.RecurrenceRule();
 rule.dayOfWeek = new schedule.Range(1, 5);
 rule.minute = [0, 30];

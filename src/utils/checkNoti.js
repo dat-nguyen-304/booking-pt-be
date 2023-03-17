@@ -12,7 +12,6 @@ async function checkNotify () {
         const today = new Date(nop.toLocaleString("en-US", options));
         const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-        console.log("1232", today + "  " + startOfDay + "  " + endOfDay);
         const now = moment();
         const notificationTime = now.clone().add(30, 'minutes'); 
         const session = await db.Session.findAll({

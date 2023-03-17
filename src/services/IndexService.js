@@ -49,7 +49,7 @@ const create = async (indexData) => {
 
 const update = async (id, indexData) => {
     try {
-        if (typeof indexData.indexCategoryId !== 'undefined' || indexData.indexCategoryId !== null || typeof indexData.measureId !== 'undefined' || indexData.measureId !== null){
+        if (typeof indexData.indexCategoryId !== 'undefined' || typeof indexData.measureId !== 'undefined'){
             const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
             if (notExistIndexCategory) return notExistIndexCategory;
             const notExistMeasure = await checkExist("Measure", { measureId: indexData.measureId });
