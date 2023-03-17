@@ -171,13 +171,12 @@ const create = async (sessionData) => {
 
 const update = async (id, sessionData) => {
     try {
-        const notExistTraineePackage = await checkExist("TraineePackage", { traineePackageId: sessionData.traineePackageId});
-        if (notExistTraineePackage) return notExistTraineePackage;
+        
         const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
         if (notExistPT) return notExistPT;
         const notExistSlot = await checkExist("Slot", { slotId: sessionData.slotId });
         if (notExistSlot) return notExistSlot;
-        
+
         const session = await db.Session.findOne({
             where: { sessionId: id },
             include: [
