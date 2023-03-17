@@ -116,14 +116,14 @@ const create = async (traineePackageData) => {
         const notExistPayment = await checkExist("Payment", { paymentId: traineePackageData.paymentId });
         if (notExistPayment) return notExistPayment;
 
-        console.log("êre" ,typeof traineePackageData.startDate);
+        console.log("êre", typeof traineePackageData.startDate);
         //check timestamp within 14 days
         const startDate = new Date(traineePackageData.startDate * 1000);
         const today = new Date();
         const latestDate = 14;
         const futureDate = new Date();
         futureDate.setDate(today.getDate() + latestDate);
-        if(startDate.getDay() != today.getDay()){
+        if (startDate.getDay() != today.getDay()) {
             if (startDate < today || startDate > futureDate) {
                 return {
                     errorCode: 0,
@@ -155,7 +155,7 @@ const create = async (traineePackageData) => {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)
         }
-        console.log("êre" ,typeof traineePackageData.startDate);
+        console.log("êre", typeof traineePackageData.startDate);
         let traineePackage = await db.TraineePackage.create(traineePackageData);
         traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: traineePackage.traineePackageId },
@@ -183,7 +183,8 @@ const create = async (traineePackageData) => {
             await NotificationService.postNotification(1, message);
 
             for (let day = 0; day < traineePackage.remainDay; day++) {
-                const dateTimestamp = startDate.getTime() + day * 86400 * 1000;
+                const millisecondsPerDay = 60 * 60 * 24 * 1000;
+                const dateTimestamp = startDate.getTime() + day * millisecondsPerDay;
                 const date = new Date(dateTimestamp);
                 const dayOfWeek = date.getDay();
                 if (dayOfWeek !== 0 && dayOfWeek !== 6) {

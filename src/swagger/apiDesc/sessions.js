@@ -224,6 +224,10 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of slot you choose for session',
                                 },
+                                date: {
+                                    type: 'integer',
+                                    description: 'Date of session (Timestamp)',
+                                },
                                 rating: {
                                     type: 'integer',
                                     description: 'rating for session',
@@ -243,10 +247,6 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                centerId: {
-                                    type: 'integer',
-                                    description: 'Session ID',
-                                },
                                 PTId: {
                                     type: 'integer',
                                     description: 'ID of PT you choose for session',
@@ -255,16 +255,20 @@ module.exports = {
                                     type: 'integer',
                                     description: 'ID of slot you choose for session',
                                 },
+                                date: {
+                                    type: 'integer',
+                                    description: 'Date of session (Timestamp)',
+                                },
                                 rating: {
                                     type: 'integer',
                                     description: 'rating for session',
                                 },
                                 noteFromPT: {
-                                    type: 'integer',
+                                    type: 'string',
                                     description: 'Note from PT',
                                 },
                                 noteFromStudent: {
-                                    type: 'integer',
+                                    type: 'string',
                                     description: 'Note from student',
                                 }
                             }
