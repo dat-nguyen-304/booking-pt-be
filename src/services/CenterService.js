@@ -3,6 +3,7 @@ import imgUrl from "../utils/GetImgLink";
 import deleteUrl from "../utils/DeleteImgLink"
 import { redisClient } from "../config/connectDB";
 import checkNotify from "../utils/checkNoti";
+import { checkRequiredFields } from "./commonService";
 
 const getAllCenter = async () => {
     let isCached = false;
@@ -39,8 +40,12 @@ const postNewCenter = async ({ centerData, file }) => {
         const imgLink = await imgUrl(file, "users");
         if (!imgLink) return {
             errorCode: 1,
-            message: "File is required"
+            message: "centerImg is required"
         }
+
+        const checkRequired = checkRequiredFields(centerData, ['centerName ', 'address ']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
         const center = await db.Center.create({
             ...centerData,
             imgLink
@@ -79,7 +84,12 @@ const getCenterById = async (id) => {
 
 const update = async (id, centerData, file) => {
     try {
-        if (typeof file != "undefined") {
+        if (!id) return {
+            errorCode: 1,
+            message: 'centerId is required'
+        }
+
+        if (file) {
             const imgLink = await imgUrl(file, "users");
             if (!imgLink) return {
                 errorCode: 1,
@@ -87,6 +97,7 @@ const update = async (id, centerData, file) => {
             }
             centerData.imgLink = imgLink;
         }
+
         const centerFound = await db.Center.findOne({
             where: { centerId: id }
         });

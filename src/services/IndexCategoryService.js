@@ -1,5 +1,6 @@
 import db from "../models/index";
 import { redisClient } from "../config/connectDB";
+import { checkRequiredFields } from "./commonService";
 
 const getAll = async () => {
     let isCached = false;
@@ -30,9 +31,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (indexCategories) => {
+const create = async (indexCategoryData) => {
     try {
-        const indexCategory = await db.IndexCategory.create(indexCategories);
+        const checkRequired = checkRequiredFields(indexCategoryData, ['indexCategoryName']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
+        const indexCategory = await db.IndexCategory.create(indexCategoryData);
         redisClient.del('indexCategories');
         return {
             errorCode: 0,
@@ -46,6 +50,11 @@ const create = async (indexCategories) => {
 
 const update = async (id, indexCategoryData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'indexCategoryId is required'
+        }
+
         const indexCategory = await db.IndexCategory.findOne({
             where: { indexCategoryId: id }
         });

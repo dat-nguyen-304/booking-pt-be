@@ -1,4 +1,5 @@
 import db from "../models/index";
+import { checkRequiredFields } from "./commonService";
 
 const getAll = async () => {
     try {
@@ -15,9 +16,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (payments) => {
+const create = async (paymentData) => {
     try {
-        const payment = await db.Payment.create(payments);
+        const checkRequired = checkRequiredFields(paymentData, ['paymentName']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
+        const payment = await db.Payment.create(paymentData);
         return {
             errorCode: 0,
             payment
@@ -30,6 +34,11 @@ const create = async (payments) => {
 
 const update = async (id, paymentData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'paymentId is required'
+        }
+
         const payment = await db.Payment.findOne({
             where: { paymentId: id }
         });

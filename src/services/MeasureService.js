@@ -1,5 +1,5 @@
 import db from "../models/index";
-import { checkExist } from "./commonService";
+import { checkExist, checkRequiredFields } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -57,9 +57,12 @@ const getAll = async (query) => {
 
 const create = async (measureData) => {
     try {
+        const checkRequired = checkRequiredFields(measureData, ['traineeId', 'recorder']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
         const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
         if (notExistTrainee) return notExistTrainee;
-        
+
         const measure = await db.Measure.create(measureData);
         return {
             errorCode: 0,
@@ -73,11 +76,15 @@ const create = async (measureData) => {
 
 const update = async (id, measureData) => {
     try {
-        if (typeof measureData.traineeId !== 'undefined'){
+        if (!id) return {
+            errorCode: 1,
+            message: 'measureId is required'
+        }
+
+        if (measureData.traineeId) {
             const notExistTrainee = await checkExist("Trainee", { traineeId: measureData.traineeId });
             if (notExistTrainee) return notExistTrainee;
         }
-
 
         const measure = await db.Measure.findOne({
             where: { measureId: id }

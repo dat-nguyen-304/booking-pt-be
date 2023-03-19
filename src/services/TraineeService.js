@@ -50,6 +50,10 @@ const getById = async (id) => {
 
 const update = async (id, traineeData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'traineeId is required'
+        }
         const trainee = await db.Trainee.findOne({
             where: { traineeId: id },
             include: [
@@ -64,7 +68,7 @@ const update = async (id, traineeData) => {
             errorCode: 1,
             message: 'Trainee ID does not exist'
         }
-        console.log(traineeData);
+
         await trainee.update(traineeData);
         return {
             errorCode: 0,

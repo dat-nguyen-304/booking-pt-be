@@ -1,7 +1,7 @@
 import db from "../models/index";
 const { Op } = require('sequelize');
 import NotificationService from "../services/NotificationService";
-import { checkExist } from "./commonService";
+import { checkExist, checkRequiredFields } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -104,6 +104,9 @@ const getById = async (id) => {
 
 const create = async (traineePackageData) => {
     try {
+        const checkRequired = checkRequiredFields(traineePackageData, ['traineeId', 'packageId', 'mainPTId', 'mainSlotId', 'paymentId', 'startDate']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
         //check ID exist
         const notExistTrainee = await checkExist("Trainee", { traineeId: traineePackageData.traineeId });
         if (notExistTrainee) return notExistTrainee;
@@ -116,7 +119,6 @@ const create = async (traineePackageData) => {
         const notExistPayment = await checkExist("Payment", { paymentId: traineePackageData.paymentId });
         if (notExistPayment) return notExistPayment;
 
-        console.log("êre", typeof traineePackageData.startDate);
         //check timestamp within 14 days
         const startDate = new Date(traineePackageData.startDate * 1000);
         const today = new Date();
@@ -155,7 +157,7 @@ const create = async (traineePackageData) => {
             ...traineePackageData,
             startDate: new Date(Number.parseInt(traineePackageData.startDate) * 1000)
         }
-        console.log("êre", typeof traineePackageData.startDate);
+
         let traineePackage = await db.TraineePackage.create(traineePackageData);
         traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: traineePackage.traineePackageId },
@@ -211,6 +213,32 @@ const create = async (traineePackageData) => {
 
 const update = async (id, traineePackageData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'traineePackageId is required'
+        }
+
+        if (traineePackageData.traineeId) {
+            const notExistTrainee = await checkExist("Trainee", { traineeId: traineePackageData.traineeId });
+            if (notExistTrainee) return notExistTrainee;
+        }
+        if (traineePackageData.packageId) {
+            const notExistPackage = await checkExist("Package", { packageId: traineePackageData.packageId });
+            if (notExistPackage) return notExistPackage;
+        }
+        if (traineePackageData.mainPTId) {
+            const notExistPT = await checkExist("PT", { PTId: traineePackageData.mainPTId });
+            if (notExistPT) return notExistPT;
+        }
+        if (traineePackageData.mainSlotId) {
+            const notExistSlot = await checkExist("Slot", { slotId: traineePackageData.mainSlotId });
+            if (notExistSlot) return notExistSlot;
+        }
+        if (traineePackageData.paymentId) {
+            const notExistPayment = await checkExist("Payment", { paymentId: traineePackageData.paymentId });
+            if (notExistPayment) return notExistPayment;
+        }
+
         const traineePackage = await db.TraineePackage.findOne({
             where: { traineePackageId: id },
             include: [

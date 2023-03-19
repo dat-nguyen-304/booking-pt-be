@@ -1,4 +1,5 @@
 import db from "../models/index";
+import { checkRequiredFields } from "./commonService";
 
 const getAll = async () => {
     try {
@@ -16,9 +17,12 @@ const getAll = async () => {
     }
 }
 
-const create = async (slots) => {
+const create = async (slotData) => {
     try {
-        const slot = await db.Slot.create(slots);
+        const checkRequired = checkRequiredFields(slotData, ['slotName', 'slotTime']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
+        const slot = await db.Slot.create(slotData);
         return {
             errorCode: 0,
             slot
@@ -31,6 +35,11 @@ const create = async (slots) => {
 
 const update = async (id, slotData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'slotId is required'
+        }
+
         const slot = await db.Slot.findOne({
             where: { slotId: id }
         });

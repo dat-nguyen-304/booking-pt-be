@@ -1,7 +1,7 @@
 import db from "../models/index";
 import { redisClient } from "../config/connectDB";
 import imgUrl from "../utils/GetImgLink";
-import { checkExist } from "./commonService";
+import { checkExist, checkRequiredFields } from "./commonService";
 const { Op, where } = require("sequelize");
 
 const getAll = async (query) => {
@@ -157,10 +157,13 @@ const create = async (requestData, file) => {
             if (!imgLink)
                 return {
                     errorCode: 1,
-                    message: "File is required",
+                    message: "Image file is required",
                 };
             requestData.imgLink = imgLink;
         }
+
+        const checkRequired = checkRequiredFields(requestData, ['centerId', 'email', 'fullName']);
+        if (checkRequired.errorCode === 1) return checkRequired;
 
         const notExistCenter = await checkExist("Center", { centerId: requestData.centerId });
         if (notExistCenter) return notExistCenter;
@@ -195,7 +198,12 @@ const create = async (requestData, file) => {
 
 const update = async (id, PTData, file) => {
     try {
-        if (typeof file != "undefined") {
+        if (!id) return {
+            errorCode: 1,
+            message: 'PT ID is required'
+        }
+
+        if (file) {
             const imgLink = await imgUrl(file, "PTs");
             if (!imgLink)
                 return {
@@ -204,6 +212,12 @@ const update = async (id, PTData, file) => {
                 };
             PTData.imgLink = imgLink;
         }
+
+        if (PTData.centerId) {
+            const notExistCenter = await checkExist("Center", { centerId: PTData.centerId });
+            if (notExistCenter) return notExistCenter;
+        }
+
         const PT = await db.PT.findOne({
             where: { PTId: id },
             include: [{ model: db.Center, as: "center" }],

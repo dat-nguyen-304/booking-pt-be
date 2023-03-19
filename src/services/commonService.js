@@ -11,3 +11,17 @@ export const checkExist = async (model, condition) => {
         }
     }
 }
+
+export const checkRequiredFields = (objectData, requiredFields) => {
+    for (const field of requiredFields) {
+        if (!objectData[field])
+            return {
+                errorCode: 1,
+                message: `${field} is required.`
+            }
+    }
+    return {
+        errorCode: 0,
+        message: ''
+    }
+}

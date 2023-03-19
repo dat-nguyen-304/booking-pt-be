@@ -1,7 +1,7 @@
 import db from "../models/index";
 import NotificationService from "../services/NotificationService";
 const { Op } = require('sequelize');
-import { checkExist } from "./commonService";
+import { checkExist, checkRequiredFields } from "./commonService";
 
 const getAll = async (query) => {
     try {
@@ -103,8 +103,10 @@ const getById = async (id) => {
 
 const create = async (sessionData) => {
     try {
+        const checkRequired = checkRequiredFields(sessionData, ['traineePackageId', 'PTId', 'slotId']);
+        if (checkRequired.errorCode === 1) return checkRequired;
 
-        const notExistTraineePackage = await checkExist("TraineePackage", { traineePackageId: sessionData.traineePackageId});
+        const notExistTraineePackage = await checkExist("TraineePackage", { traineePackageId: sessionData.traineePackageId });
         if (notExistTraineePackage) return notExistTraineePackage;
         const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
         if (notExistPT) return notExistPT;
@@ -116,7 +118,7 @@ const create = async (sessionData) => {
         const latestDate = 14;
         const futureDate = new Date();
         futureDate.setDate(today.getDate() + latestDate);
-        if(startDate.getDay() != today.getDay()){
+        if (startDate.getDay() != today.getDay()) {
             if (startDate < today || startDate > futureDate) {
                 return {
                     errorCode: 0,
@@ -171,13 +173,21 @@ const create = async (sessionData) => {
 
 const update = async (id, sessionData) => {
     try {
-        if (typeof sessionData.PTId !== 'undefined'|| typeof sessionData.slotId !== 'undefined'){
+        if (!id) return {
+            errorCode: 1,
+            message: 'sessionId is required'
+        }
+
+        if (sessionData.PTId) {
             const notExistPT = await checkExist("PT", { PTId: sessionData.PTId });
             if (notExistPT) return notExistPT;
+        }
+
+        if (sessionData.slotId) {
             const notExistSlot = await checkExist("Slot", { slotId: sessionData.slotId });
             if (notExistSlot) return notExistSlot;
         }
-        
+
         const session = await db.Session.findOne({
             where: { sessionId: id },
             include: [

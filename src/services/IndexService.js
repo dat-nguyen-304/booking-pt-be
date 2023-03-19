@@ -1,5 +1,5 @@
 import db from "../models/index";
-import { checkExist } from "./commonService";
+import { checkExist, checkRequiredFields } from "./commonService";
 
 const getAll = async () => {
     try {
@@ -18,6 +18,8 @@ const getAll = async () => {
 
 const create = async (indexData) => {
     try {
+        const checkRequired = checkRequiredFields(indexData, ['measureId', 'indexCategoryId']);
+        if (checkRequired.errorCode === 1) return checkRequired;
 
         const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
         if (notExistIndexCategory) return notExistIndexCategory;
@@ -49,9 +51,16 @@ const create = async (indexData) => {
 
 const update = async (id, indexData) => {
     try {
-        if (typeof indexData.indexCategoryId !== 'undefined' || typeof indexData.measureId !== 'undefined'){
+        if (!id) return {
+            errorCode: 1,
+            message: 'indexId is required'
+        }
+        if (indexData.indexCategoryId) {
             const notExistIndexCategory = await checkExist("IndexCategory", { indexCategoryId: indexData.indexCategoryId });
             if (notExistIndexCategory) return notExistIndexCategory;
+
+        }
+        if (indexData.measureId) {
             const notExistMeasure = await checkExist("Measure", { measureId: indexData.measureId });
             if (notExistMeasure) return notExistMeasure;
         }

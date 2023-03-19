@@ -1,4 +1,5 @@
 import db from "../models/index";
+import { checkRequiredFields } from "./commonService";
 const { Op } = require('sequelize');
 
 const getAllPackage = async (query) => {
@@ -75,6 +76,9 @@ const getPackageById = async (id) => {
 
 const create = async (packageData) => {
     try {
+        const checkRequired = checkRequiredFields(packageData, ['packageName', 'price', 'durationByDay', 'durationByMonth', 'object', 'category']);
+        if (checkRequired.errorCode === 1) return checkRequired;
+
         const packageCreated = await db.Package.create(packageData);
         return {
             errorCode: 0,
@@ -88,6 +92,11 @@ const create = async (packageData) => {
 
 const update = async (id, packageData) => {
     try {
+        if (!id) return {
+            errorCode: 1,
+            message: 'packageId is required'
+        }
+
         const packageFound = await db.Package.findOne({
             where: { packageId: id }
         });
