@@ -9,7 +9,7 @@ export const checkExist = async (model, condition) => {
             errorCode: 0,
             message: `${model} ID does not exist`
         }
-    }
+    } else return false;
 }
 
 export const checkRequiredFields = (objectData, requiredFields) => {

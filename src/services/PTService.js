@@ -168,6 +168,12 @@ const create = async (requestData, file) => {
         const notExistCenter = await checkExist("Center", { centerId: requestData.centerId });
         if (notExistCenter) return notExistCenter;
 
+        const notExistEmail = await checkExist("Account", { email: requestData.email });
+        if (!notExistEmail) return {
+            errorCode: 0,
+            message: 'Email is already exist'
+        }
+
         const { email, ...PTData } = requestData;
         const account = await db.Account.create({
             email,
@@ -186,6 +192,7 @@ const create = async (requestData, file) => {
             nest: true,
             raw: true,
         });
+        redisClient.del("PTs");
         return {
             errorCode: 0,
             PT
