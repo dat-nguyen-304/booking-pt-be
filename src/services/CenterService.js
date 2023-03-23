@@ -43,7 +43,7 @@ const postNewCenter = async ({ centerData, file }) => {
             message: "centerImg is required"
         }
 
-        const checkRequired = checkRequiredFields(centerData, ['centerName ', 'address ']);
+        const checkRequired = checkRequiredFields(centerData, ['centerName', 'address']);
         if (checkRequired.errorCode === 1) return checkRequired;
 
         const center = await db.Center.create({
